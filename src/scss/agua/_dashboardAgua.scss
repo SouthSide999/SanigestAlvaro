@@ -1,0 +1,75 @@
+@use 'base/mixins' as m;
+@use 'base/variables' as v;
+
+.dashboardAgua {
+
+    &__contenedor {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        background-color: v.$blanco;
+    }
+
+    &__menu {
+        @include m.contenedor;
+        @include m.grid(1, 3rem);
+
+        @include m.desktop {
+            @include m.grid(3, 3rem);
+        }
+    }
+
+    &__enlace {
+        padding: 3rem;
+        color: v.$blanco;
+        border-radius: 1rem;
+        text-align: center;
+        font-size: 2rem;
+        transition: filter .3s ease, transform .2s ease;
+
+        // Tus 11 variantes…
+        @for $i from 1 through 11 {
+            &:nth-child(#{$i}) {
+                $hue: 200 + ($i - 1) * 5;
+                $base: hsl($hue, 70%, 50%);
+                background-color: $base;
+                background-image:
+                    radial-gradient(circle at 15% 15%, lighten($base, 20%) 0%, transparent 60%),
+                    radial-gradient(circle at 85% 10%, adjust-hue($base, -15) 0%, transparent 50%),
+                    radial-gradient(circle at 50% 85%, darken($base, 10%) 0%, transparent 70%),
+                    radial-gradient(circle at center, rgba(255, 255, 255, 0.15) 0%, transparent 50%);
+            }
+        }
+
+        &:hover {
+            filter: brightness(1.2);
+            transform: translateY(-4px);
+            cursor: pointer;
+        }
+    }
+
+    &__recomendaciones {
+        margin: 2rem 0;
+        padding: 1.5rem;
+        background: v.$azul;
+        border-radius: 1rem;
+    }
+
+    &__recomendaciones-heading {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: v.$blanco;
+        text-align: center;
+    }
+
+    &__recomendaciones-lista {
+        list-style: disc inside;
+        color: v.$blanco;
+        line-height: 1.6;
+
+        li {
+            margin-bottom: 0.75rem;
+        }
+    }
+
+}

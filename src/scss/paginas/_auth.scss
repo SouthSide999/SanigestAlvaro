@@ -1,0 +1,31 @@
+@use 'base/mixins' as m;
+
+.auth {
+    @include m.grid(2, 2rem);
+
+    &__1 {
+        @include m.contenedor-sm;
+        padding-bottom: 10rem;
+    }
+
+    &__2 {
+        @include m.contenedor-sm;
+        padding-top: 10rem;
+        padding-bottom: 10rem;
+    }
+    &__3 {
+        @include m.contenedor-sm;
+        padding-top: 10rem;
+        padding-bottom: 20rem;
+    }
+    &__4 {
+        @include m.contenedor-sm;
+        padding-top: 10rem;
+        padding-bottom: 30rem;
+    }
+}
+
+
+.auth__texto {
+    font-size: 2rem;
+}

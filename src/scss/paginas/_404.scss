@@ -1,0 +1,41 @@
+@use 'base/variables' as v;
+
+.pagina_404 {
+
+    min-height: 60rem;
+    margin-top: 0;
+    
+    background-image: image-set(
+        url(../img/404.avif) 1x,
+        url(../img/404.webp) 1x,
+        url(../img/404.jpg) 1x
+    );
+    
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    &__contenedor {
+
+        text-align: center;
+    }
+
+    &__heading {
+        margin-top: 0;
+        color: v.$blanco;
+        padding-top: 3rem;
+    }
+
+    &__texto {
+        color: v.$blanco;
+        font-size: 2rem;
+        margin-bottom: 2rem;
+
+    }
+
+    &__enlace {
+        color: v.$azul;
+        font-size: 3rem;
+    }
+ 
+}

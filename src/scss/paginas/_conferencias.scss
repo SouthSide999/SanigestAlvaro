@@ -1,0 +1,120 @@
+@use 'base/mixins' as m;
+@use 'base/variables' as v;
+
+.agenda {
+    padding: 6rem 0;
+    @include m.contenedor;
+}
+
+.eventos {
+    $modificador: &; //cambio de color a titulo workshops
+
+    &__heading {
+        color: v.$azul;
+        margin: 5rem 0;
+        text-align: left;
+        font-size: clamp(2rem, -0.8rem + 8vw, 6rem);
+    }
+
+    &__fecha {
+        color: v.$gris;
+        margin: 3rem 0 1rem 0;
+    }
+
+    &--workshops {
+
+        #{$modificador}__heading {
+            //cambio de color de workshops
+            color: v.$secundario;
+        }
+
+        .evento__informacion {
+            background-color: v.$secundario;//cambiar de color
+
+            &:hover {
+                background-color: darken(v.$secundario, 10%);
+            }
+        }
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        color: rgba(v.$blanco, .5);
+    }
+
+    .swiper-pagination {
+        position: relative;
+        margin-top: 2rem;
+
+        /* ajusta el valor según sea necesario */
+        &--conferencias {
+            color: darken(v.$azul, 20%);
+
+        }
+        &--workshops {
+            color: darken(v.$secundario, 20%);
+        }
+
+    }
+}
+
+.evento {
+    
+    &__hora {
+        font-weight: v.$bold;
+    }
+    &__enlace{
+        all: unset;
+    }
+    &__informacion {
+        padding: 2rem;
+        border-radius: 1rem;
+        background-color: v.$azul;
+        color: v.$blanco;
+        transition: 300ms background-color ease;
+
+        &:hover {
+            background-color: darken(v.$azul, 10%);
+        }
+    }
+
+    &__nombre {
+        font-size: 2rem;
+        margin: 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    &__introduccion {
+        //recortar texto
+        font-size: 1.6rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; //cuantas lineas de texto quieres
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    &__autor-info {
+        display: flex;
+        gap: 2rem;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__imagen-autor {
+        width: 5rem;
+        background-color: v.$blanco;
+        border-radius: 50%;
+    }
+
+    &__autor-nombre {
+        font-weight: v.$bold;
+    }
+    &__agregar {
+        @include m.boton(v.$blanco,v.$negro);
+        margin-top: 1rem;
+    }
+
+}

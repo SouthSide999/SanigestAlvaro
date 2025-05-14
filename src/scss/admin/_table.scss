@@ -1,0 +1,98 @@
+@use 'base/mixins' as m;
+@use 'base/variables' as v;
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+
+    &__thead {
+        background-color: v.$gris;
+        color: v.$blanco;
+    }
+
+    &__th {
+        padding: 1rem;
+        text-align: left;
+        
+    }
+
+    &__tr {
+
+        &:nth-child(even) {
+            background-color:  darken($color: v.$gris-claro, $amount: 20%);
+
+        }
+    }
+    &__td {
+        padding: 1.5rem 1rem;
+
+        &:hover {
+            background-color: darken($color: v.$blanco, $amount: 30%);
+
+        }
+
+        &--acciones {
+            @extend .table__td;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 2rem;
+        }
+
+        button {
+            border: none;
+            font-size: 1.5rem;
+            padding: .5rem 1rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            border-radius: 1rem;
+        }
+    }
+
+    &__accion {
+        all: unset;
+        text-transform: uppercase;
+        font-size: 1.4rem;
+        font-weight: bold;
+
+        &--editar {
+            color: v.$azul;
+
+        }
+
+        &--eliminar {
+            color: v.$rojo;
+        }
+        &--asignar {
+            color: v.$negro;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &__pendiente {
+        background-color: v.$amarillo;
+        color: v.$blanco;
+        border: none;
+        font-size: 1.5rem;
+        padding: .5rem 1rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        border-radius: 1rem;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &__completa {
+        background-color: v.$verde;
+        color: v.$blanco;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

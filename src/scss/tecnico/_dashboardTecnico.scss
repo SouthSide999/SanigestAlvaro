@@ -1,0 +1,171 @@
+@use 'base/mixins' as m;
+@use 'base/variables' as v;
+
+.dashboardtecnico {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: v.$gris-claro;
+
+    &__header {
+        background-color: v.$tecnico;
+        padding: 2rem;
+    }
+
+    &__header-grid {
+        display: flex;
+        flex-direction: column;
+
+        @include m.tablet {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+    &__logo {
+        @include m.logo;
+        @include m.texto-fluido(2rem, 3rem);
+    }
+
+    &__form {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__submit--logout {
+        @include m.enlace;
+    }
+
+    &__contenido {
+        width: 100%;
+        padding: 1rem 1rem 3rem 1rem;
+
+        @include m.tablet {
+            padding: 1rem 5rem 3rem 5rem;
+        }
+
+        & h2 {
+            text-align: center;
+        }
+    }
+
+    &__contenedor-boton {
+        @include m.tablet {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 5rem;
+        }
+    }
+
+    &__boton {
+        @include m.boton(v.$tecnico, v.$blanco);
+        margin-left: 1rem;
+        text-transform: uppercase;
+        font-size: 1.4rem;
+
+        @include m.tablet {
+            width: auto;
+        }
+    }
+
+    &__contenedor {
+        background-color: v.$blanco;
+        padding: 2rem;
+        border-radius: 1rem;
+        margin-top: 5rem;
+    }
+
+
+    &__formulario {
+        @extend .dashboardtecnico__contenedor;
+        @include m.contenedor-md;
+    }
+
+    &__mensaje {
+        padding-top: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    //nav
+    &__grid {
+        padding-top: 6rem;
+        @include m.contenedor-l;
+        @include m.grid(1, 2rem);
+
+        @include m.tablet {
+            // Asigna más espacio a la primera columna (por ejemplo, 2/3 del ancho total)
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+    }
+
+    &__recomendaciones {
+        line-height: 3rem;
+    }
+
+    &__navegacion {
+        padding-top: 3rem;
+
+        @include m.grid(1, .5rem);
+
+        @include m.tablet {
+            @include m.grid(2, 1rem);
+
+        }
+    }
+
+    &__navegacion-enlace {
+        all: unset;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: v.$tecnico;
+        border-radius: 2rem;
+        padding: 2rem;
+        width: 25rem;
+        margin: 0 auto;
+
+        &:hover {
+            cursor: pointer;
+            background-color: darken($color: v.$tecnico, $amount: 20%);
+        }
+    }
+
+
+
+    &__navegacion-icono {
+        color: v.$blanco;
+        font-size: 6rem;
+        padding-bottom: 1rem;
+    }
+
+    &__navegacion-texto {
+        color: v.$blanco;
+        padding-top: 1rem;
+        text-align: center;
+    }
+
+    &__navegacion-etiqueta {
+        color: v.$blanco;
+        padding-top: 1rem;
+        text-align: center;
+    }
+
+    //division en crear
+    &__gridCreate {
+        @include m.grid(1, 2rem);
+
+        @include m.tablet {
+            @include m.grid(2, 2rem);
+
+        }
+    }
+
+
+
+}

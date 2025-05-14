@@ -1,0 +1,45 @@
+@use 'base/mixins' as m;
+@use 'base/variables' as v;
+
+.contacto {
+    @include m.contenedor;
+
+    &__informacion {
+        @include m.contenedor-md;
+        @include m.grid(1, 2rem);
+
+        @include m.tablet {
+            @include m.grid(3, 2rem);
+
+        }
+    }
+
+    &__dato {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__icono {
+        color: v.$azul;
+        font-size: 6rem;
+        padding-bottom: 1rem;
+    }
+
+    &__texto {
+        padding-top: 1rem;
+        text-align: center;
+    }
+
+    &__contenido {
+        @include m.contenedor;
+
+        @include m.grid(1, 2rem);
+
+        @include m.tablet {
+            @include m.grid(2, 2rem);
+        }
+        margin: 2rem 0 6rem 0;
+    }
+}

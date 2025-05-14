@@ -1,0 +1,63 @@
+@use 'base/mixins' as m;
+@use 'base/variables' as v;
+
+.quehacemos {
+
+    &__grid {
+        padding-bottom: 20rem;
+        @include m.contenedor;
+        @include m.grid(1, 3rem);
+
+        @include m.tablet {
+            @include m.grid(3, 3rem);
+            align-items: flex-start;
+        }
+    }
+
+    &__submit {
+        @include m.boton(v.$azul, v.$blanco);
+        margin-top: 3rem;
+    }
+
+    &__descripcion{
+        text-align: center;
+        font-size: 1.8rem;
+        font-weight: v.$delgada;
+        color: v.$gris-oscuro;
+        margin-bottom: 5rem;
+    }
+}
+
+.hacemos {
+    @include m.card;
+
+    &:nth-child(2) {
+        order: -1; //ordenar en celular el paquete mas caro es el primero 
+
+        @include m.tablet {
+            order: unset;
+        }
+    }
+
+    &__lista {
+        @include m.reset-lista;
+        line-height: 2;
+    }
+
+
+    i {
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: v.$azul;
+        font-size: 6rem;
+
+    }
+    &__imagen {
+        padding-top: 3rem;
+        margin: 0 auto;
+        max-width: 20rem;
+
+    }
+}

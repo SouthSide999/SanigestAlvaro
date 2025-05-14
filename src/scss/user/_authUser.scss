@@ -1,0 +1,232 @@
+@use 'base/mixins' as m;
+@use 'base/variables' as v;
+
+.authUser__body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    background: linear-gradient(90deg, #e2e2e2, #c9d6ff);
+}
+
+.authUser {
+
+    @include m.desktop {
+        position: relative;
+        width: 1050px;
+        height: 750px;
+        background: #fff;
+        margin: 20px;
+        border-radius: 30px;
+        box-shadow: 0 0 30px rgba(0, 0, 0, .2);
+        overflow: hidden;
+    }
+    @include m.telefono{
+    }
+
+
+    &__titulo {
+        font-size: 36px;
+        margin: -10px 0;
+    }
+
+    &__texto {
+        font-size: 14.5px;
+        margin: 15px 0;
+    }
+
+    &__form {
+        position: absolute;
+        right: 0;
+        width: 50%;
+        height: 100%;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        color: #333;
+        text-align: center;
+        padding: 40px;
+        z-index: 1;
+        transition: .6s ease-in-out 1.2s, visibility 0s 1s;
+    }
+
+    &.active &__form {
+        right: 50%;
+    }
+
+    &__form--registrar {
+        visibility: hidden;
+    }
+
+    &.active &__form--registrar {
+        visibility: visible;
+    }
+
+
+    &__input {
+        position: relative;
+        margin: 30px 0;
+
+        input {
+            width: 100%;
+            padding: 13px 50px 13px 20px;
+            background: #eee;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            color: #333;
+            font-weight: 500;
+
+            &::placeholder {
+                color: #888;
+                font-weight: 400;
+            }
+        }
+
+        .authUser__icono {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+        }
+    }
+
+    &__recuperar {
+        margin: -15px 0 15px;
+
+        &-enlace {
+            font-size: 14.5px;
+            color: #333;
+        }
+    }
+
+    &__boton {
+        width: 100%;
+        height: 48px;
+        background: v.$azul;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        color: v.$blanco;
+        font-weight: 600;
+
+        &:hover {
+            background-color: v.$blanco;
+            color: v.$azul;
+            cursor: pointer;
+            border: 2px solid v.$negro;
+            /* Borde blanco y no tan grueso */
+        }
+
+        &--ingresar {
+            margin-top: 1rem;
+            width: 30%;
+        }
+
+        &--registrar {
+            margin-top: 1rem;
+            width: 30%;
+        }
+    }
+
+    &__alternar {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+
+        &::before {
+            content: '';
+            position: absolute;
+            left: -250%;
+            width: 300%;
+            height: 100%;
+            background: v.$azul;
+            border-radius: 150px;
+            z-index: 2;
+            transition: 1.8s ease-in-out;
+        }
+    }
+
+    &.active &__alternar::before {
+        left: 50%;
+    }
+
+    &__alternar-panel {
+        position: absolute;
+        width: 50%;
+        height: 100%;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 2;
+        transition: .6s ease-in-out;
+
+        &--izquierda {
+            left: 0;
+            transition-delay: 1.2s;
+        }
+
+        &--derecha {
+            right: -50%;
+            transition-delay: .6s;
+        }
+    }
+
+    &.active &__alternar-panel--izquierda {
+        left: -50%;
+        transition-delay: .6s;
+    }
+
+    &.active &__alternar-panel--derecha {
+        right: 0;
+        transition-delay: 1.2s;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .authUser {
+        height: calc(100vh - 40px);
+
+        &__form {
+            bottom: 0;
+            width: 100%;
+            height: 70%;
+        }
+
+        &.active &__form {
+            right: 0;
+            bottom: 30%;
+        }
+
+        &__alternar::before {
+            left: 0;
+            top: -270%;
+            width: 100%;
+            height: 300%;
+            border-radius: 20vw;
+        }
+
+        &.active &__alternar::before {
+            left: 0;
+            top: 70%;
+        }
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .authUser__form {
+        padding: 20px;
+    }
+
+    .authUser__alternar-panel h1 {
+        font-size: 30px;
+    }
+}
+
+@include m.telefono {}

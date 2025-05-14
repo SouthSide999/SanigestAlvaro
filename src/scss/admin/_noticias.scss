@@ -1,0 +1,9 @@
+.noticia__introduccion{
+    //recortar texto
+    font-size: 1.6rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 10; //cuantas lineas de texto quieres
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-weight: normal;
+}

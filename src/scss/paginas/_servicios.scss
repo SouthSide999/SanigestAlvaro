@@ -1,0 +1,309 @@
+@use 'base/mixins' as m;
+@use 'base/variables' as v;
+
+.servicios-linea {
+    @include m.contenedor;
+    padding: 6rem 0 6rem 0;
+
+    &__title {
+        text-align: center;
+        padding-bottom: 2rem;
+    }
+
+    &__grid {
+        @include m.grid(1, 2rem);
+
+        @include m.tablet {
+            @include m.grid(4, 2rem);
+        }
+    }
+}
+
+.servicios-linea__item {
+    background-color: hsla(229, 71%, 62%, 1);
+    background-image:
+        radial-gradient(at 89% 86%, hsla(359, 80%, 66%, 1) 0px, transparent 50%),
+        radial-gradient(at 95% 65%, hsla(140, 64%, 64%, 1) 0px, transparent 50%),
+        radial-gradient(at 13% 79%, hsla(335, 68%, 65%, 1) 0px, transparent 50%),
+        radial-gradient(at 67% 8%, hsla(219, 75%, 72%, 1) 0px, transparent 50%);
+    padding: 5rem;
+    border-radius: 2rem;
+    transition: transform 0.3s ease-in-out, background 0.3s ease-in-out;
+
+    &:hover {
+        background-color: #ff999c;
+        background-image:
+            radial-gradient(at 62% 99%, hsla(56, 62%, 72%, 1) 0px, transparent 50%),
+            radial-gradient(at 50% 27%, hsla(101, 81%, 67%, 1) 0px, transparent 50%),
+            radial-gradient(at 64% 41%, hsla(301, 61%, 69%, 1) 0px, transparent 50%),
+            radial-gradient(at 61% 86%, hsla(83, 67%, 73%, 1) 0px, transparent 50%);
+        cursor: pointer;
+        transform: scale(1.1);
+    }
+
+    &-title {
+        color: v.$blanco;
+        font-size: 3rem;
+        text-align: center;
+    }
+
+    &-icono {
+        color: v.$blanco;
+        font-size: 8rem;
+        padding: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &-description {
+        color: v.$blanco;
+        text-align: center;
+    }
+}
+
+//* nueva conexion 
+.nuevaconexion {
+    @include m.contenedor;
+    @include m.shadow;
+    margin-bottom: 10rem;
+    margin-top: 2rem;
+    padding: 2rem;
+    border-radius: 2rem;
+}
+
+.requisitos {
+
+    &__titulo {
+        font-size: 4rem;
+        text-align: center;
+    }
+
+    &__lista {
+        @include m.contenedor-md;
+        list-style: none;
+        padding: 0;
+    }
+
+    &__item {
+        padding: 1rem 0;
+        border-bottom: 1px solid #ccc;
+    }
+
+    &__nota {
+        font-size: 1.5rem;
+        color: #666;
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+    &__botones {
+        padding: 2rem 0;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        justify-content: center;
+    }
+
+    &__boton {
+        background-color: v.$azul;
+        padding: 1.5rem 4rem;
+        color: v.$blanco;
+        font-size: 1.8rem;
+        font-weight: 700;
+        border: none;
+        transition-property: background-color;
+        transition-duration: .3s;
+        text-align: center;
+        width: 30rem;
+        display: inline-block;
+        border-radius: 1rem;
+
+        &:hover {
+            background-color: v.$celeste;
+            cursor: pointer;
+        }
+    }
+
+}
+
+.nuevaconexion__formulario {
+    background-color: v.$blanco;
+
+    margin-top: 5rem;
+    @include m.contenedor;
+
+    &__boton {
+        margin: 0 auto;
+        margin-top: 2rem;
+        background-color: v.$azul;
+        padding: 1.5rem 4rem;
+        color: v.$blanco;
+        font-size: 1.8rem;
+        font-weight: 700;
+        border: none;
+        transition-property: background-color;
+        transition-duration: .3s;
+        text-align: center;
+        width: 30rem;
+        display: inline-block;
+        border-radius: 1rem;
+
+        &:hover {
+            background-color: v.$celeste;
+            cursor: pointer;
+        }
+
+        &--rechazar {
+            background-color: v.$rojo;
+        }
+
+        &--asignar {
+            background-color: hsla(39, 100%, 50%, 1); // Amarillo intenso
+        }
+        &--aceptar {
+            background-color: v.$verde;
+        }
+
+    }
+}
+
+.nuevaconexion__contenedor-botones {
+    @include m.grid(1, 2rem);
+
+    @include m.tablet {
+        @include m.grid(2, 2rem);
+    }
+
+}
+
+.nuevaconexion__modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+
+    &--contenido {
+        background: v.$blanco;
+        padding: 2rem;
+        width: 90%;
+        max-width: 600px;
+        border-radius: 10px;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        animation: fadeIn 0.3s ease-in-out;
+
+        h2 {
+            font-size: 3rem;
+            color: v.$negro;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 2rem;
+            color: v.$gris-oscuro;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .requisitos__boton {
+            background-color: v.$azul;
+            color: v.$blanco;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+
+            &:hover {
+                background-color: v.$celeste;
+            }
+        }
+    }
+}
+
+// Animación para la aparición del modal
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.formulario_nueva_conexion__fieldset {
+    @include m.grid(2, 1rem);
+
+    @include m.desktop {
+        @include m.grid(3, 1rem);
+    }
+}
+
+.estadoconexion {
+    &__contenedor {
+        @include m.contenedor-sm;
+        padding-left: 10rem;
+
+        &--ticket {
+            @include m.contenedor;
+            margin-bottom: 10rem;
+        }
+    }
+
+    &__formulario {
+        @include m.contenedor-sm;
+
+        @include m.tablet {
+            display: flex;
+            justify-content: start;
+            margin-bottom: 5rem;
+        }
+    }
+
+    &__boton-buscador {
+        @include m.boton(v.$azul, v.$blanco);
+        margin: 3rem;
+        margin-left: 1rem;
+        text-transform: uppercase;
+        font-size: 1.4rem;
+
+        @include m.tablet {
+            width: auto;
+        }
+    }
+
+    &__contenedor-boton {
+        padding-top: 2.5rem;
+    }
+}
+
+.modalnuevaconexion {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+.modalnuevaconexion-contenido {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    
+}
