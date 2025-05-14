@@ -50,7 +50,7 @@ class Router
         $contenido = ob_get_clean(); // Limpia el Buffer
 
         // Utilizar el Layout de acuerdo a la URL
-        $url_actual = $_SERVER['PATH_INFO'] ?? '/';
+        $url_actual = strtok($_SERVER['REQUEST_URI'], '?') ?? '/';
 
 
         if (str_contains($url_actual, '/admin')) {
@@ -65,7 +65,7 @@ class Router
             include_once __DIR__ . '/views/auth-layout.php';
         } elseif (str_contains($url_actual, '/lecturador')) {
             include_once __DIR__ . '/views/lecturador-layout.php';
-        }elseif (str_contains($url_actual, '/sin-rol')) {
+        } elseif (str_contains($url_actual, '/sin-rol')) {
             include_once __DIR__ . '/views/layout-limpio.php';
         } else {
             include_once __DIR__ . '/views/layout.php';
