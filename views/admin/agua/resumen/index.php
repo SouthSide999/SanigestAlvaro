@@ -5,10 +5,6 @@
         <i class="fa-solid fa-circle-arrow-left"></i>
         Volver
     </a>
-    <a class="dashboard__boton" href="/admin/medidores/crear">
-        <i class="fa-solid fa-circle-plus"></i>
-        Nuevo Medidor
-    </a>
 </div>
 
 <div class="dashboard__contenedor-buscador">

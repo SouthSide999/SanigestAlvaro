@@ -11,6 +11,7 @@ use Model\Medidor;
 use Model\Conexion;
 use Classes\Paginacion;
 use Model\Contribuyente;
+use Model\EstadoServicio;
 
 class AguaPotableTesoreroController
 {
@@ -124,6 +125,52 @@ class AguaPotableTesoreroController
             'contribuyente' => $contribuyente
         ]);
     }
+    public static function contribuyenteCrear(Router $router)
+    {
+        if (!is_auth()) {
+            header('Location: /auth/login');
+            exit;
+        }
+        if (!is_tesorero()) {
+            header('Location: /auth/login');
+            exit;
+        }
+
+        $alertas = [];
+        $contribuyente = new Contribuyente;
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Generación del código de contribuyente
+            if (empty($_POST['codigo_contribuyente'])) {
+                $ultimo_codigo = Contribuyente::ultimoValor('codigo_contribuyente', 'contribuyentes');
+                if (!$ultimo_codigo) {
+                    $contribuyente->codigo_contribuyente = 'C00001';
+                } else {
+                    $numero = (int) substr($ultimo_codigo, 1);
+                    $numero++;
+                    $contribuyente->codigo_contribuyente = 'C' . str_pad($numero, 5, '0', STR_PAD_LEFT);
+                }
+            }
+
+            // Sincronizar los datos del formulario con el objeto contribuyente
+            $contribuyente->sincronizar($_POST);
+
+            // Validar los datos
+            $alertas = $contribuyente->validar();
+            if (empty($alertas)) {
+                // Guardar el nuevo contribuyente
+                $contribuyente->guardar();
+                header('Location: /tesorero/contribuyentes/crear?creado=1');
+                exit;
+            }
+        }
+
+        $router->render('tesorero/agua/contribuyentes/crear', [
+            'titulo' => 'Registrar Contribuyente',
+            'contribuyente' => $contribuyente,
+            'alertas' => $alertas
+        ]);
+    }
 
     public static function contribuyenteEliminar()
     {
@@ -179,23 +226,21 @@ class AguaPotableTesoreroController
             $dato = $_POST['dato'] ?? '';
 
             if ($criterio && $dato) {
-                if ($criterio === 'situacion') {
-                    $predios = Predio::buscarestricto($criterio, $dato);
-                } else {
-                    $predios = Predio::buscar($criterio, $dato);
-                }
+                // Búsqueda normal (LIKE)
+                $predios = Predio::buscar($criterio, $dato);
 
                 foreach ($predios as $predio) {
                     $predio->zona = Zona::find($predio->zona_id);
                     $predio->sector = Sector::find($predio->sector_id);
                     $predio->contribuyente = Contribuyente::find($predio->contribuyente_id);
+                    $predio->estado_servicio = EstadoServicio::find($predio->estado_servicio_id);
                 }
             }
         } else {
             $pagina_actual = $_GET['page'] ?? 1;
             $pagina_actual = filter_var($pagina_actual, FILTER_VALIDATE_INT);
             if (!$pagina_actual || $pagina_actual < 1) {
-                header('Location: /tesorero/predios?page=1');
+                header('Location: /admin/predios?page=1');
             }
 
             $por_pagina = 20;
@@ -206,6 +251,7 @@ class AguaPotableTesoreroController
                 $predio->zona = Zona::find($predio->zona_id);
                 $predio->sector = Sector::find($predio->sector_id);
                 $predio->contribuyente = Contribuyente::find($predio->contribuyente_id);
+                $predio->estado_servicio = EstadoServicio::find($predio->estado_servicio_id);
             }
             $paginacion = $paginacion->paginacion();
         }
@@ -235,6 +281,8 @@ class AguaPotableTesoreroController
         $sectores = Sector::all();
         $tarifas = Tarifa::all();
         $contribuyentes = Contribuyente::all();
+        $estado = EstadoServicio::all();
+
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (empty($_POST['codigo_predio'])) {
@@ -262,7 +310,9 @@ class AguaPotableTesoreroController
             'sectores' => $sectores,
             'contribuyentes' => $contribuyentes,
             'tarifas' => $tarifas,
-            'alertas' => $alertas
+            'alertas' => $alertas,
+            'estado' => $estado
+
         ]);
     }
 
@@ -289,6 +339,7 @@ class AguaPotableTesoreroController
         $zonas = Zona::all();
         $sectores = Sector::all();
         $contribuyentes = Contribuyente::all();
+        $estado = EstadoServicio::all();
         $alertas = [];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -309,7 +360,9 @@ class AguaPotableTesoreroController
             'sectores' => $sectores,
             'contribuyentes' => $contribuyentes,
             'tarifas' => $tarifas,
-            'alertas' => $alertas
+            'alertas' => $alertas,
+            'estado' => $estado
+
         ]);
     }
 
@@ -435,7 +488,7 @@ class AguaPotableTesoreroController
         $zonas = Zona::all();
         $sectores = Sector::all();
         $contribuyentes = Contribuyente::all();
-
+        $estado = EstadoServicio::all();
         // Buscar medidor y conexión por predio_id, no por id directo
         $medidor = Medidor::where('predio_id', $id) ?? new Medidor();
         $conexion = Conexion::where('predio_id', $id) ?? new Conexion();
@@ -483,6 +536,7 @@ class AguaPotableTesoreroController
             'tarifas' => $tarifas,
             'medidor' => $medidor,
             'conexion' => $conexion,
+            'estado' => $estado,
             'alertas' => $alertas
         ]);
     }

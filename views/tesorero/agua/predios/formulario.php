@@ -111,14 +111,17 @@
     </div>
 
     <div class="formulario__campo">
-        <label for="situacion" class="formulario__label">Situación</label>
-        <select class="formulario__input" id="situacion" name="situacion">
+        <label for="estado_servicio_id" class="formulario__label">Estado del Servicio</label>
+        <select class="formulario__input" id="estado_servicio_id" name="estado_servicio_id">
             <option value="" disabled selected>-- Seleccionar --</option>
-            <option value="activo" <?php echo ($predio->situacion === 'activo') ? 'selected' : ''; ?>>Activo</option>
-            <option value="inactivo" <?php echo ($predio->situacion === 'inactivo') ? 'selected' : ''; ?>>Inactivo</option>
+            <?php foreach ($estado as $est) : ?>
+                <option value="<?php echo $est->id; ?>"
+                    <?php echo (isset($predio->estado_servicio_id) && $predio->estado_servicio_id == $est->id) ? 'selected' : ''; ?>>
+                    <?php echo s($est->nombre); ?>
+                </option>
+            <?php endforeach; ?>
         </select>
     </div>
-
 
     <div class="formulario__campo">
         <label for="fecha_registro" class="formulario__label">Fecha de Registro</label>

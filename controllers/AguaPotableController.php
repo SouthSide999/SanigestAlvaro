@@ -11,6 +11,7 @@ use Model\Medidor;
 use Model\Conexion;
 use Classes\Paginacion;
 use Model\Contribuyente;
+use Model\EstadoServicio;
 
 class AguaPotableController
 {
@@ -124,6 +125,54 @@ class AguaPotableController
             'contribuyente' => $contribuyente
         ]);
     }
+
+    public static function contribuyenteCrear(Router $router)
+    {
+        if (!is_auth()) {
+            header('Location: /auth/login');
+            exit;
+        }
+        if (!is_admin()) {
+            header('Location: /auth/login');
+            exit;
+        }
+
+        $alertas = [];
+        $contribuyente = new Contribuyente;
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Generación del código de contribuyente
+            if (empty($_POST['codigo_contribuyente'])) {
+                $ultimo_codigo = Contribuyente::ultimoValor('codigo_contribuyente', 'contribuyentes');
+                if (!$ultimo_codigo) {
+                    $contribuyente->codigo_contribuyente = 'C00001';
+                } else {
+                    $numero = (int) substr($ultimo_codigo, 1);
+                    $numero++;
+                    $contribuyente->codigo_contribuyente = 'C' . str_pad($numero, 5, '0', STR_PAD_LEFT);
+                }
+            }
+
+            // Sincronizar los datos del formulario con el objeto contribuyente
+            $contribuyente->sincronizar($_POST);
+
+            // Validar los datos
+            $alertas = $contribuyente->validar();
+            if (empty($alertas)) {
+                // Guardar el nuevo contribuyente
+                $contribuyente->guardar();
+                header('Location: /admin/contribuyentes/crear?creado=1');
+                exit;
+            }
+        }
+
+        $router->render('admin/agua/contribuyentes/crear', [
+            'titulo' => 'Registrar Contribuyente',
+            'contribuyente' => $contribuyente,
+            'alertas' => $alertas
+        ]);
+    }
+
     public static function contribuyenteEliminar()
     {
         if (!is_auth()) {
@@ -511,18 +560,14 @@ class AguaPotableController
             $dato = $_POST['dato'] ?? '';
 
             if ($criterio && $dato) {
-                if ($criterio === 'situacion') {
-                    // Búsqueda estricta e insensible a mayúsculas/minúsculas para 'situacion'
-                    $predios = Predio::buscarestricto($criterio, $dato);
-                } else {
-                    // Búsqueda normal (LIKE)
-                    $predios = Predio::buscar($criterio, $dato);
-                }
+                // Búsqueda normal (LIKE)
+                $predios = Predio::buscar($criterio, $dato);
 
                 foreach ($predios as $predio) {
                     $predio->zona = Zona::find($predio->zona_id);
                     $predio->sector = Sector::find($predio->sector_id);
                     $predio->contribuyente = Contribuyente::find($predio->contribuyente_id);
+                    $predio->estado_servicio = EstadoServicio::find($predio->estado_servicio_id);
                 }
             }
         } else {
@@ -540,6 +585,7 @@ class AguaPotableController
                 $predio->zona = Zona::find($predio->zona_id);
                 $predio->sector = Sector::find($predio->sector_id);
                 $predio->contribuyente = Contribuyente::find($predio->contribuyente_id);
+                $predio->estado_servicio = EstadoServicio::find($predio->estado_servicio_id);
             }
             $paginacion = $paginacion->paginacion();
         }
@@ -550,6 +596,7 @@ class AguaPotableController
             'paginacion' => $paginacion
         ]);
     }
+
     //crear predio
     public static function predioCrear(Router $router)
     {
@@ -567,6 +614,8 @@ class AguaPotableController
         $zonas = Zona::all();
         $sectores = Sector::all();
         $tarifas = Tarifa::all();
+        $estado = EstadoServicio::all();
+
 
         $contribuyentes = Contribuyente::all();
 
@@ -597,7 +646,6 @@ class AguaPotableController
 
             // Sincronizar los datos del formulario con el objeto predio
             $predio->sincronizar($_POST);
-            // debuguear($predio);
 
             // Validar los datos
             $alertas = $predio->validar();
@@ -616,7 +664,8 @@ class AguaPotableController
             'sectores' => $sectores,
             'contribuyentes' => $contribuyentes,
             'tarifas' => $tarifas,
-            'alertas' => $alertas
+            'alertas' => $alertas,
+            'estado' => $estado
         ]);
     }
     // Editar predio
@@ -637,6 +686,8 @@ class AguaPotableController
         $zonas = Zona::all();
         $sectores = Sector::all();
         $contribuyentes = Contribuyente::all();
+        $estado = EstadoServicio::all();
+
         $alertas = [];
 
         if (!$predio) {
@@ -662,6 +713,7 @@ class AguaPotableController
             'sectores' => $sectores,
             'contribuyentes' => $contribuyentes,
             'tarifas' => $tarifas,
+            'estado' => $estado,
             'alertas' => $alertas
         ]);
     }
@@ -1266,52 +1318,53 @@ class AguaPotableController
             header('Location: /auth/login');
             exit;
         }
-    
+
         $id = $_GET['id'] ?? null;
         $predio = Predio::find($id);
         $tarifas = Tarifa::all();
         $zonas = Zona::all();
         $sectores = Sector::all();
         $contribuyentes = Contribuyente::all();
-    
+        $estado = EstadoServicio::all();
+
         // Buscar medidor y conexión por predio_id, no por id directo
         $medidor = Medidor::where('predio_id', $id) ?? new Medidor();
         $conexion = Conexion::where('predio_id', $id) ?? new Conexion();
-    
+
         $alertas = [];
-    
+
         if (!$predio) {
             header('Location: /admin/predios');
             exit;
         }
-    
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Sincronizar los datos
             $predio->sincronizar($_POST);
             $medidor->sincronizar($_POST);
             $conexion->sincronizar($_POST);
-    
+
             // Asignar el predio_id si es nuevo
             $medidor->predio_id = $predio->id;
             $conexion->predio_id = $predio->id;
-    
+
             // Validaciones combinadas
             $alertas = array_merge(
                 $predio->validar(),
                 $medidor->validar(),
                 $conexion->validar()
             );
-    
+
             if (empty($alertas)) {
                 $predio->guardar();
                 $medidor->guardar();
                 $conexion->guardar();
-    
+
                 header("Location: /admin/resumen");
                 exit;
             }
         }
-    
+
         $router->render('admin/agua/resumen/editar', [
             'titulo' => 'Detalle Completo',
             'predio' => $predio,
@@ -1321,8 +1374,8 @@ class AguaPotableController
             'tarifas' => $tarifas,
             'medidor' => $medidor,
             'conexion' => $conexion,
+            'estado' => $estado,
             'alertas' => $alertas
         ]);
     }
-    
 }

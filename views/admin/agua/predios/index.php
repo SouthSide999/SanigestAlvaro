@@ -16,11 +16,10 @@
         <fieldset class="formulario__fieldset">
             <div class="formulario__campo">
                 <label for="buscar_por" class="formulario__label">Buscar por:</label>
-                <select class="formulario__input" id="criterio" name="criterio">
-                    <option disabled  selected>Selecciona un opcion</option>
+                <select class="formulario__input" id="criterio" name="criterio" required>
+                    <option disabled selected>Selecciona una opción</option>
                     <option value="codigo_predio">Código</option>
                     <option value="direccion">Dirección</option>
-                    <option value="situacion">Situación</option>
                 </select>
             </div>
 
@@ -31,7 +30,8 @@
                     class="formulario__input"
                     id="dato"
                     name="dato"
-                    placeholder="Ingrese el valor a buscar">
+                    placeholder="Ingrese el valor a buscar"
+                    required>
             </div>
         </fieldset>
 
@@ -57,7 +57,7 @@
                     <th scope="col" class="table__th">Dirección</th>
                     <th scope="col" class="table__th">Zona</th>
                     <th scope="col" class="table__th">Sector</th>
-                    <th scope="col" class="table__th">Situación</th>
+                    <th scope="col" class="table__th">Estado Servicio</th>
                     <th scope="col" class="table__th">Acciones</th>
                 </tr>
             </thead>
@@ -70,7 +70,7 @@
                         <td class="table__td"><?php echo $predio->direccion; ?></td>
                         <td class="table__td"><?php echo $predio->zona->codigo_zona . ' - ' . $predio->zona->nombre_zona; ?></td>
                         <td class="table__td"><?php echo $predio->sector->codigo_sector . ' - ' . $predio->sector->nombre_sector; ?></td>
-                        <td class="table__td"><?php echo ucfirst($predio->situacion); ?></td>
+                        <td class="table__td"><?php echo $predio->estado_servicio->nombre ?? 'N/D'; ?></td>
 
                         <td class="table__td--acciones">
                             <!-- Editar -->

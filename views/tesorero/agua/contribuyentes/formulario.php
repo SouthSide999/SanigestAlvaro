@@ -8,7 +8,7 @@
             class="formulario__input"
             id="codigo_contribuyente"
             name="codigo_contribuyente"
-            placeholder="Ej: C2025001"
+            placeholder="Se Ingresa Automaticamente"
             value="<?php echo $contribuyente->codigo_contribuyente ?? ''; ?>"
             disabled>
     </div>

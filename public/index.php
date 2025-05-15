@@ -140,6 +140,8 @@ $router->get('/admin/agua', [AguaPotableController::class, 'index']);
 //controbuyentes
 $router->get('/admin/contribuyentes', [AguaPotableController::class, 'contribuyentes']);
 $router->post('/admin/contribuyentes', [AguaPotableController::class, 'contribuyentes']);
+$router->get('/admin/contribuyentes/crear', [AguaPotableController::class, 'contribuyenteCrear']);
+$router->post('/admin/contribuyentes/crear', [AguaPotableController::class, 'contribuyenteCrear']);
 $router->get('/admin/contribuyentes/editar', [AguaPotableController::class, 'contribuyenteEditar']);
 $router->post('/admin/contribuyentes/editar', [AguaPotableController::class, 'contribuyenteEditar']);
 $router->post('/admin/contribuyentes/eliminar', [AguaPotableController::class, 'contribuyenteEliminar']);
@@ -295,12 +297,14 @@ $router->post('/tecnico/solicitudes/finalizar', [SolicitudController::class, 'fi
 //*area tesorero 
 $router->get('/tesorero/dashboard', [DashboardTesoreroController::class, 'index']);
 
-//*agua-potable
+//agua-potable
 $router->get('/tesorero/agua', [AguaPotableTesoreroController::class, 'index']);
 
 // contribuyentes
 $router->get('/tesorero/contribuyentes', [AguaPotableTesoreroController::class, 'contribuyentes']);
 $router->post('/tesorero/contribuyentes', [AguaPotableTesoreroController::class, 'contribuyentes']);
+$router->get('/tesorero/contribuyentes/crear', [AguaPotableTesoreroController::class, 'contribuyenteCrear']);
+$router->post('/tesorero/contribuyentes/crear', [AguaPotableTesoreroController::class, 'contribuyenteCrear']);
 $router->get('/tesorero/contribuyentes/editar', [AguaPotableTesoreroController::class, 'contribuyenteEditar']);
 $router->post('/tesorero/contribuyentes/editar', [AguaPotableTesoreroController::class, 'contribuyenteEditar']);
 $router->post('/tesorero/contribuyentes/eliminar', [AguaPotableTesoreroController::class, 'contribuyenteEliminar']);

@@ -9,7 +9,7 @@
         <div class="nuevaconexion__formulario">
             <?php if ($solicitud) { ?>
                 <?php
-                include_once __DIR__ . '../formulario.php';
+                include_once __DIR__ . '/formulario.php';
                 ?>
 
             <?php } else { ?>
