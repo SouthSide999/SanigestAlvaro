@@ -2,7 +2,7 @@
 <div class="dashboardlecturador__grid">
     <div>
         <div class="dashboardlecturador__navegacion">
-            <a class="dashboardlecturador__navegacion-enlace" href="/lecturador/lecturas">
+            <a class="dashboardlecturador__navegacion-enlace" href="/lecturador/lectura">
                 <i class="dashboardlecturador__navegacion-icono fa-solid fa-gauge-high"></i>
                 <h4 class="dashboardlecturador__navegacion-etiqueta">Lecturas</h4>
             </a>

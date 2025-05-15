@@ -147,6 +147,31 @@ class ActiveRecord
         $resultado = self::consultarSQL($query);
         return $resultado;
     }
+    public static function paginarFiltrado($por_pagina, $offset, $filtros)
+    {
+        $query = "SELECT c.* FROM consumos c ";
+        $joins = "";
+        $where = "WHERE 1 = 1";
+
+        if (!empty($filtros['codigo_predio'])) {
+            $joins .= " INNER JOIN predios p ON c.predio_id = p.id ";
+            $where .= " AND p.codigo_predio LIKE '%" . self::$db->escape_string($filtros['codigo_predio']) . "%'";
+        }
+
+        if (!empty($filtros['mes'])) {
+            $where .= " AND c.mes = " . intval($filtros['mes']);
+        }
+
+        if (!empty($filtros['anio'])) {
+            $where .= " AND c.anio = " . intval($filtros['anio']);
+        }
+
+        $query .= $joins . $where . " ORDER BY c.anio DESC, c.mes DESC LIMIT $por_pagina OFFSET $offset";
+
+        $resultado = self::consultarSQL($query);
+        return $resultado;
+    }
+
 
     public static function paginarBusqueda($por_pagina, $offset, $filtro = [])
     {
@@ -326,5 +351,30 @@ class ActiveRecord
         $resultado = self::consultarSQL($query);
 
         return $resultado[0]->$columna ?? null;
+    }
+
+    public static function totalFiltrado($filtros)
+    {
+        $query = "SELECT COUNT(*) FROM consumos c ";
+        $joins = "";
+        $where = "WHERE 1 = 1";
+
+        // Si se quiere filtrar por código de predio, se une la tabla predios
+        if (!empty($filtros['codigo_predio'])) {
+            $joins .= " INNER JOIN predios p ON c.predio_id = p.id ";
+            $where .= " AND p.codigo_predio LIKE '%" . self::$db->escape_string($filtros['codigo_predio']) . "%'";
+        }
+
+        if (!empty($filtros['mes'])) {
+            $where .= " AND c.mes = " . intval($filtros['mes']);
+        }
+
+        if (!empty($filtros['anio'])) {
+            $where .= " AND c.anio = " . intval($filtros['anio']);
+        }
+
+        $resultado = self::$db->query($query . $joins . $where);
+        $total = $resultado->fetch_array()[0];
+        return $total;
     }
 }

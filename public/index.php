@@ -29,6 +29,7 @@ use Controllers\ServiciosEnLineaController;
 use Controllers\DashboardTesoreroController;
 use Controllers\AguaPotableTesoreroController;
 use Controllers\DashboardLecturadorController;
+use Controllers\FacturacionLecturadorController;
 use Controllers\NuevasConexionesTecnicoController;
 
 $router = new Router();
@@ -331,6 +332,18 @@ $router->post('/tesorero/solicitudes/finalizar', [SolicitudController::class, 'f
 
 //*lecturador
 $router->get('/lecturador/dashboard', [DashboardLecturadorController::class, 'index']);
+
+//consumos lecturador
+$router->get('/lecturador/lectura', [FacturacionLecturadorController::class, 'indexLectura']);
+$router->post('/lecturador/lectura', [FacturacionLecturadorController::class, 'indexLectura']);
+$router->get('/lecturador/lectura/crear', [FacturacionLecturadorController::class, 'crearLectura']);
+$router->post('/lecturador/lectura/crear', [FacturacionLecturadorController::class, 'crearLectura']);
+$router->get('/lecturador/lectura/editar', [FacturacionLecturadorController::class, 'editarLectura']);
+$router->post('/lecturador/lectura/editar', [FacturacionLecturadorController::class, 'editarLectura']);
+$router->post('/lecturador/lectura/eliminar', [FacturacionLecturadorController::class, 'eliminarLectura']);
+$router->get('/lecturador/lectura/generar', [FacturacionLecturadorController::class, 'generarLectura']);
+$router->post('/lecturador/lectura/generar', [FacturacionLecturadorController::class, 'generarLectura']);
+
 
 
 $router->comprobarRutas();
