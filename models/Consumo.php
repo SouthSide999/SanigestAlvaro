@@ -36,8 +36,8 @@ class Consumo extends ActiveRecord {
         $this->anio = $args['anio'] ?? null;
         $this->consumo_m3 = $args['consumo_m3'] ?? null;
         $this->monto_total = $args['monto_total'] ?? null;
-        $this->created_at = $args['created_at'] ?? null;
-        $this->estado_id = $args['estado_id'] ?? 1; // Por defecto estado 1
+        $this->created_at = $args['created_at'] ?? date('Y-m-d H:i:s');
+        $this->estado_id = $args['estado_id'] ?? '1'; // Por defecto estado 1
     }
 
     // Método para validar los datos del consumo
