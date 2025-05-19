@@ -5,18 +5,18 @@
         <i class="fa-solid fa-circle-arrow-left"></i>
         Volver
     </a>
-    <a class="dashboard__boton" href="/lecturador/consumos/crear">
+    <a class="dashboard__boton" href="/lecturador/lectura/crear">
         <i class="fa-solid fa-circle-plus"></i>
         Nuevo Consumo
     </a>
-    <a class="dashboard__boton" href="/lecturador/consumos/generar">
+    <a class="dashboard__boton" href="/lecturador/lectura/generar">
         <i class="fa-solid fa-circle-plus"></i>
         Generar Multiples Consumos
     </a>
 </div>
 
 <div class="dashboard__contenedor-buscador">
-    <form class="dashboard__formulario__buscardor" action="/lecturador/consumos" method="POST">
+    <form class="dashboard__formulario__buscardor" action="/lecturador/lectura" method="POST">
         <fieldset class="formulario__fieldset">
             <div class="formulario__campo">
                 <label for="mes" class="formulario__label">Mes:</label>
@@ -55,7 +55,7 @@
                 type="submit"
                 value="Buscar"
                 class="dashboard__boton__buscardor">
-            <a href="/lecturador/consumos" class="dashboard__boton__buscardor">
+            <a href="/lecturador/lectura" class="dashboard__boton__buscardor">
                 Lista Completa
             </a>
         </div>
