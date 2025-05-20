@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-    alert('prueba');
     const predioSelect = document.getElementById('predio_id');
     const consumoInput = document.getElementById('consumo_m3');
     const montoTotalInput = document.getElementById('monto_total');

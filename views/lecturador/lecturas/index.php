@@ -14,7 +14,10 @@
         Generar Multiples Consumos
     </a>
 </div>
-
+<?php
+$mesActual = date('n');
+$anioActual = date('Y');
+?>
 <div class="dashboard__contenedor-buscador">
     <form class="dashboard__formulario__buscardor" action="/lecturador/lectura" method="POST">
         <fieldset class="formulario__fieldset">
@@ -38,7 +41,8 @@
                         12 => 'Diciembre'
                     ];
                     foreach ($meses as $num => $nombre) {
-                        echo "<option value=\"$num\">$nombre</option>";
+                        $selected = ($num == $mesActual) ? 'selected' : '';
+                        echo "<option value=\"$num\" $selected>$nombre</option>";
                     }
                     ?>
                 </select>
@@ -46,9 +50,10 @@
 
             <div class="formulario__campo">
                 <label for="anio" class="formulario__label">Año:</label>
-                <input type="number" class="formulario__input" id="anio" name="anio" min="2000" max="2099" placeholder="Ej: 2025">
+                <input type="number" class="formulario__input" id="anio" name="anio" min="2000" max="2099" value="<?php echo $anioActual; ?>" placeholder="Ej: 2025">
             </div>
         </fieldset>
+
 
         <div class="dashboard__contenedor__boton">
             <input
@@ -92,11 +97,11 @@
                         <td class="table__td"><?php echo number_format($consumo->monto_total, 2); ?></td>
                         <td class="table__td"><?php echo $consumo->estado->nombre ?? 'Pendiente'; ?></td>
                         <td class="table__td--acciones">
-                            <a class="table__accion table__accion--editar" href="/lecturador/consumos/editar?id=<?php echo $consumo->id; ?>">
+                            <a class="table__accion table__accion--editar" href="/lecturador/lectura/editar?id=<?php echo $consumo->id; ?>">
                                 <i class="fa-solid fa-pen-to-square"></i>
                                 Editar
                             </a>
-                            <form method="POST" action="/lecturador/consumos/eliminar" class="table__formulario">
+                            <form method="POST" action="/lecturador/lectura/eliminar" class="table__formulario">
                                 <input type="hidden" name="id" value="<?php echo $consumo->id; ?>">
                                 <button class="table__accion table__accion--eliminar" type="submit">
                                     <i class="fa-solid fa-circle-xmark"></i>
@@ -109,7 +114,7 @@
             </tbody>
         </table>
     <?php } else { ?>
-        <p class="text-center">No se encontraron consumos registrados.</p>
+        <p class="text-center">No se encontraron lecturas registradas.</p>
     <?php } ?>
 </div>
 
