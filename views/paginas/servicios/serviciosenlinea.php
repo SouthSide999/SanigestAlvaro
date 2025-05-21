@@ -22,11 +22,12 @@
 
 
 
-        <a href="" class="servicios-linea__item">
+        <a href="/servicios/consultar-recibo" class="servicios-linea__item">
             <h3 class="servicios-linea__item-title">Consultar Recibos y Facturación</h3>
             <i class="fa-solid fa-file-invoice-dollar servicios-linea__item-icono"></i>
             <p class="servicios-linea__item-description">Accede a tus recibos actuales fácilmente.</p>
         </a>
+
     </div>
 
 

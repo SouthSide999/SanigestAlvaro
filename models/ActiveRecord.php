@@ -195,7 +195,20 @@ class ActiveRecord
         $resultado = self::consultarSQL($query);
         return array_shift($resultado);
     }
-
+    // Busqueda Where con Múltiples opciones pero solo un resultado
+    public static function whereMultiple($array = [])
+    {
+        $query = "SELECT * FROM " . static::$tabla . " WHERE ";
+        foreach ($array as $key => $value) {
+            if ($key == array_key_last($array)) {
+                $query .= " ${key} = '${value}'";
+            } else {
+                $query .= " ${key} = '${value}' AND ";
+            }
+        }
+        $resultado = self::consultarSQL($query);
+        return array_shift($resultado);
+    }
     // Retornar los registros por un orden
     public static function ordenar($columna, $orden)
     {

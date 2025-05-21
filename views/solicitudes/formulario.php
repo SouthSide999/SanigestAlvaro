@@ -47,7 +47,7 @@
                     <picture>
                         <source srcset="<?php echo $_ENV['HOST'] . '/img/evidenciasSolicitudes/' . $solicitud->evidencia; ?>.webp" type="image/webp">
                         <source srcset="<?php echo $_ENV['HOST'] . '/img/evidenciasSolicitudes/' . $solicitud->evidencia; ?>.png" type="image/png">
-                        <img id="imagenEvidencia" src="<?php echo $_ENV['HOST'] . '/img/evidenciasSolicitudes/' . $solicitud->evidencia; ?>.png" alt="Imagen noticia"
+                        <img id="imagenEvidencia" src="<?php echo $_ENV['HOST'] . '/img/evidenciasSolicitudes/' . $solicitud->evidencia; ?>.png" alt="Imagen "
                             alt="No Adjunto Ninguna Evidencia"
                             class="imagen-evidencia"
                             onclick="abrirModal('modalEvidencia', 'modalImgEvidencia', this)">

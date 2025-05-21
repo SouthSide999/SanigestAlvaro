@@ -30,7 +30,7 @@ class FacturacionLecturadorController
         }
 
         $consumos = [];
-        $por_pagina = 10;
+        $por_pagina = 30;
         $paginacion = null; // Inicializamos por defecto
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -146,6 +146,10 @@ class FacturacionLecturadorController
         }
 
         $predios = Predio::all();
+        foreach ($predios as $predio) {
+            $predio->tarifa = Tarifa::find($predio->tarifa_id);
+        }
+
         // Obtener la lectura
         $lectura = Consumo::find($id);
 
@@ -162,6 +166,7 @@ class FacturacionLecturadorController
 
             // Validar
             $alertas = $lectura->validar();
+
 
             if (empty($alertas)) {
                 $resultado = $lectura->guardar();

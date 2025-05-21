@@ -30,6 +30,7 @@ class ReclamoController
         $tiposreclamos = TiposReclamos::all('ASC');
 
         $reclamosUsuario = Reclamo::whereArray(['cliente_id' => $_SESSION['id']]);
+        
         foreach ($reclamosUsuario as $reclamoUsuario) {
             $reclamoUsuario->tipo = TiposReclamos::find($reclamoUsuario->tipo_reclamo_id);
         }

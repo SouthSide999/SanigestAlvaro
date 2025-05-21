@@ -1,0 +1,100 @@
+@use 'base/mixins' as m;
+@use 'base/variables' as v;
+
+.recibo {
+    &__contenedor {
+        padding-bottom: 15rem;
+        @include m.contenedor-l;
+    }
+
+    &__heading {
+        font-size: 3rem;
+        text-align: center;
+        color: v.$primario;
+        margin-bottom: 3rem;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    &__contenido {
+        padding: 3rem;
+        border-radius: 2rem;
+        background: linear-gradient(to right, #ffffff, #f0f4ff);
+        border: 2px solid v.$secundario;
+        @include m.shadow-lg;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 3rem;
+    }
+
+    &__datos,
+    &__contribuyente,
+    &__consumo {
+        background-color: #fff;
+        padding: 2rem;
+        border-radius: 1.5rem;
+        border-left: 8px solid v.$primario;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+        }
+    }
+
+    &__subtitulo {
+        font-size: 2rem;
+        color: v.$secundario;
+        margin-bottom: 1.5rem;
+        border-bottom: 2px solid v.$secundario;
+        padding-bottom: 0.5rem;
+    }
+
+    &__dato {
+        font-size: 1.6rem;
+        margin-bottom: 1rem;
+        color: #333;
+        line-height: 1.6;
+        padding-left: 0.5rem;
+        position: relative;
+
+        &::before {
+            content: "•";
+            color: v.$primario;
+            position: absolute;
+            left: 0;
+        }
+    }
+
+    &__label {
+        font-weight: bold;
+        color: v.$negro;
+    }
+
+    &__mensaje {
+        background-color: v.$secundario;
+        color: v.$blanco;
+        padding: 2rem;
+        margin: 2rem 0;
+        border-left: 1rem solid v.$primario;
+        border-radius: 1rem;
+        font-size: 2.4rem;
+        font-weight: bold;
+        text-align: center;
+        text-transform: uppercase;
+        @include m.shadow;
+
+        animation: mensajeAnimado 0.8s ease-in-out both;
+    }
+}
+
+@keyframes mensajeAnimado {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

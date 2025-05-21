@@ -6,16 +6,19 @@
         @content;
     }
 }
+
 @mixin tablet {
     @media (min-width: v.$tablet) {
         @content;
     }
 }
+
 @mixin desktop {
     @media (min-width: v.$desktop) {
         @content;
     }
 }
+
 @mixin xl_desktop {
     @media (min-width: v.$xl_desktop) {
         @content;
@@ -36,7 +39,7 @@
     display: inline-block;
 
     &:hover {
-        background-color: darken( $bgColor, 10% );
+        background-color: darken($bgColor, 10%);
         cursor: pointer;
     }
 }
@@ -46,6 +49,7 @@
     gap: $espaciado;
     grid-template-columns: repeat($columnas, 1fr);
 }
+
 @mixin contenedor {
     width: min(95%, 140rem);
     margin: 0 auto;
@@ -77,6 +81,7 @@
     margin: 6rem 0 3rem 0;
     text-align: center;
 }
+
 @mixin descripcion-pagina {
     text-align: center;
     font-size: 1.8rem;
@@ -84,24 +89,29 @@
     color: v.$gris-oscuro;
     margin-bottom: 5rem;
 }
+
 @mixin texto-fluido($min, $max) {
-    font-size: clamp($min, -0.8rem + 10vw ,$max);
+    font-size: clamp($min, -0.8rem + 10vw, $max);
 }
+
 @mixin texto-degradado($inicio, $final) {
     background: linear-gradient(to right, $inicio, $final);
     background-clip: text;
     color: transparent;
 }
+
 @mixin logo {
     color: v.$blanco;
     text-align: center;
     margin-bottom: 2rem;
-    white-space: nowrap;//evitar salto
+    white-space: nowrap; //evitar salto
+
     @include desktop {
         text-align: left;
         margin: 0;
     }
 }
+
 @mixin menu-social($color, $size) {
 
     &__enlace {
@@ -119,19 +129,23 @@
         &[href*="facebook.com"]::before {
             content: "\f39e";
         }
+
         &[href*="github.com"]::before {
             content: "\f09b";
         }
-        
+
         &[href*="tiktok.com"]::before {
             content: "\e07b";
         }
+
         &[href*="instagram.com"]::before {
             content: "\f16d";
         }
+
         &[href*="youtube.com"]::before {
             content: "\f167";
         }
+
         &[href*="twitter.com"]::before {
             content: "\f099";
         }
@@ -142,7 +156,7 @@
     }
 }
 
-@mixin enlace{
+@mixin enlace {
     all: unset;
     color: v.$blanco;
     font-size: 1.4rem;
@@ -159,6 +173,12 @@
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
+@mixin shadow-lg {
+    box-shadow:
+        0 20px 35px rgba(0, 119, 182, 0.25),
+        0 10px 15px rgba(0, 0, 0, 0.15);
+}
+
 @mixin reset-lista {
     margin: 0;
     padding: 0;
@@ -172,7 +192,7 @@
     gap: 1.5rem;
     margin-top: 1.5rem;
 
-    > li {
+    >li {
         background-color: v.$azul;
         padding: 1rem;
         border-radius: .5rem;

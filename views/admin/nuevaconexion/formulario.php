@@ -113,7 +113,7 @@
                     <picture>
                         <source srcset="<?php echo $_ENV['HOST'] . '/img/nuevaconexion/' . $nueva->documento_propiedad; ?>.webp" type="image/webp">
                         <source srcset="<?php echo $_ENV['HOST'] . '/img/nuevaconexion/' . $nueva->documento_propiedad; ?>.png" type="image/png">
-                        <img id="imagenEvidencia" src="<?php echo $_ENV['HOST'] . '/img/nuevaconexion/' . $nueva->documento_propiedad; ?>.png" alt="Imagen noticia"
+                        <img id="imagenEvidencia" src="<?php echo $_ENV['HOST'] . '/img/nuevaconexion/' . $nueva->documento_propiedad; ?>.png" alt="Imagen "
                             alt="No Adjunto Ninguna Evidencia"
                             class="imagen-evidencia"
                             onclick="abrirModal('modalEvidencia', 'modalImgEvidencia', this)">
@@ -135,7 +135,7 @@
                     <picture>
                         <source srcset="<?php echo $_ENV['HOST'] . '/img/nuevaconexion/' . $nueva->dni_documento; ?>.webp" type="image/webp">
                         <source srcset="<?php echo $_ENV['HOST'] . '/img/nuevaconexion/' . $nueva->dni_documento; ?>.png" type="image/png">
-                        <img id="imagenEvidencia" src="<?php echo $_ENV['HOST'] . '/img/nuevaconexion/' . $nueva->dni_documento; ?>.png" alt="Imagen noticia"
+                        <img id="imagenEvidencia" src="<?php echo $_ENV['HOST'] . '/img/nuevaconexion/' . $nueva->dni_documento; ?>.png" alt="Imagen "
                             alt="No Adjunto Ninguna Evidencia"
                             class="imagen-evidencia"
                             onclick="abrirModal('modalEvidencia', 'modalImgEvidencia', this)">
@@ -158,7 +158,7 @@
                     <picture>
                         <source srcset="<?php echo $_ENV['HOST'] . '/img/nuevaconexion/' . $nueva->croquis; ?>.webp" type="image/webp">
                         <source srcset="<?php echo $_ENV['HOST'] . '/img/nuevaconexion/' . $nueva->croquis; ?>.png" type="image/png">
-                        <img id="imagenEvidencia" src="<?php echo $_ENV['HOST'] . '/img/nuevaconexion/' . $nueva->croquis; ?>.png" alt="Imagen noticia"
+                        <img id="imagenEvidencia" src="<?php echo $_ENV['HOST'] . '/img/nuevaconexion/' . $nueva->croquis; ?>.png" alt="Imagen "
                             alt="No Adjunto Ninguna Evidencia"
                             class="imagen-evidencia"
                             onclick="abrirModal('modalEvidencia', 'modalImgEvidencia', this)">
@@ -181,7 +181,7 @@
                     <picture>
                         <source srcset="<?php echo $_ENV['HOST'] . '/img/nuevaconexion/' . $nueva->foto_instalacion; ?>.webp" type="image/webp">
                         <source srcset="<?php echo $_ENV['HOST'] . '/img/nuevaconexion/' . $nueva->foto_instalacion; ?>.png" type="image/png">
-                        <img id="imagenEvidencia" src="<?php echo $_ENV['HOST'] . '/img/nuevaconexion/' . $nueva->foto_instalacion; ?>.png" alt="Imagen noticia"
+                        <img id="imagenEvidencia" src="<?php echo $_ENV['HOST'] . '/img/nuevaconexion/' . $nueva->foto_instalacion; ?>.png" alt="Imagen "
                             alt="No Adjunto Ninguna Evidencia"
                             class="imagen-evidencia"
                             onclick="abrirModal('modalEvidencia', 'modalImgEvidencia', this)">
@@ -204,7 +204,7 @@
                     <picture>
                         <source srcset="<?php echo $_ENV['HOST'] . '/img/nuevaconexion/' . $nueva->foto_recibo; ?>.webp" type="image/webp">
                         <source srcset="<?php echo $_ENV['HOST'] . '/img/nuevaconexion/' . $nueva->foto_recibo; ?>.png" type="image/png">
-                        <img id="imagenEvidencia" src="<?php echo $_ENV['HOST'] . '/img/nuevaconexion/' . $nueva->foto_recibo; ?>.png" alt="Imagen noticia"
+                        <img id="imagenEvidencia" src="<?php echo $_ENV['HOST'] . '/img/nuevaconexion/' . $nueva->foto_recibo; ?>.png" alt="Imagen "
                             alt="No Adjunto Ninguna Evidencia"
                             class="imagen-evidencia"
                             onclick="abrirModal('modalEvidencia', 'modalImgEvidencia', this)">
@@ -228,7 +228,7 @@
                         <picture>
                             <source srcset="<?php echo $_ENV['HOST'] . '/img/nuevaconexion/' . $nueva->foto_autorizacion_notarial; ?>.webp" type="image/webp">
                             <source srcset="<?php echo $_ENV['HOST'] . '/img/nuevaconexion/' . $nueva->foto_autorizacion_notarial; ?>.png" type="image/png">
-                            <img id="imagenEvidencia" src="<?php echo $_ENV['HOST'] . '/img/nuevaconexion/' . $nueva->foto_autorizacion_notarial; ?>.png" alt="Imagen noticia"
+                            <img id="imagenEvidencia" src="<?php echo $_ENV['HOST'] . '/img/nuevaconexion/' . $nueva->foto_autorizacion_notarial; ?>.png" alt="Imagen "
                                 alt="No Adjunto Ninguna Evidencia"
                                 class="imagen-evidencia"
                                 onclick="abrirModal('modalEvidencia', 'modalImgEvidencia', this)">
@@ -251,7 +251,7 @@
                         <picture>
                             <source srcset="<?php echo $_ENV['HOST'] . '/img/nuevaconexion/' . $nueva->foto_vigencia_poder; ?>.webp" type="image/webp">
                             <source srcset="<?php echo $_ENV['HOST'] . '/img/nuevaconexion/' . $nueva->foto_vigencia_poder; ?>.png" type="image/png">
-                            <img id="imagenEvidencia" src="<?php echo $_ENV['HOST'] . '/img/nuevaconexion/' . $nueva->foto_vigencia_poder; ?>.png" alt="Imagen noticia"
+                            <img id="imagenEvidencia" src="<?php echo $_ENV['HOST'] . '/img/nuevaconexion/' . $nueva->foto_vigencia_poder; ?>.png" alt="Imagen "
                                 alt="No Adjunto Ninguna Evidencia"
                                 class="imagen-evidencia"
                                 onclick="abrirModal('modalEvidencia', 'modalImgEvidencia', this)">

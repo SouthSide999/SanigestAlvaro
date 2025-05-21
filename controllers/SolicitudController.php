@@ -243,7 +243,7 @@ class SolicitudController
             'usuariorol' => $usuariorol
         ]);
     }
-        public static function finalizartecnico(Router $router)
+    public static function finalizartecnico(Router $router)
     {
         if (!is_auth()) {
             header('Location: /auth/login');
@@ -300,6 +300,103 @@ class SolicitudController
             'solicitud' => $solicitud,
             'usuariorol' => $usuariorol
 
+        ]);
+    }
+    public static function listalecturador(Router $router)
+    {
+        if (!is_auth()) {
+            header('Location: /auth/login');
+            exit;
+        }
+
+        $pagina_actual = $_GET['page'] ?? 1;
+        $pagina_actual = filter_var($pagina_actual, FILTER_VALIDATE_INT);
+
+        if (!$pagina_actual || $pagina_actual < 1) {
+            header('Location: /lecturador/solicitudes?page=1');
+            exit;
+        }
+
+        $id = $_SESSION["id"];
+        $usuariorol = $_SESSION["rol_id"];
+
+        $solicitudes = Solicitud::buscarestricto('personal_asignado', $id);
+
+        foreach ($solicitudes as $solicitud) {
+            $solicitud->estado = Estados::find($solicitud->estado_id);
+            $solicitud->tipo_solicitud = TiposSolicitud::find($solicitud->tipo_solicitud_id);
+        }
+
+        $router->render('solicitudes/index', [
+            'titulo' => 'Solicitudes Registradas',
+            'solicitudes' => $solicitudes,
+            'usuariorol' => $usuariorol
+        ]);
+    }
+    public static function finalizarlecturador(Router $router)
+    {
+        if (!is_auth()) {
+            header('Location: /auth/login');
+            return;
+        }
+
+        $id = $_GET['id'] ?? null;
+        $id = filter_var($id, FILTER_VALIDATE_INT);
+        if (!$id) {
+            header('Location: /lecturador/solicitudes');
+            exit;
+        }
+
+        $usuariorol = $_SESSION["rol_id"];
+        $solicitud = Solicitud::find($id);
+
+        if (!$solicitud) {
+            header('Location: /lecturador/solicitudes');
+            exit;
+        }
+
+        $solicitud->estado = Estados::find($solicitud->estado_id);
+        $solicitud->personal = Usuario::find($solicitud->personal_asignado);
+        $solicitud->tipo = TiposSolicitud::find($solicitud->tipo_solicitud_id);
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $solicitud->sincronizar($_POST);
+            $notificacion = new Notificaciones(
+                $solicitud->email,
+                $solicitud->nombres,
+                $solicitud->apellidos
+            );
+
+            if ($solicitud->estado_id === '3') {
+                $solicitud->personal_asignado = 100;
+                $notificacion->enviarSolicitudRechazadaCliente(
+                    $solicitud->tipo->nombre,
+                    $solicitud->descripcion,
+                    $solicitud->observaciones
+                );
+            } else {
+                $solicitud->estado_id = '5';
+                $solicitud->observaciones = $_POST['observacionesConcluido'];
+                $notificacion->enviarSolicitudFinalizadaCliente(
+                    $solicitud->tipo->nombre,
+                    $solicitud->descripcion,
+                    $solicitud->observaciones
+                );
+            }
+
+            $resultado = $solicitud->guardar();
+
+            if ($resultado) {
+                $_SESSION['exito'] = true;
+                header('Location: /lecturador/solicitudes');
+                exit;
+            }
+        }
+
+        $router->render('/solicitudes/finalizar', [
+            'titulo' => 'Gestión de Solicitud',
+            'solicitud' => $solicitud,
+            'usuariorol' => $usuariorol
         ]);
     }
 }

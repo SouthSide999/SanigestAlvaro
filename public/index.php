@@ -230,6 +230,9 @@ $router->post('/servicios/estado', [ServiciosEnLineaController::class, 'estado']
 $router->get('/servicios/solicitud/crear', [ServiciosEnLineaController::class, 'solicitud']);
 $router->post('/servicios/solicitud/crear', [ServiciosEnLineaController::class, 'solicitud']);
 
+$router->get('/servicios/consultar-recibo', [ServiciosEnLineaController::class, 'consultarRecibo']);
+$router->post('/servicios/consultar-recibo', [ServiciosEnLineaController::class, 'consultarRecibo']);
+
 
 
 //paginas helper
@@ -344,6 +347,11 @@ $router->post('/lecturador/lectura/eliminar', [FacturacionLecturadorController::
 $router->get('/lecturador/lectura/generar', [FacturacionLecturadorController::class, 'generarLectura']);
 $router->post('/lecturador/lectura/generar', [FacturacionLecturadorController::class, 'generarLectura']);
 
+
+// solicitudes para lecturador
+$router->get('/lecturador/solicitudes', [SolicitudController::class, 'listaLecturador']);
+$router->get('/lecturador/solicitudes/finalizar', [SolicitudController::class, 'finalizarLecturador']);
+$router->post('/lecturador/solicitudes/finalizar', [SolicitudController::class, 'finalizarLecturador']);
 
 
 $router->comprobarRutas();

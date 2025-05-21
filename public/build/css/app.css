@@ -992,13 +992,13 @@ h3 {
   margin: 3rem 0 1rem 0;
 }
 .eventos--workshops .eventos__heading {
-  color: #00c8c2;
+  color: #00b4d8;
 }
 .eventos--workshops .evento__informacion {
-  background-color: #00c8c2;
+  background-color: #00b4d8;
 }
 .eventos--workshops .evento__informacion:hover {
-  background-color: rgb(0, 149, 144.53);
+  background-color: rgb(0, 137.5, 165);
 }
 .eventos .swiper-button-next,
 .eventos .swiper-button-prev {
@@ -1013,7 +1013,7 @@ h3 {
   color: rgb(0, 72.7459016393, 142);
 }
 .eventos .swiper-pagination--workshops {
-  color: rgb(0, 98, 95.06);
+  color: #005f72;
 }
 
 .evento__hora {
@@ -1336,7 +1336,7 @@ h3 {
   background-image: radial-gradient(at 40% 20%, hsl(209, 100%, 47%) 0px, transparent 50%), radial-gradient(at 80% 0%, hsl(178, 100%, 39%) 0px, transparent 50%), radial-gradient(at 69% 82%, hsl(209, 100%, 47%) 0px, transparent 50%), radial-gradient(at 26% 91%, hsl(178, 100%, 39%) 0px, transparent 50%), radial-gradient(at 0% 100%, hsl(209, 100%, 47%) 0px, transparent 50%), radial-gradient(at 27% 22%, hsl(178, 100%, 39%) 0px, transparent 50%), radial-gradient(at 0% 0%, hsl(209, 100%, 47%) 0px, transparent 50%);
 }
 .boleto--virtual {
-  background-color: #00c8c2;
+  background-color: #00b4d8;
 }
 .boleto--gratis {
   background-color: #007df4;
@@ -1626,7 +1626,7 @@ h3 {
 }
 .noticias .swiper-button-next,
 .noticias .swiper-button-prev {
-  color: #00c8c2;
+  color: #00b4d8;
 }
 .noticias .swiper-pagination {
   position: relative;
@@ -2082,6 +2082,89 @@ h3 {
   position: absolute;
 }
 
+.recibo__contenedor {
+  padding-bottom: 15rem;
+  width: min(95%, 100rem);
+  margin: 0 auto;
+}
+.recibo__heading {
+  font-size: 3rem;
+  text-align: center;
+  color: #0077b6;
+  margin-bottom: 3rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+.recibo__contenido {
+  padding: 3rem;
+  border-radius: 2rem;
+  background: linear-gradient(to right, #ffffff, #f0f4ff);
+  border: 2px solid #00b4d8;
+  box-shadow: 0 20px 35px rgba(0, 119, 182, 0.25), 0 10px 15px rgba(0, 0, 0, 0.15);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+}
+.recibo__datos, .recibo__contribuyente, .recibo__consumo {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  border-left: 8px solid #0077b6;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.recibo__datos:hover, .recibo__contribuyente:hover, .recibo__consumo:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+}
+.recibo__subtitulo {
+  font-size: 2rem;
+  color: #00b4d8;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #00b4d8;
+  padding-bottom: 0.5rem;
+}
+.recibo__dato {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: #333;
+  line-height: 1.6;
+  padding-left: 0.5rem;
+  position: relative;
+}
+.recibo__dato::before {
+  content: "•";
+  color: #0077b6;
+  position: absolute;
+  left: 0;
+}
+.recibo__label {
+  font-weight: bold;
+  color: #1a1b15;
+}
+.recibo__mensaje {
+  background-color: #00b4d8;
+  color: #FFFFFF;
+  padding: 2rem;
+  margin: 2rem 0;
+  border-left: 1rem solid #0077b6;
+  border-radius: 1rem;
+  font-size: 2.4rem;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  animation: mensajeAnimado 0.8s ease-in-out both;
+}
+
+@keyframes mensajeAnimado {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
 .formulario {
   display: flex;
   flex-direction: column;
@@ -2368,7 +2451,7 @@ h3 {
 }
 .header__logo {
   font-size: clamp(2rem, -0.8rem + 10vw, 8rem);
-  background: linear-gradient(to right, #007df4, #00c8c2);
+  background: linear-gradient(to right, #007df4, #00b4d8);
   -webkit-background-clip: text;
           background-clip: text;
   color: transparent;
@@ -3069,7 +3152,7 @@ h3 {
   color: #007df4;
 }
 .eventos-registro__heading--workshops {
-  color: #00c8c2;
+  color: #00b4d8;
   margin-top: 5rem;
 }
 .eventos-registro__fecha {
