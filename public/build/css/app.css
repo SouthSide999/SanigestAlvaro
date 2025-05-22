@@ -3654,6 +3654,72 @@ h3 {
   margin-right: 0.6rem;
 }
 
+.historial-grafica {
+  width: min(95%, 60rem);
+  margin: 0 auto;
+  background-color: white;
+  padding: 3rem;
+  border-radius: 2rem;
+  margin-bottom: 4rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 35px rgba(0, 119, 182, 0.25), 0 10px 15px rgba(0, 0, 0, 0.15);
+}
+.historial-grafica::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 100px;
+  height: 100px;
+  background-color: #007df4;
+  opacity: 0.1;
+  border-radius: 50%;
+}
+.historial-grafica canvas {
+  width: 100% !important;
+  height: auto !important;
+  display: block;
+  margin-top: 2rem;
+}
+.historial-grafica__titulo {
+  font-family: "Outfit", sans-serif;
+  font-weight: 900;
+  margin: 2rem 0;
+  font-size: 2.4rem;
+  text-align: center;
+  background: linear-gradient(to right, #007df4, #00b4d8);
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+  margin-bottom: 1rem;
+}
+.historial-grafica__descripcion {
+  font-size: 1.6rem;
+  text-align: center;
+  color: #1E293B;
+  margin-bottom: 2rem;
+}
+.historial-grafica__icono {
+  font-size: 4rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.historial-grafica__resumen {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 1.6rem;
+}
+.historial-grafica__resumen p {
+  margin: 0.5rem 0;
+  color: #1a1b15;
+  font-weight: 700;
+}
+.historial-grafica__resumen p span {
+  color: #007df4;
+  font-weight: 900;
+}
+
 .dashboardtecnico {
   height: 100%;
   display: flex;

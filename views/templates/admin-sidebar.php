@@ -81,13 +81,5 @@
                 Contactos
             </span>
         </a>
-
-
-        <!-- <a href="/admin/regalos" class="dashboard__enlace <?php echo pagina_actual('/regalos') ? 'dashboard__enlace--actual' : ''; ?> ">
-            <i class="fa-solid fa-file"></i>
-            <span class="dashboard__menu-texto">
-                Estadisticas
-            </span>
-        </a> -->
     </nav>
 </aside>

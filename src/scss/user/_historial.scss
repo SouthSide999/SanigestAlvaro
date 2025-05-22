@@ -1,0 +1,70 @@
+@use 'base/mixins' as m;
+@use 'base/variables' as v;
+
+.historial-grafica {
+    @include m.contenedor-sm;
+    background-color: lighten(v.$gris-claro, 5%);
+    padding: 3rem;
+    border-radius: 2rem;
+    margin-bottom: 4rem;
+    position: relative;
+    overflow: hidden;
+    @include m.shadow-lg;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: -40px;
+        right: -40px;
+        width: 100px;
+        height: 100px;
+        background-color: v.$azul;
+        opacity: 0.1;
+        border-radius: 50%;
+    }
+
+    canvas {
+        width: 100% !important;
+        height: auto !important;
+        display: block;
+        margin-top: 2rem;
+    }
+
+    &__titulo {
+        @include m.headings;
+        font-size: 2.4rem;
+        text-align: center;
+        @include m.texto-degradado(v.$azul, v.$secundario);
+        margin-bottom: 1rem;
+    }
+
+    &__descripcion {
+        font-size: 1.6rem;
+        text-align: center;
+        color: v.$gris-oscuro;
+        margin-bottom: 2rem;
+    }
+
+    &__icono {
+        font-size: 4rem;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    &__resumen {
+        margin-top: 2rem;
+        text-align: center;
+        font-size: 1.6rem;
+
+        p {
+            margin: 0.5rem 0;
+            color: v.$negro;
+            font-weight: v.$bold;
+
+            span {
+                color: v.$azul;
+                font-weight: v.$black;
+            }
+        }
+    }
+}

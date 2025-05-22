@@ -346,7 +346,6 @@ class ActiveRecord
         return $resultado;
     }
 
-
     public static function ultimoID($columna = 'id')
     {
         $query = "SELECT MAX($columna) as id FROM " . static::$tabla;

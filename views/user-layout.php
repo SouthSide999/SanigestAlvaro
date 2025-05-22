@@ -23,7 +23,8 @@
     // if (str_contains($_SERVER['REQUEST_URI'], '/user/dashboard')) {
     //     include_once __DIR__ . '/templates/user-nav.php';
     // }
-    // ?>
+    // 
+    ?>
     <div class="dashboardUser__grid">
         <main class="dashboardUser__contenido">
             <?php
@@ -31,7 +32,7 @@
             ?>
         </main>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.1.2/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
     <script
         src="/build/js/main.min.js"
         defer>

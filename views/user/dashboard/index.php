@@ -8,7 +8,7 @@
             <p class="dashboardUser__navegacion-texto">Consulta tu Recibo Mensual Actual</p>
         </a>
 
-        <a class="dashboardUser__navegacion-enlace" href="/user/consumos">
+        <a class="dashboardUser__navegacion-enlace" href="/user/historial">
             <i class="dashboardUser__navegacion-icono fa-solid fa-chart-line"></i>
             <h4 class="dashboardUser__navegacion-etiqueta">Historial de Consumos y Facturación</h4>
             <p class="dashboardUser__navegacion-texto">Ver el historial de consumo y facturación de agua</p>

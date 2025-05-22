@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require_once __DIR__ . '/../includes/app.php';
 
@@ -18,6 +18,7 @@ use Controllers\PersonalController;
 use Controllers\PonentesController;
 use Controllers\RegistroController;
 use Controllers\DashboardController;
+use Controllers\HistorialController;
 use Controllers\SolicitudController;
 use Controllers\PerfilUserController;
 use Controllers\AguaPotableController;
@@ -30,6 +31,7 @@ use Controllers\DashboardTecnicoController;
 use Controllers\ServiciosEnLineaController;
 use Controllers\DashboardTesoreroController;
 use Controllers\AguaPotableTesoreroController;
+use Controllers\APIHistorial;
 use Controllers\DashboardLecturadorController;
 use Controllers\FacturacionLecturadorController;
 use Controllers\NuevasConexionesTecnicoController;
@@ -205,8 +207,8 @@ $router->post('/admin/resumen/detalle', [AguaPotableController::class, 'resumenE
 // $router->get('/api/eventos-horario', [APIEventos::class, 'index']);
 // $router->get('/api/ponentes', [APIPonentes::class, 'index']);
 // $router->get('/api/ponente', [APIPonentes::class, 'ponente']);
-// $router->get('/api/regalos', [APIRegalos::class, 'index']);//para grafica de regalos
 // $router->get('/admin/registrados', [RegistradosController::class, 'index']);
+$router->get('/api/regalos', [APIRegalos::class, 'index']);//para grafica de regalos
 $router->get('/admin/regalos', [RegalosController::class, 'index']);
 
 
@@ -278,6 +280,11 @@ $router->get('/user/recibo-actual', [RecibosUserController::class, 'consultarRec
 //servicio
 $router->get('/user/estado-servicio', [EstadoServicioController::class, 'estadoServicio']);
 
+//historial
+$router->get('/api/historial', [APIHistorial::class, 'index']);//para grafica
+$router->get('/user/historial', [HistorialController::class, 'historial']);
+
+
 
 //*area tecnico
 $router->get('/tecnico/dashboard', [DashboardTecnicoController::class, 'index']);
@@ -304,6 +311,7 @@ $router->get('/tesorero/dashboard', [DashboardTesoreroController::class, 'index'
 
 //agua-potable
 $router->get('/tesorero/agua', [AguaPotableTesoreroController::class, 'index']);
+
 
 // contribuyentes
 $router->get('/tesorero/contribuyentes', [AguaPotableTesoreroController::class, 'contribuyentes']);

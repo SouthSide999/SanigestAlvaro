@@ -15,6 +15,7 @@ import './nuevaconexion.js'
 import './carrosel.js'
 import './slider2.js'
 import './consumos.js'
+import './historial.js'
 
 
 
