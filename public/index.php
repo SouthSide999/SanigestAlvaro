@@ -21,9 +21,11 @@ use Controllers\DashboardController;
 use Controllers\SolicitudController;
 use Controllers\PerfilUserController;
 use Controllers\AguaPotableController;
+use Controllers\RecibosUserController;
 use Controllers\RegistradosController;
 use Controllers\DashboardUserController;
 use Controllers\NuevaConexionController;
+use Controllers\EstadoServicioController;
 use Controllers\DashboardTecnicoController;
 use Controllers\ServiciosEnLineaController;
 use Controllers\DashboardTesoreroController;
@@ -266,17 +268,16 @@ $router->get('/user/reclamos/ver', [ReclamoController::class, 'ver']);
 $router->post('/user/reclamos/ver', [ReclamoController::class, 'ver']);
 $router->post('/user/reclamos/eliminar', [ReclamoController::class, 'eliminar']);
 
-//solicitudes
-$router->get('/user/solicitud', [SolicitudController::class, 'index']);
-$router->get('/user/solicitud/crear', [SolicitudController::class, 'crear']);
-$router->post('/user/solicitud/crear', [SolicitudController::class, 'crear']);
-$router->get('/user/solicitud/ver', [SolicitudController::class, 'ver']);
-$router->post('/user/solicitud/ver', [SolicitudController::class, 'ver']);
-$router->post('/user/solicitud/eliminar', [SolicitudController::class, 'eliminar']);
-
 //perfil
 $router->get('/user/perfil', [PerfilUserController::class, 'perfil']);
 $router->post('/user/perfil', [PerfilUserController::class, 'perfil']);
+
+//recibos
+$router->get('/user/recibo-actual', [RecibosUserController::class, 'consultarRecibo']);
+
+//servicio
+$router->get('/user/estado-servicio', [EstadoServicioController::class, 'estadoServicio']);
+
 
 //*area tecnico
 $router->get('/tecnico/dashboard', [DashboardTecnicoController::class, 'index']);

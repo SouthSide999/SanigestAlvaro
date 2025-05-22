@@ -2087,6 +2087,9 @@ h3 {
   width: min(95%, 100rem);
   margin: 0 auto;
 }
+.recibo__contenedor--user {
+  padding-bottom: 0rem;
+}
 .recibo__heading {
   font-size: 3rem;
   text-align: center;
@@ -3590,6 +3593,65 @@ h3 {
   background-image: radial-gradient(at 43% 24%, hsl(38, 62%, 78%) 0px, transparent 50%), radial-gradient(at 2% 21%, hsl(20, 64%, 79%) 0px, transparent 50%), radial-gradient(at 89% 57%, hsl(292, 79%, 70%) 0px, transparent 50%), radial-gradient(at 32% 61%, hsl(326, 78%, 63%) 0px, transparent 50%), radial-gradient(at 0% 97%, hsl(217, 89%, 63%) 0px, transparent 50%), radial-gradient(at 74% 52%, hsl(86, 67%, 72%) 0px, transparent 50%), radial-gradient(at 98% 87%, hsl(144, 95%, 79%) 0px, transparent 50%);
   border-radius: 20px;
   padding-bottom: 10rem;
+}
+
+.estadoServicio {
+  width: min(95%, 80rem);
+  margin: 0 auto;
+  margin: 4rem auto;
+}
+.estadoServicio__titulo {
+  font-family: "Outfit", sans-serif;
+  font-weight: 900;
+  margin: 2rem 0;
+  margin: 6rem 0 3rem 0;
+  text-align: center;
+  font-weight: 900;
+  color: #007df4;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.estadoServicio__card {
+  background-color: #FFFFFF;
+  border-radius: 1rem;
+  padding: 2.5rem 3rem;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 15px;
+  margin-bottom: 2.5rem;
+  transition: box-shadow 0.3s ease;
+}
+.estadoServicio__card:hover {
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 8px 30px;
+}
+@media (min-width: 768px) {
+  .estadoServicio__card {
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+}
+.estadoServicio__section {
+  flex: 1 1 45%;
+  min-width: 280px;
+}
+.estadoServicio__subtitulo {
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  color: #1E293B;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #007df4;
+  padding-bottom: 0.5rem;
+}
+.estadoServicio__dato {
+  font-size: 1.6rem;
+  color: #1E293B;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+.estadoServicio__etiqueta {
+  font-weight: 600;
+  color: #007df4;
+  margin-right: 0.6rem;
 }
 
 .dashboardtecnico {

@@ -1,0 +1,62 @@
+@use 'base/mixins' as m;
+@use 'base/variables' as v;
+
+.estadoServicio {
+    @include m.contenedor-md;
+    margin: 4rem auto;
+
+    &__titulo {
+        @include m.nombre-pagina;
+        font-weight: 900;
+        color: v.$azul;
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    &__card {
+        background-color: v.$blanco;
+        border-radius: 1rem;
+        padding: 2.5rem 3rem;
+        box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 15px;
+        margin-bottom: 2.5rem;
+        transition: box-shadow 0.3s ease;
+
+        &:hover {
+            box-shadow: rgba(0, 0, 0, 0.15) 0px 8px 30px;
+        }
+
+        @include m.tablet {
+            display: flex;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+    }
+
+    &__section {
+        flex: 1 1 45%;
+        min-width: 280px;
+    }
+
+    &__subtitulo {
+        font-family: v.$fuente_principal;
+        font-weight: 700;
+        font-size: 2rem;
+        color: v.$gris-oscuro;
+        margin-bottom: 1.5rem;
+        border-bottom: 2px solid v.$azul;
+        padding-bottom: 0.5rem;
+    }
+
+    &__dato {
+        font-size: 1.6rem;
+        color: v.$gris-oscuro;
+        margin-bottom: 1rem;
+        line-height: 1.5;
+    }
+
+    &__etiqueta {
+        font-weight: 600;
+        color: v.$azul;
+        margin-right: 0.6rem;
+    }
+}

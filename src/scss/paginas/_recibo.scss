@@ -5,6 +5,10 @@
     &__contenedor {
         padding-bottom: 15rem;
         @include m.contenedor-l;
+
+        &--user {
+            padding-bottom: 0rem;
+        }
     }
 
     &__heading {
@@ -84,6 +88,8 @@
         @include m.shadow;
 
         animation: mensajeAnimado 0.8s ease-in-out both;
+
+
     }
 }
 
