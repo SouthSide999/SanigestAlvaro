@@ -238,6 +238,24 @@ class ActiveRecord
         $resultado = self::consultarSQL($query);
         return $resultado;
     }
+    public static function whereArrayLimit($array = [], $limite = 10)
+    {
+        $query = "SELECT * FROM " . static::$tabla . " WHERE ";
+
+        foreach ($array as $key => $value) {
+            if ($key === array_key_last($array)) {
+                $query .= " ${key} = '${value}'";
+            } else {
+                $query .= " ${key} = '${value}' AND ";
+            }
+        }
+
+        $query .= " LIMIT ${limite}";
+
+        $resultado = self::consultarSQL($query);
+        return $resultado;
+    }
+
 
     // Traer un total de registros
     public static function total($columna = '', $valor = '')
@@ -281,14 +299,7 @@ class ActiveRecord
         $query .= "'" . join("', '", array_values($atributos)) . "'";
         $query .= ")";
 
-        // $query .= " ) VALUES (' ";
-        // $query .= join("', '", array_values($atributos));
-        // $query .= " ') ";
-
-
-
         //debuguear($query); // Descomentar si no te funciona algo
-
         // Resultado de la consulta
         $resultado = self::$db->query($query);
         return [
@@ -334,6 +345,13 @@ class ActiveRecord
         $resultado = self::consultarSQL($query);
         return $resultado;
     }
+    public static function buscarultimos($columna, $limite = 5)
+    {
+        $query = "SELECT * FROM " . static::$tabla . " ORDER BY ${columna} DESC LIMIT ${limite}";
+        $resultado = self::consultarSQL($query);
+        return $resultado;
+    }
+
     // Búsqueda estricta, insensible a mayúsculas/minúsculas
     public static function buscarestricto($columna, $valor)
     {

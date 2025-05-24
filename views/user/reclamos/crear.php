@@ -30,11 +30,11 @@
                                     <?php echo  $reclamoUsuario->tipo->nombre ?>
                                 </td>
                                 <td class="table__td">
-                                    <?php if ($reclamoUsuario->estado === '0') { ?>
+                                    <?php if ($reclamoUsuario->estado_id === '1') { ?>
                                         <button class="table__pendiente" type="submit">
                                             Pendiente
                                         </button>
-                                    <?php } elseif ($reclamoUsuario->estado === '1') { ?>
+                                    <?php } elseif ($reclamoUsuario->estado_id === '5') { ?>
                                         <button class="table__completa">
                                             Completa
                                         </button>

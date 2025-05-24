@@ -109,4 +109,32 @@ class Cliente extends ActiveRecord
     {
         $this->password = password_hash($this->password, PASSWORD_BCRYPT);
     }
+    public function validar_cliente()
+    {
+        if (!$this->nombre) {
+            self::$alertas['error'][] = 'El Nombre no puede ir vacío';
+        }
+        if (!$this->apellido) {
+            self::$alertas['error'][] = 'El Apellido no puede ir vacío';
+        }
+        if (!$this->email) {
+            self::$alertas['error'][] = 'El Email no puede ir vacío';
+        } elseif (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            self::$alertas['error'][] = 'El Email no es válido';
+        }
+        if (!$this->dni) {
+            self::$alertas['error'][] = 'El DNI no puede ir vacío';
+        } elseif (!preg_match('/^\d{8}$/', $this->dni)) {
+            self::$alertas['error'][] = 'El DNI debe tener 8 dígitos numéricos';
+        }
+        if (!$this->celular) {
+            self::$alertas['error'][] = 'El celular no puede ir vacío';
+        } elseif (!preg_match('/^\d{9}$/', $this->celular)) {
+            self::$alertas['error'][] = 'El celular debe tener 9 dígitos numéricos';
+        }
+        if (!$this->codigo_predio) {
+            self::$alertas['error'][] = 'Debe seleccionar un predio';
+        }
+        return self::$alertas;
+    }
 }

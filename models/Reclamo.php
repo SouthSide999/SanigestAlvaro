@@ -1,10 +1,12 @@
-<?php 
+<?php
 
 namespace Model;
 
-class Reclamo extends ActiveRecord {
+class Reclamo extends ActiveRecord
+{
     protected static $tabla = 'reclamos';
-    protected static $columnasDB = ['id', 'cliente_id', 'tipo_reclamo_id', 'numero', 'descripcion', 'evidencia', 'fecha','estado'];
+    // Cambio 'estado' por 'estado_id'
+    protected static $columnasDB = ['id', 'cliente_id', 'tipo_reclamo_id', 'numero', 'descripcion', 'evidencia', 'fecha', 'estado_id'];
 
     public $id;
     public $cliente_id;
@@ -13,7 +15,7 @@ class Reclamo extends ActiveRecord {
     public $descripcion;
     public $evidencia;
     public $fecha;
-    public $estado;
+    public $estado_id;  // Cambio aquí
 
     public function __construct($args = [])
     {
@@ -24,23 +26,28 @@ class Reclamo extends ActiveRecord {
         $this->descripcion = $args['descripcion'] ?? '';
         $this->evidencia = $args['evidencia'] ?? null;
         $this->fecha = $args['fecha'] ?? date('Y-m-d H:i:s');
-        $this->estado = $args['mensaje'] ?? 0;
+        $this->estado_id = $args['estado_id'] ?? 1;  
     }
 
-    public function validar() {
-        if(!$this->cliente_id) {
+    public function validar()
+    {
+        if (!$this->cliente_id) {
             self::$alertas['error'][] = 'El usuario es obligatorio';
         }
-        if(!$this->tipo_reclamo_id) {
+        if (!$this->tipo_reclamo_id) {
             self::$alertas['error'][] = 'El tipo de reclamo es obligatorio';
         }
-        if(!$this->numero) {
+        if (!$this->numero) {
             self::$alertas['error'][] = 'El número de contacto es obligatorio';
         }
-        if(!$this->descripcion) {
+        if (!$this->descripcion) {
             self::$alertas['error'][] = 'La descripción es obligatoria';
         }
-    
+        // Validar estado_id (opcional)
+        if (!is_numeric($this->estado_id)) {
+            self::$alertas['error'][] = 'El estado es inválido';
+        }
+
         return self::$alertas;
     }
 }

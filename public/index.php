@@ -6,7 +6,9 @@ use MVC\Router;
 use Controllers\APIEventos;
 use Controllers\APIRegalos;
 use Controllers\APIPonentes;
+use Controllers\APIHistorial;
 use Controllers\AuthController;
+use Controllers\ClienteController;
 use Controllers\EventosController;
 use Controllers\PaginasController;
 use Controllers\ReclamoController;
@@ -31,7 +33,6 @@ use Controllers\DashboardTecnicoController;
 use Controllers\ServiciosEnLineaController;
 use Controllers\DashboardTesoreroController;
 use Controllers\AguaPotableTesoreroController;
-use Controllers\APIHistorial;
 use Controllers\DashboardLecturadorController;
 use Controllers\FacturacionLecturadorController;
 use Controllers\NuevasConexionesTecnicoController;
@@ -127,6 +128,14 @@ $router->get('/admin/personal/editar', [PersonalController::class, 'editar']);
 $router->post('/admin/personal/editar', [PersonalController::class, 'editar']);
 $router->get('/admin/personal/eliminar', [PersonalController::class, 'eliminar']);
 $router->post('/admin/personal/eliminar', [PersonalController::class, 'eliminar']);
+
+
+//admin-clientes
+$router->get('/admin/cliente', [ClienteController::class, 'index']);
+$router->get('/admin/cliente/editar', [ClienteController::class, 'editar']);
+$router->post('/admin/cliente/editar', [ClienteController::class, 'editar']);
+$router->get('/admin/cliente/eliminar', [ClienteController::class, 'eliminar']);
+$router->post('/admin/cliente/eliminar', [ClienteController::class, 'eliminar']);
 
 //nueva-conexion
 $router->get('/admin/nuevaconexion', [NuevaConexionController::class, 'index']);

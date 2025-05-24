@@ -37,16 +37,16 @@
                                     <?php echo $reclamo->tipo->nombre ?>
                                 </td>
                                 <td class="table__td">
-                                    <?php if ($reclamo->estado === '0') { ?>
+                                    <?php if ($reclamo->estado_id === '1') { ?>
                                         <form method="POST" action="/admin/reclamos/editarB" class="table__formulario">
                                             <input type="hidden" name="id" value="<?php echo $reclamo->id ?>">
-                                            <input type="hidden" name="estado" value="1">
+                                            <input type="hidden" name="estado_id" value="5">
                                             <button class="table__pendiente" type="submit">Pendiente</button>
                                         </form>
-                                    <?php } elseif ($reclamo->estado === '1') { ?>
+                                    <?php } elseif ($reclamo->estado_id === '5') { ?>
                                         <form method="POST" action="/admin/reclamos/editarB" class="table__formulario">
                                             <input type="hidden" name="id" value="<?php echo $reclamo->id ?>">
-                                            <input type="hidden" name="estado" value="0">
+                                            <input type="hidden" name="estado_id" value="1">
                                             <button class="table__completa">Completa</button>
                                         </form>
                                     <?php } ?>
@@ -83,19 +83,19 @@
             <fieldset class="formulario__fieldset">
                 <legend class="formulario__legend">Estado Del Reclamo:</legend>
                 <span>(Haz Click para cambiar el estado del reclamo)</span>
-                <?php if ($reclamoDetalle->estado === '0') { ?>
+                <?php if ($reclamoDetalle->estado_id === '1') { ?>
 
                     <form method="POST" action="/admin/reclamos/editarB" class="table__formulario">
                         <input type="hidden" name="id" value="<?php echo $reclamoDetalle->id; ?>">
-                        <input type="hidden" name="estado" value="1">
+                        <input type="hidden" name="estado_id" value="5">
                         <button class="table__pendiente" type="submit">
                             Pendiente
                         </button>
                     </form>
-                <?php } elseif ($reclamoDetalle->estado === '1') { ?>
+                <?php } elseif ($reclamoDetalle->estado_id === '5') { ?>
                     <form method="POST" action="/admin/reclamos/editarB" class="table__formulario">
                         <input type="hidden" name="id" value="<?php echo $reclamoDetalle->id; ?>">
-                        <input type="hidden" name="estado" value="0">
+                        <input type="hidden" name="estado_id" value="1">
                         <button class="table__completa">
                             Completa
                         </button>

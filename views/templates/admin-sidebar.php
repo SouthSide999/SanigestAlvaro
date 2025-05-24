@@ -41,6 +41,14 @@
             </span>
         </a>
 
+        <a href="/admin/cliente" class="dashboard__enlace <?php echo pagina_actual('/cliente') ? 'dashboard__enlace--actual' : ''; ?> ">
+            <i class="fa-solid fa-user"></i>
+            <span class="dashboard__menu-texto">
+                Clientes
+            </span>
+        </a>
+
+
         <a href="/admin/agua" class="dashboard__enlace <?php echo pagina_actual('/aguapotable') ? 'dashboard__enlace--actual' : ''; ?> ">
             <i class="fa-solid fa-faucet"></i>
             <span class="dashboard__menu-texto">
