@@ -116,6 +116,7 @@ class AreaConmercialController
                 }
             }
         }
+        $alertas = Consumo::getAlertas();
 
         $router->render('tesorero/agua/consumos/crear', [
             'titulo' => 'Registrar Lectura',
@@ -222,7 +223,7 @@ class AreaConmercialController
             header('Location: /auth/login');
             exit;
         }
-               if (!is_tesorero()) {
+        if (!is_tesorero()) {
             header('Location: /auth/login');
             exit;
         }
