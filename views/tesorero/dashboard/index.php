@@ -2,40 +2,19 @@
 
 <main class="bloques">
     <div class="bloques__grid">
+        <!-- Ingresos Totales del Mes -->
         <div class="bloque">
-            <h3 class="bloque__heading">Últimos Registros</h3>
-
-            <?php foreach($registros as $registro) { ?>
-                <div class="bloque__contenido">
-                    <p class="bloque__texto">
-                        <?php echo $registro->usuario->nombre . " " . $registro->usuario->apellido; ?>
-                    </p>
-                </div>
-            <?php } ?>
+            <h3 class="bloque__heading">Ingresos del Mes</h3>
+            <p class="bloque__texto--cantidad">S/ <?php echo number_format($ingresos_mes, 2); ?></p>
         </div>
 
+        <!-- Predios con Deuda -->
         <div class="bloque">
-            <h3 class="bloque__heading">Ingresos</h3>
-            <p class="bloque__texto--cantidad">$ <?php echo $ingresos; ?></p>
-        </div>
-
-        <div class="bloque">
-            <h3 class="bloque__heading">Eventos Con Menos Lugares Disponibles</h3>
-            <?php foreach($menos_disponibles as $evento) { ?>
+            <h3 class="bloque__heading">Predios con Deuda</h3>
+            <?php foreach ($predios_endeudados as $predio) { ?>
                 <div class="bloque__contenido">
                     <p class="bloque__texto">
-                        <?php echo $evento->nombre . " - " . $evento->disponibles . ' Disponibles'; ?>
-                    </p>
-                </div>
-            <?php } ?>
-        </div>
-
-        <div class="bloque">
-            <h3 class="bloque__heading">Eventos Con Más Lugares Disponibles</h3>
-            <?php foreach($mas_disponibles as $evento) { ?>
-                <div class="bloque__contenido">
-                    <p class="bloque__texto">
-                        <?php echo $evento->nombre . " - " . $evento->disponibles . ' Disponibles'; ?>
+                        <?php echo $predio->datosPredio->codigo_predio . " " . $predio->contribuyente->nombres . " " . $predio->contribuyente->apellidos . " monto - S/ " . number_format($predio->monto_total, 2); ?>
                     </p>
                 </div>
             <?php } ?>

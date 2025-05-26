@@ -310,13 +310,16 @@ html {
   height: 100%;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
 
 body {
   font-family: "Outfit", sans-serif;
   font-size: 1.8rem;
+  height: 100%;
 }
 
 a {

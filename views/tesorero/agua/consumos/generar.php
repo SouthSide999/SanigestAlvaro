@@ -6,7 +6,7 @@ $anioActual = date('Y');
 
 <h2>Generar Consumos Múltiples</h2>
 
-<form class="dashboard__formulario" action="/lecturador/lectura/generar" method="POST">
+<form class="dashboard__formulario" action="/tesorero/consumos/generar" method="POST">
     <?php
     include_once __DIR__ . '/../../../templates/alertas.php';
     ?>
@@ -54,7 +54,7 @@ $anioActual = date('Y');
             timer: 3000,
             showConfirmButton: false
         }).then(() => {
-            window.location.href = '/lecturador/lectura';
+            window.location.href = '/tesorero/consumos';
         });
     </script>
 <?php elseif (isset($_GET['error']) && $_GET['error'] == 1): ?>

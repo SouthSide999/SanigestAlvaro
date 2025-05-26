@@ -9,15 +9,15 @@ use Model\Consumo;
 use Classes\Paginacion;
 use Model\EstadoConsumo;
 
-class FacturacionLecturadorController
+class AreaConmercialController
 {
-    public static function indexLectura(Router $router)
+    public static function indexConsumos(Router $router)
     {
         if (!is_auth()) {
             header('Location: /auth/login');
             exit;
         }
-        if (!is_lecturador()) {
+        if (!is_tesorero()) {
             header('Location: /auth/login');
             exit;
         }
@@ -25,7 +25,7 @@ class FacturacionLecturadorController
         $pagina_actual = $_GET['page'] ?? 1;
         $pagina_actual = filter_var($pagina_actual, FILTER_VALIDATE_INT);
         if (!$pagina_actual || $pagina_actual < 1) {
-            header('Location: /lecturador/consumos?page=1');
+            header('Location: /tesorero/consumos?page=1');
             exit;
         }
 
@@ -59,21 +59,21 @@ class FacturacionLecturadorController
             }
         }
 
-        $router->render('lecturador/lecturas/index', [
+        $router->render('tesorero/agua/consumos/index', [
             'titulo' => 'Lista de Consumos',
             'consumos' => $consumos,
             'paginacion' => $paginacion ? $paginacion->paginacion() : ''
         ]);
     }
-    public static function crearLectura(Router $router)
+    public static function crearConsumos(Router $router)
     {
-        if (!is_auth() || !is_lecturador()) {
+        if (!is_auth() || !is_tesorero()) {
             header('Location: /auth/login');
             exit;
         }
 
         $alertas = [];
-        $lectura = new Consumo();
+        $consumo = new Consumo();
 
         // Obtener datos necesarios para el formulario
         $predios = Predio::all();
@@ -85,30 +85,29 @@ class FacturacionLecturadorController
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $lectura->sincronizar($_POST);
+            $consumo->sincronizar($_POST);
 
             // Validar datos básicos de la lectura
-            $alertas = $lectura->validar();
+            $alertas = $consumo->validar();
 
             // Validar que monto_total venga en POST y sea numérico
             if (!isset($_POST['monto_total']) || !is_numeric($_POST['monto_total'])) {
-                Consumo::setAlerta('error',  'Monto total inválido o no enviado.');
+                Consumo::setAlerta('error', 'Monto total inválido o no enviado.');
             } else {
-                $lectura->monto_total = floatval($_POST['monto_total']);
+                $consumo->monto_total = floatval($_POST['monto_total']);
             }
-
             if (empty($alertas)) {
                 // Validar que el predio exista
-                $predio = Predio::find($lectura->predio_id);
+                $predio = Predio::find($consumo->predio_id);
                 if (!$predio) {
                     Consumo::setAlerta('error', 'El predio seleccionado no existe.');
                 } else {
-                    $consumoExistente = Consumo::whereArray(['predio_id' => $lectura->predio_id, 'mes' => $lectura->mes, 'anio' => $lectura->anio]) ?? [];
+                    $consumoExistente = Consumo::whereArray(['predio_id' => $consumo->predio_id, 'mes' => $consumo->mes, 'anio' => $consumo->anio]) ?? [];
                     if ($consumoExistente) {
                         Consumo::setAlerta('error', 'Ya existe un consumo registrado para este predio en el mismo mes y año.');
                     } else {
-                        if ($lectura->guardar()) {
-                            header('Location: /lecturador/lectura/crear?creado=1');
+                        if ($consumo->guardar()) {
+                            header('Location: /tesorero/consumos/crear?creado=1');
                             exit;
                         } else {
                             Consumo::setAlerta('error', 'Error al guardar la lectura.');
@@ -117,22 +116,23 @@ class FacturacionLecturadorController
                 }
             }
         }
-        $router->render('lecturador/lecturas/crear', [
+
+        $router->render('tesorero/agua/consumos/crear', [
             'titulo' => 'Registrar Lectura',
-            'lectura' => $lectura,
+            'lectura' => $consumo,
             'predios' => $predios,
             'estados' => $estados,
             'alertas' => $alertas
         ]);
     }
-    public static function editarLectura(Router $router)
+    public static function editarConsumos(Router $router)
     {
         if (!is_auth()) {
             header('Location: /auth/login');
             exit;
         }
 
-        if (!is_lecturador()) {
+        if (!is_tesorero()) {
             header('Location: /auth/login');
             exit;
         }
@@ -144,7 +144,7 @@ class FacturacionLecturadorController
         $id = filter_var($id, FILTER_VALIDATE_INT);
 
         if (!$id) {
-            header('Location: /lecturador/lectura');
+            header('Location: /tesorero/lectura');
             exit;
         }
 
@@ -154,10 +154,10 @@ class FacturacionLecturadorController
         }
 
         // Obtener la lectura
-        $lectura = Consumo::find($id);
+        $consumo = Consumo::find($id);
 
-        if (!$lectura) {
-            header('Location: /lecturador/lectura');
+        if (!$consumo) {
+            header('Location: /tesorero/lectura');
             exit;
         }
 
@@ -165,38 +165,38 @@ class FacturacionLecturadorController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Sincronizar datos
-            $lectura->sincronizar($_POST);
+            $consumo->sincronizar($_POST);
 
             // Validar
-            $alertas = $lectura->validar();
+            $alertas = $consumo->validar();
 
 
             if (empty($alertas)) {
-                $resultado = $lectura->guardar();
+                $resultado = $consumo->guardar();
 
                 if ($resultado) {
-                    header("Location: /lecturador/lectura/editar?id=$id&editado=1");
+                    header("Location: /tesorero/consumos/editar?id=$id&editado=1");
                     exit;
                 }
             }
         }
 
         // Renderizar vista
-        $router->render('lecturador/lecturas/editar', [
+        $router->render('tesorero/agua/consumos/editar', [
             'titulo' => 'Editar Lectura',
             'alertas' => $alertas,
             'predios' => $predios,
-            'lectura' => $lectura
+            'lectura' => $consumo
         ]);
     }
-    public static function eliminarLectura()
+    public static function eliminarConsumos()
     {
         if (!is_auth()) {
             header('Location: /auth/login');
             exit;
         }
 
-        if (!is_lecturador()) {
+        if (!is_tesorero()) {
             header('Location: /auth/login');
             exit;
         }
@@ -212,17 +212,17 @@ class FacturacionLecturadorController
                 $_SESSION['error'] = 'La lectura no fue encontrada.';
             }
 
-            header('Location: /lecturador/lectura');
+            header('Location: /tesorero/consumos');
             exit;
         }
     }
-    public static function generarLectura(Router $router)
+    public static function generarConsumos(Router $router)
     {
         if (!is_auth()) {
             header('Location: /auth/login');
             exit;
         }
-        if (!is_lecturador()) {
+               if (!is_tesorero()) {
             header('Location: /auth/login');
             exit;
         }
@@ -242,6 +242,8 @@ class FacturacionLecturadorController
             12 => 'Diciembre'
         ];
 
+        $alertas = [];
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mes = $_POST['mes'] ?? null;
             $anio = $_POST['anio'] ?? null;
@@ -249,7 +251,7 @@ class FacturacionLecturadorController
             $fecha_fin = $_POST['fecha_fin'] ?? null;
 
             if (!$mes || !$anio || !$fecha_inicio || !$fecha_fin) {
-                header('Location: /lecturador/lectura/generar?error=1');
+                header('Location: /tesorero/consumos/generar?error=1');
                 exit;
             }
 
@@ -259,12 +261,12 @@ class FacturacionLecturadorController
                 return in_array($p->estado_servicio_id, [1, 4]);
             });
 
-
             if (empty($predios)) {
-                header('Location: /lecturador/lectura/generar?sinPredios=1');
+                header('Location: /tesorero/consumos/generar?sinPredios=1');
                 exit;
             }
 
+            // Verificar si ya existen consumos para al menos un predio
             $hayDuplicados = false;
             foreach ($predios as $predio) {
                 $existente = Consumo::whereArray([
@@ -278,9 +280,9 @@ class FacturacionLecturadorController
                     break;
                 }
             }
+
             if ($hayDuplicados) {
                 Consumo::setAlerta('error', 'Ya existen consumos registrados para al menos un predio en el mismo mes y año.');
-
             } else {
                 // Generar consumos
                 foreach ($predios as $predio) {
@@ -296,16 +298,16 @@ class FacturacionLecturadorController
                     $lectura->guardar();
                 }
 
-                header('Location: /lecturador/lectura/generar?exito=1');
+                header('Location: /tesorero/consumos/generar?exito=1');
                 exit;
             }
         }
         $alertas = Consumo::getAlertas();
 
-        $router->render('/lecturador/lecturas/generar', [
+        $router->render('/tesorero/agua/consumos/generar', [
             'titulo' => 'Generar Consumos',
             'meses' => $meses,
-            'alertas' => $alertas 
+            'alertas' => $alertas
         ]);
     }
 }

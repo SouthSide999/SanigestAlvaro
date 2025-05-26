@@ -28,6 +28,7 @@ use Controllers\RecibosUserController;
 use Controllers\RegistradosController;
 use Controllers\DashboardUserController;
 use Controllers\NuevaConexionController;
+use Controllers\AreaConmercialController;
 use Controllers\EstadoServicioController;
 use Controllers\DashboardTecnicoController;
 use Controllers\ServiciosEnLineaController;
@@ -350,6 +351,19 @@ $router->post('/tesorero/resumen/detalle', [AguaPotableTesoreroController::class
 $router->get('/tesorero/solicitudes', [SolicitudController::class, 'lista']);
 $router->get('/tesorero/solicitudes/finalizar', [SolicitudController::class, 'finalizar']);
 $router->post('/tesorero/solicitudes/finalizar', [SolicitudController::class, 'finalizar']);
+
+//area conmercial tesorero
+//consumos
+$router->get('/tesorero/consumos', [AreaConmercialController::class, 'indexConsumos']);
+$router->post('/tesorero/consumos', [AreaConmercialController::class, 'indexConsumos']);
+$router->get('/tesorero/consumos/crear', [AreaConmercialController::class, 'crearConsumos']);
+$router->post('/tesorero/consumos/crear', [AreaConmercialController::class, 'crearConsumos']);
+$router->get('/tesorero/consumos/editar', [AreaConmercialController::class, 'editarConsumos']);
+$router->post('/tesorero/consumos/editar', [AreaConmercialController::class, 'editarConsumos']);
+$router->post('/tesorero/consumos/eliminar', [AreaConmercialController::class, 'eliminarConsumos']);
+$router->get('/tesorero/consumos/generar', [AreaConmercialController::class, 'generarConsumos']);
+$router->post('/tesorero/consumos/generar', [AreaConmercialController::class, 'generarConsumos']);
+
 
 //*lecturador
 $router->get('/lecturador/dashboard', [DashboardLecturadorController::class, 'index']);
