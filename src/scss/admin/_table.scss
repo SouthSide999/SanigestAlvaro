@@ -4,48 +4,76 @@
 .table {
     width: 100%;
     border-collapse: collapse;
+    color: v.$negro;
+    overflow-x: auto;
+    display: block;
 
     &__thead {
         background-color: v.$gris;
         color: v.$blanco;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        user-select: none;
     }
 
     &__th {
-        padding: 1rem;
+        padding: 1rem 1.2rem;
         text-align: left;
-        
+        font-weight: bold;
+        border-bottom: 3px solid darken(v.$gris, 10%);
+        white-space: nowrap; // evitar que el texto se parta
     }
 
     &__tr {
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
 
         &:nth-child(even) {
-            background-color:  darken($color: v.$gris-claro, $amount: 20%);
-
+            background-color: darken(v.$gris-claro, 20%);
         }
-    }
-    &__td {
-        padding: 1.5rem 1rem;
 
         &:hover {
-            background-color: darken($color: v.$blanco, $amount: 30%);
+            background-color: lighten(v.$azul, 40%);
+            box-shadow: inset 4px 0 0 0 v.$azul;
+            cursor: pointer;
+        }
+    }
 
+    &__td {
+        padding: 1.5rem 1rem;
+        font-size: 1.8rem;
+        vertical-align: middle;
+        border-bottom: 1px solid lighten(v.$gris, 40%);
+        transition: background-color 0.3s ease;
+        white-space: nowrap;
+
+        &:hover {
+            background-color: lighten(v.$blanco, 30%);
         }
 
         &--acciones {
             @extend .table__td;
             display: flex;
             justify-content: flex-start;
-            align-items: flex-start;
-            gap: 2rem;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
         }
 
         button {
             border: none;
-            font-size: 1.5rem;
-            padding: .5rem 1rem;
+            font-size: 1.4rem;
+            padding: 0.5rem 1.2rem;
             text-transform: uppercase;
             font-weight: 700;
-            border-radius: 1rem;
+            border-radius: 0.8rem;
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            user-select: none;
+
+            &:focus-visible {
+                outline: 3px solid v.$azul;
+                outline-offset: 3px;
+            }
         }
     }
 
@@ -53,22 +81,64 @@
         all: unset;
         text-transform: uppercase;
         font-size: 1.4rem;
-        font-weight: bold;
+        font-weight: 700;
+        padding: 0.4em 0.8em;
+        border-radius: 4px;
+        transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4em;
+        user-select: none;
 
         &--editar {
             color: v.$azul;
+            background-color: rgba(2, 132, 199, 0.1);
+            border: 1.5px solid v.$azul;
 
+            &:hover,
+            &:focus {
+                background-color: v.$azul;
+                color: #fff;
+                box-shadow: 0 4px 8px rgba(2, 132, 199, 0.4);
+                outline: none;
+            }
         }
 
         &--eliminar {
             color: v.$rojo;
+            background-color: rgba(220, 38, 38, 0.1);
+            border: 1.5px solid v.$rojo;
+
+            &:hover,
+            &:focus {
+                background-color: v.$rojo;
+                color: #fff;
+                box-shadow: 0 4px 8px rgba(220, 38, 38, 0.4);
+                outline: none;
+            }
         }
+
         &--asignar {
             color: v.$negro;
+            background-color: rgba(0, 0, 0, 0.05);
+            border: 1.5px solid v.$negro;
+
+            &:hover,
+            &:focus {
+                background-color: v.$negro;
+                color: #fff;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                outline: none;
+            }
         }
 
         &:hover {
             cursor: pointer;
+        }
+
+        &:focus-visible {
+            outline: 2px solid v.$azul;
+            outline-offset: 2px;
         }
     }
 
@@ -77,22 +147,101 @@
         color: v.$blanco;
         border: none;
         font-size: 1.5rem;
-        padding: .5rem 1rem;
+        padding: 0.5rem 1rem;
         text-transform: uppercase;
         font-weight: 700;
         border-radius: 1rem;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        user-select: none;
 
         &:hover {
             cursor: pointer;
+            background-color: darken(v.$amarillo, 10%);
+            color: lighten(v.$blanco, 10%);
         }
     }
 
     &__completa {
         background-color: v.$verde;
         color: v.$blanco;
+        border-radius: 1rem;
+        padding: 0.5rem 1rem;
+        font-size: 1.5rem;
+        font-weight: 700;
+        user-select: none;
+        transition: background-color 0.3s ease;
 
         &:hover {
             cursor: pointer;
+            background-color: darken(v.$verde, 10%);
+        }
+    }
+
+    &__check {
+        width: 20px;
+        height: 20px;
+        accent-color: v.$azul;
+        cursor: pointer;
+        display: flex;
+        margin: 0 auto;
+        transform: scale(1.1);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        user-select: none;
+
+        &:hover {
+            transform: scale(1.3);
+            box-shadow: 0 0 6px rgba(2, 132, 199, 0.6);
+        }
+    }
+
+    // Responsividad
+    @include m.telefono {
+        font-size: 1.5rem;
+
+        &__th,
+        &__td {
+            padding: 1rem;
+        }
+
+        &__acciones {
+            gap: 1rem;
+        }
+    }
+
+    @include m.tablet {
+        display: table;
+        font-size: 1.4rem;
+
+        &__thead {
+            display: table-header-group;
+        }
+
+        &__tr {
+            display: table-row;
+        }
+
+        &__th,
+        &__td {
+            display: table-cell;
+            padding: 1rem 1.5rem;
+            white-space: normal; // permitir ajuste en tablet para mejor lectura
+        }
+
+        &__td--acciones {
+            flex-wrap: nowrap;
+            gap: 2rem;
+        }
+    }
+
+    @include m.desktop {
+
+        &__th,
+        &__td {
+            padding: 1.5rem 2rem;
+        }
+
+        &__td--acciones {
+            gap: 2.5rem;
         }
     }
 }

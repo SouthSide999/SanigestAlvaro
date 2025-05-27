@@ -64,8 +64,28 @@ function is_lecturador(): bool
     return isset($_SESSION['rol_id']) && (int)$_SESSION['rol_id'] === 5;
 }
 
-function aos_animacion() : void {//para añadir efectos
+function aos_animacion(): void
+{ //para añadir efectos
     $efectos = ['fade-up', 'fade-down', 'fade-left', 'fade-right', 'flip-left', 'flip-right', 'zoom-in', 'zoom-in-up', 'zoom-in-down', 'zoom-out'];
     $efecto = array_rand($efectos, 1);
     echo ' data-aos="' . $efectos[$efecto] . '" ';
+}
+
+function nombreMes($numeroMes)
+{
+    $meses = [
+        1 => 'Enero',
+        2 => 'Febrero',
+        3 => 'Marzo',
+        4 => 'Abril',
+        5 => 'Mayo',
+        6 => 'Junio',
+        7 => 'Julio',
+        8 => 'Agosto',
+        9 => 'Septiembre',
+        10 => 'Octubre',
+        11 => 'Noviembre',
+        12 => 'Diciembre'
+    ];
+    return $meses[intval($numeroMes)] ?? 'Desconocido';
 }

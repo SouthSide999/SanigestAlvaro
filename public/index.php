@@ -8,6 +8,7 @@ use Controllers\APIRegalos;
 use Controllers\APIPonentes;
 use Controllers\APIHistorial;
 use Controllers\AuthController;
+use Controllers\PagoController;
 use Controllers\ClienteController;
 use Controllers\EventosController;
 use Controllers\PaginasController;
@@ -363,6 +364,18 @@ $router->post('/tesorero/consumos/editar', [AreaConmercialController::class, 'ed
 $router->post('/tesorero/consumos/eliminar', [AreaConmercialController::class, 'eliminarConsumos']);
 $router->get('/tesorero/consumos/generar', [AreaConmercialController::class, 'generarConsumos']);
 $router->post('/tesorero/consumos/generar', [AreaConmercialController::class, 'generarConsumos']);
+//pago
+$router->get('/tesorero/pagos', [PagoController::class, 'index']); 
+$router->post('/tesorero/pagos', [PagoController::class, 'index']);
+
+$router->get('/tesorero/pagos/detalle', [PagoController::class, 'detallePagos']); 
+$router->post('/tesorero/pagos/detalle', [PagoController::class, 'detallePagos']);
+
+$router->get('/tesorero/pagos/realizar', [PagoController::class, 'realizarPago']); 
+$router->post('/tesorero/pagos/realizar', [PagoController::class, 'realizarPago']); 
+
+$router->get('/tesorero/pagos/recibo', [PagoController::class, 'verRecibo']); 
+$router->post('/tesorero/pagos/recibo', [PagoController::class, 'verRecibo']); 
 
 
 //*lecturador
