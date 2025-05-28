@@ -189,9 +189,10 @@ class PagoController
                 $alertas = $pago->validar();
 
                 if (empty($alertas)) {
-                    $resultado = $pago->guardar();
                     $consumo->guardar();
-                    if ($resultado && $id) {
+                    $resultado = $pago->guardar();
+                    $id=$resultado['id'];
+                    if ($resultado) {
                         $recibo = new Recibo;
                         $recibo->pago_id = $id;
                         $recibo->numero_recibo = $pago->numero_comprobante;
