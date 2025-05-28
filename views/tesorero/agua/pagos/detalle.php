@@ -78,9 +78,10 @@
                         <td class="table__td"><?php echo $pago->fecha_pago; ?></td>
                         <td class="table__td">S/ <?php echo number_format($pago->monto_pagado, 2); ?></td>
                         <td class="table__td--acciones">
-                            <a class="table__accion table__accion--editar" href="/tesorero/pagos/ver?id=<?php echo $pago->id; ?>">
+                            <a class="table__accion table__accion--editar" href="/documents/comprobante_<?php echo $pago->numero_comprobante; ?>.pdf" target="_blank">
                                 <i class="fa-solid fa-eye"></i> Ver
                             </a>
+
                         </td>
                     </tr>
                 <?php } ?>

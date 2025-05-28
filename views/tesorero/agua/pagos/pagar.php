@@ -1,17 +1,16 @@
 <h2><?php echo $titulo; ?></h2>
 
 <div class="dashboard__contenedor-boton">
-    <a class="dashboard__boton" href="/tesorero/consumos">
+    <a class="dashboard__boton" href="<?= $_SERVER['HTTP_REFERER'] ?? '/tesorero/pagos' ?>">
         <i class="fa-solid fa-circle-arrow-left"></i>
         Volver
     </a>
 </div>
-
 <div class="dashboard__formulario">
     <?php
     include_once __DIR__ . '/../../../templates/alertas.php';
     ?>
-    <form class="formulario" action="/tesorero/consumos/crear" method="POST">
+    <form class="formulario"  method="POST">
 
         <?php
         include_once __DIR__ . '/formulario.php'; // Este incluirá los campos como ID del predio, lectura actual, etc.
@@ -19,21 +18,22 @@
 
         <input
             type="submit"
-            value="Registrar Lectura"
+            value="Registrar Pago y Generar Recio/Comprobante"
             class="formulario__submit formulario__submit--registrar">
     </form>
 </div>
 
-<?php if (isset($_GET['creado'])) : ?>
+
+<?php if (isset($_GET['pagado'])) : ?>
     <script>
         Swal.fire({
-            title: "¡Lectura registrada!",
-            text: "La lectura se ha guardado correctamente.",
+            title: "¡Pago realizado!",
+            text: "El pago se ha registrado correctamente.",
             icon: "success",
             timer: 3000,
             confirmButtonText: "OK"
         }).then(() => {
-            window.location.href = "/tesorero/consumos"; // Redirigir a la lista de lecturas
+            window.location.href = "/tesorero/agua/consumos"; // Redirigir a la lista de consumos
         });
     </script>
 <?php endif; ?>
@@ -42,7 +42,7 @@
     <script>
         Swal.fire({
             icon: 'error',
-            title: 'Error de registro',
+            title: 'Error al realizar el pago',
             html: `
             <ul style="text-align: left;">
                 <?php foreach ($alertas['error'] as $error): ?>

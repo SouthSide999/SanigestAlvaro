@@ -6,37 +6,64 @@
 
     &__grid {
         @include m.contenedor;
-        @include m.grid(2, 3rem);
 
+        @include m.telefono {
+            @include m.grid(1, 2rem);
+        }
+
+        @include m.desktop {
+            @include m.grid(2, 3rem);
+        }
     }
 }
 
 .masinformacion__informacion {
-
     @include m.contenedor-sm;
-    
-
     @include m.card;
-    background-position: center top;
-    background-size: 250px;
-    background-repeat: no-repeat;
+
     background-image: image-set(url('../img/bg_4.avif') 1x,
             url('../img/bg_4.webp') 1x,
             url('../img/bg_4.png') 1x);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
 
+    &:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    }
 
+    padding: 3rem;
+    backdrop-filter: blur(4px);
+    background-color: rgba(255, 255, 255, 0.75);
 
     &__imagen {
-        max-width: 90rem;
-        max-height: 90rem;
+        max-width: 100%;
+        height: auto;
+        border-radius: 1rem;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        margin-bottom: 2rem;
+
     }
 
     &__texto {
         text-align: justify;
-        line-height: 2;
+        line-height: 1.8;
+        font-size: 2rem;
+        color: v.$gris-oscuro;
+        font-weight: 400;
 
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        strong {
+            color: v.$primario;
+        }
     }
-
-
-
 }

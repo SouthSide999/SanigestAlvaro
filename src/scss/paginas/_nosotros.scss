@@ -2,18 +2,107 @@
 @use 'base/variables' as v;
 
 .nosotros {
+    position: relative;
+    background-color: v.$blanco;
+    padding: 4rem 0;
+    padding-bottom: 12rem;
+    overflow: hidden;
 
-    padding-bottom:6rem;
+    @include m.tablet {
+        padding: 5rem 0;
+        padding-bottom: 12rem;
+
+    }
+
+    @include m.desktop {
+        padding: 6rem 0;
+        padding-bottom: 12rem;
+
+    }
+
+    @include m.xl_desktop {
+        padding: 8rem 0;
+        padding-bottom: 12rem;
+
+    }
+
     &__grid {
         @include m.contenedor;
         @include m.grid(1, 3rem);
+        gap: 2rem;
+
         @include m.tablet {
             @include m.grid(2, 5rem);
             align-items: center;
         }
+
+        @include m.desktop {
+            @include m.grid(2, 6rem);
+        }
+
+        @include m.xl_desktop {
+            @include m.grid(2, 8rem);
+        }
+    }
+
+    &__imagen {
+        width: 100%;
+        border-radius: 1.5rem;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        transform: scale(1);
+        transition: transform 0.3s ease;
+
+        &:hover {
+            transform: scale(1.03);
+        }
+    }
+
+    &__contenido {
+        animation: fadeInUp 1s ease-in-out;
+    }
+
+    &__titulo {
+        font-family: 'PP Neue Corp', sans-serif;
+        font-size: 3rem;
+        color: v.$rojo;
+        margin-bottom: 1.5rem;
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            width: 4rem;
+            height: 0.5rem;
+            background-color: v.$azul;
+            bottom: -0.5rem;
+            left: 0;
+            border-radius: 2rem;
+        }
+
+        @include m.tablet {
+            font-size: 3.5rem;
+        }
+
+        @include m.desktop {
+            font-size: 4rem;
+        }
     }
 
     &__texto {
-        line-height: 2;
+        color: v.$gris-oscuro;
+        line-height: 1.8;
+        font-size: 1.4rem;
+
+        @include m.tablet {
+            font-size: 1.6rem;
+        }
+
+        @include m.desktop {
+            font-size: 1.8rem;
+        }
+
+        @include m.xl_desktop {
+            font-size: 2rem;
+        }
     }
 }

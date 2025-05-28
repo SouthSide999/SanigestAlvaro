@@ -5,14 +5,14 @@ namespace Controllers;
 use Model\Pago;
 use Model\Zona;
 use MVC\Router;
+use Classes\PDF;
 use Model\Predio;
+use Model\Recibo;
 use Model\Sector;
-use Model\Tarifa;
 use Model\Consumo;
+use Model\Usuario;
 use Classes\Paginacion;
 use Model\Contribuyente;
-use Model\EstadoConsumo;
-use Random\Engine\Secure;
 
 class PagoController
 {
@@ -79,7 +79,7 @@ class PagoController
         $predios_paginados = array_slice($predios_con_consumo, $offset, $por_pagina);
 
         $router->render('tesorero/agua/pagos/index', [
-            'titulo' => 'Lista de Predio por Contribuyente',
+            'titulo' => 'Lista de Predio por Contribuyente para Realizar los Pagos',
             'predios' => $predios_paginados,
             'paginacion' => $paginacion->paginacion(),
         ]);
@@ -123,12 +123,11 @@ class PagoController
         }
 
         $router->render('tesorero/agua/pagos/detalle', [
-            'titulo' => 'Lista de Consumos',
+            'titulo' => 'Lista Pagos Realizados y Pendientes',
             'consumos' => $consumos_pendientes,
             'pagos' => $pagos_realizados,
         ]);
     }
-
     public static function realizarPago(Router $router)
     {
         if (!is_auth()) {
@@ -140,23 +139,101 @@ class PagoController
             exit;
         }
 
-        $router->render('tesorero/agua/consumos/index', [
-            'titulo' => 'Lista de Consumos',
-        ]);
-    }
-    public static function verRecibo(Router $router)
-    {
-        if (!is_auth()) {
-            header('Location: /auth/login');
-            exit;
-        }
-        if (!is_tesorero()) {
-            header('Location: /auth/login');
+        $alertas = [];
+        $id = $_GET['id'] ?? null;
+        $id = filter_var($id, FILTER_VALIDATE_INT);
+        if (!$id) {
+            header("Location:/tesorero/pagos");
             exit;
         }
 
-        $router->render('tesorero/agua/consumos/index', [
-            'titulo' => 'Lista de Consumos',
+        $consumo = Consumo::find($id);
+        if (!$consumo) {
+            header('Location: /tesorero/pagos');
+            exit;
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            $existepago = Pago::where('consumo_id', $consumo->id);
+            if ($existepago) {
+                header('Location: /tesorero/pagos');
+                exit;
+            } else {
+                $pago = new Pago($_POST);
+                $pago->consumo_id = $id;
+
+                $anio_actual = date('Y');
+                $prefijo = "SG-CO-HUARO-{$anio_actual}-";
+                $ultimo_comprobante = Pago::ultimoValor('numero_comprobante', 'pagos', $prefijo);
+
+                if (!$ultimo_comprobante) {
+                    $pago->numero_comprobante = $prefijo . '00001';
+                } else {
+                    $numero = (int) substr($ultimo_comprobante, strlen($prefijo));
+                    $numero++;
+                    $pago->numero_comprobante = $prefijo . str_pad($numero, 5, '0', STR_PAD_LEFT);
+                }
+
+
+                $pago->usuario_id = $_SESSION['id'] ?? null;
+                $pago->mes = $consumo->mes ?? date('n');
+                $pago->anio = $consumo->anio ?? date('Y');
+                $pago->fecha_pago = $_POST['fecha_pago'] ?? date('Y-m-d');
+                $pago->monto_pagado = $_POST['monto_pagado'] ?? $consumo->monto_total;
+
+
+                $consumo->estado_id = '2';
+
+
+                $alertas = $pago->validar();
+
+                if (empty($alertas)) {
+                    $resultado = $pago->guardar();
+                    $consumo->guardar();
+                    if ($resultado && $id) {
+                        $recibo = new Recibo;
+                        $recibo->pago_id = $id;
+                        $recibo->numero_recibo = $pago->numero_comprobante;
+                        $recibo->fecha_emision = date('Y-m-d');
+                        $recibo->estado_id = '1';
+                        $recibo->guardar();
+
+                        // Obtener datos para el PDF
+                        $consumo = Consumo::find($pago->consumo_id);
+                        $predio = Predio::find($consumo->predio_id);
+                        $contribuyente = $predio ? Contribuyente::find($predio->contribuyente_id) : null;
+                        $usuario = Usuario::find($pago->usuario_id);
+
+                        // Generar PDF
+                        $nombreArchivo = \Classes\PDF::generarComprobante($pago, $consumo, $contribuyente, $predio, $usuario);
+                        $rutaPublica = "/documents/$nombreArchivo";
+
+                        // Redirigir y abrir PDF
+                        echo "
+                <!DOCTYPE html>
+                <html lang='es'>
+                <head><meta charset='UTF-8'><title>Generando Comprobante...</title></head>
+                <body>
+                    <p>Generando comprobante de pago...</p>
+                    <script>
+                        window.open('$rutaPublica', '_blank');
+                        window.location.href = '/tesorero/pagos/detalle?predio_id={$consumo->predio_id}';
+                    </script>
+                </body>
+                </html>
+                ";
+                        exit;
+                    }
+                }
+            }
+        }
+
+
+        $router->render('tesorero/agua/pagos/pagar', [
+            'titulo' => 'Detalle de Deuda',
+            'pago' => $consumo,
+            'alertas' => $alertas
         ]);
     }
 }

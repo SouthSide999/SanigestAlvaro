@@ -751,6 +751,28 @@ h3 {
   display: flex;
   position: relative;
 }
+@media (min-width: 390px) {
+  .cloneable {
+    margin: 4rem 0;
+    padding: 2rem;
+  }
+}
+@media (min-width: 768px) {
+  .cloneable {
+    margin: 5rem 0;
+    padding: 3rem;
+  }
+}
+@media (min-width: 1024px) {
+  .cloneable {
+    padding: 4rem;
+  }
+}
+@media (min-width: 1200px) {
+  .cloneable {
+    padding: 5rem;
+  }
+}
 
 .looping-words {
   height: 2.7em;
@@ -760,6 +782,24 @@ h3 {
   line-height: 0.9;
   position: relative;
   color: #007df4;
+}
+@media (min-width: 390px) {
+  .looping-words {
+    font-size: 4rem;
+    height: 2.7em;
+  }
+}
+@media (min-width: 768px) {
+  .looping-words {
+    font-size: 6rem;
+    height: 3em;
+  }
+}
+@media (min-width: 1024px) {
+  .looping-words {
+    font-size: 10rem;
+    height: 2.7em;
+  }
 }
 
 .looping-words__list {
@@ -775,6 +815,26 @@ h3 {
   list-style: none;
   display: flex;
   position: relative;
+}
+@media (min-width: 390px) {
+  .looping-words__list {
+    font-size: 4rem;
+  }
+}
+@media (min-width: 768px) {
+  .looping-words__list {
+    font-size: 6rem;
+  }
+}
+@media (min-width: 1024px) {
+  .looping-words__list {
+    font-size: 8rem;
+  }
+}
+@media (min-width: 1200px) {
+  .looping-words__list {
+    font-size: 10rem;
+  }
 }
 
 .looping-words__list.is--primary {
@@ -1269,9 +1329,20 @@ h3 {
 .masinformacion__grid {
   width: min(95%, 140rem);
   margin: 0 auto;
-  display: grid;
-  gap: 3rem;
-  grid-template-columns: repeat(2, 1fr);
+}
+@media (min-width: 390px) {
+  .masinformacion__grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .masinformacion__grid {
+    display: grid;
+    gap: 3rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .masinformacion__informacion {
@@ -1279,24 +1350,48 @@ h3 {
   margin: 0 auto;
   border: 1px solid rgb(127.050209205, 141.7782426778, 162.949790795);
   padding: 3rem;
-  background-position: center top;
-  background-size: 250px;
-  background-repeat: no-repeat;
   background-image: -webkit-image-set(url("../img/bg_4.avif") 1x, url("../img/bg_4.webp") 1x, url("../img/bg_4.png") 1x);
   background-image: image-set(url("../img/bg_4.avif") 1x, url("../img/bg_4.webp") 1x, url("../img/bg_4.png") 1x);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  padding: 3rem;
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+  background-color: rgba(255, 255, 255, 0.75);
 }
 .masinformacion__informacion__nombre {
   font-weight: 900;
   font-size: 2.6rem;
   margin: 2rem 0;
 }
+.masinformacion__informacion:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
 .masinformacion__informacion__imagen {
-  max-width: 90rem;
-  max-height: 90rem;
+  max-width: 100%;
+  height: auto;
+  border-radius: 1rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
 }
 .masinformacion__informacion__texto {
   text-align: justify;
-  line-height: 2;
+  line-height: 1.8;
+  font-size: 2rem;
+  color: #1E293B;
+  font-weight: 400;
+}
+.masinformacion__informacion__texto p {
+  margin-bottom: 1.5rem;
+}
+.masinformacion__informacion__texto strong {
+  color: #0077b6;
 }
 
 .boletos {
@@ -1511,7 +1606,29 @@ h3 {
 }
 
 .nosotros {
-  padding-bottom: 6rem;
+  position: relative;
+  background-color: #FFFFFF;
+  padding: 4rem 0;
+  padding-bottom: 12rem;
+  overflow: hidden;
+}
+@media (min-width: 768px) {
+  .nosotros {
+    padding: 5rem 0;
+    padding-bottom: 12rem;
+  }
+}
+@media (min-width: 1024px) {
+  .nosotros {
+    padding: 6rem 0;
+    padding-bottom: 12rem;
+  }
+}
+@media (min-width: 1200px) {
+  .nosotros {
+    padding: 8rem 0;
+    padding-bottom: 12rem;
+  }
 }
 .nosotros__grid {
   width: min(95%, 140rem);
@@ -1519,6 +1636,7 @@ h3 {
   display: grid;
   gap: 3rem;
   grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
 }
 @media (min-width: 768px) {
   .nosotros__grid {
@@ -1528,8 +1646,79 @@ h3 {
     align-items: center;
   }
 }
+@media (min-width: 1024px) {
+  .nosotros__grid {
+    display: grid;
+    gap: 6rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1200px) {
+  .nosotros__grid {
+    display: grid;
+    gap: 8rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.nosotros__imagen {
+  width: 100%;
+  border-radius: 1.5rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  transform: scale(1);
+  transition: transform 0.3s ease;
+}
+.nosotros__imagen:hover {
+  transform: scale(1.03);
+}
+.nosotros__contenido {
+  animation: fadeInUp 1s ease-in-out;
+}
+.nosotros__titulo {
+  font-family: "PP Neue Corp", sans-serif;
+  font-size: 3rem;
+  color: rgb(169, 0, 0);
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+.nosotros__titulo::before {
+  content: "";
+  position: absolute;
+  width: 4rem;
+  height: 0.5rem;
+  background-color: #007df4;
+  bottom: -0.5rem;
+  left: 0;
+  border-radius: 2rem;
+}
+@media (min-width: 768px) {
+  .nosotros__titulo {
+    font-size: 3.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .nosotros__titulo {
+    font-size: 4rem;
+  }
+}
 .nosotros__texto {
-  line-height: 2;
+  color: #1E293B;
+  line-height: 1.8;
+  font-size: 1.4rem;
+}
+@media (min-width: 768px) {
+  .nosotros__texto {
+    font-size: 1.6rem;
+  }
+}
+@media (min-width: 1024px) {
+  .nosotros__texto {
+    font-size: 1.8rem;
+  }
+}
+@media (min-width: 1200px) {
+  .nosotros__texto {
+    font-size: 2rem;
+  }
 }
 
 .quehacemos__grid {
@@ -1616,16 +1805,43 @@ h3 {
   width: min(95%, 140rem);
   margin: 0 auto;
 }
+@media (min-width: 390px) {
+  .agenda {
+    padding: 4rem 2rem;
+  }
+}
+@media (min-width: 768px) {
+  .agenda {
+    padding: 5rem 2rem;
+  }
+}
+@media (min-width: 1024px) {
+  .agenda {
+    padding: 6rem 0;
+  }
+}
 
 .noticias__heading {
   color: #007df4;
   margin: 5rem 0;
   text-align: center;
-  font-size: clamp(2rem, -0.8rem + 8vw, 6rem);
+  font-size: clamp(2.4rem, 4vw, 6rem);
+  font-weight: 700;
 }
 .noticias__fecha {
   color: #64748B;
   margin: 3rem 0 1rem 0;
+  font-size: 1.4rem;
+}
+@media (min-width: 768px) {
+  .noticias__fecha {
+    font-size: 1.6rem;
+  }
+}
+@media (min-width: 1024px) {
+  .noticias__fecha {
+    font-size: 1.8rem;
+  }
 }
 .noticias .swiper-button-next,
 .noticias .swiper-button-prev {
@@ -1636,43 +1852,93 @@ h3 {
   margin-top: 2rem;
 }
 
+.noticia {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  .noticia {
+    flex-direction: row;
+    gap: 4rem;
+  }
+}
 .noticia__enlace {
   all: unset;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+}
+.noticia__imagen {
+  width: 100%;
+  max-width: 40rem;
+  height: auto;
+  aspect-ratio: 2/1;
+  background-color: #FFFFFF;
+  border-radius: 1rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+@media (min-width: 768px) {
+  .noticia__imagen {
+    height: 20rem;
+  }
+}
+@media (min-width: 1024px) {
+  .noticia__imagen {
+    height: 22rem;
+  }
 }
 .noticia__informacion {
-  padding: 2rem;
-  border-radius: 1rem;
   background-color: #007df4;
   color: #FFFFFF;
-  transition: 300ms background-color ease;
+  border-radius: 1rem;
+  padding: 2rem;
+  width: 100%;
+  transition: background-color 300ms ease;
 }
 .noticia__informacion:hover {
   background-color: rgb(0, 98.8729508197, 193);
 }
-.noticia__imagen {
-  margin-left: 0.2rem;
-  margin-top: 3rem;
-  width: 40rem;
-  height: 20rem;
-  background-color: #FFFFFF;
-  border-radius: 10px;
-}
 .noticia__nombre {
   font-size: 2rem;
-  margin: 0;
+  margin: 0 0 2rem 0;
+  font-weight: 600;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  margin-bottom: 3rem;
+}
+@media (min-width: 768px) {
+  .noticia__nombre {
+    font-size: 2.2rem;
+  }
+}
+@media (min-width: 1024px) {
+  .noticia__nombre {
+    font-size: 2.4rem;
+  }
 }
 .noticia__resumen {
-  font-size: 1.6rem;
+  padding-bottom: 1rem;
+  font-size: 1.4rem;
+  text-align: justify;
   display: -webkit-box;
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  text-align: justify;
+}
+@media (min-width: 768px) {
+  .noticia__resumen {
+    font-size: 1.6rem;
+  }
+}
+@media (min-width: 1024px) {
+  .noticia__resumen {
+    font-size: 1.8rem;
+  }
 }
 
 .contacto {
@@ -3085,7 +3351,7 @@ h3 {
   transform: scale(1.3);
   box-shadow: 0 0 6px rgba(2, 132, 199, 0.6);
 }
-@media (min-width: 480px) {
+@media (min-width: 390px) {
   .table {
     font-size: 1.5rem;
   }
@@ -3756,6 +4022,223 @@ h3 {
     font-size: 30px;
   }
 }
+/* Box model universal */
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Clearfix */
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Enlaces sin subrayado */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Contenedor general */
+.login {
+  width: 100%;
+  max-width: 525px;
+  min-height: 670px;
+  margin: auto;
+  position: relative;
+  background: url(../img/iglesia-huaro.jpg) no-repeat center;
+  background-size: cover;
+  box-shadow: 0 12px 15px rgba(0, 0, 0, 0.24), 0 17px 50px rgba(0, 0, 0, 0.19);
+  border-radius: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 7rem;
+}
+
+/* Contenedor interno */
+.login__inner {
+  width: 100%;
+  padding: 90px 70px 110px 70px;
+  background: rgba(40, 57, 101, 0.9);
+  border-radius: 2rem;
+}
+
+/* Ocultar radio buttons y checkbox */
+.login__tab,
+.login__check {
+  display: none;
+}
+
+/* Tabs superiores (Sign In / Sign Up) */
+.login__label--tab {
+  font-size: 22px;
+  margin-right: 15px;
+  display: inline-block;
+  padding-bottom: 5px;
+  border-bottom: 2px solid transparent;
+  color: #aaa;
+  cursor: pointer;
+}
+
+/* Tab activo */
+.login__tab--signin:checked + .login__label--tab,
+.login__tab--signup:checked + .login__label--tab {
+  color: #fff;
+  border-color: #1161ee;
+}
+
+/* Contenedor del formulario */
+.login__form {
+  padding-top: 2rem;
+  position: relative;
+}
+
+/* Secciones SignIn y SignUp ocultas inicialmente */
+.login__section {
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Mostrar sección correspondiente según tab activo */
+.login__tab--signin:checked ~ .login__form .login__section--signin,
+.login__tab--signup:checked ~ .login__form .login__section--signup {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Agrupación de campos */
+.login__group {
+  margin-bottom: 15px;
+}
+
+/* Etiquetas e inputs */
+.login__label,
+.login__input,
+.login__button {
+  width: 100%;
+  display: block;
+  color: #fff;
+}
+
+.login__label {
+  font-size: 2rem;
+  color: #aaa;
+  margin-bottom: 5px;
+}
+
+.login__input,
+.login__button {
+  padding: 15px 20px;
+  border-radius: 25px;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Ocultar texto de password */
+.login__input[data-type=password] {
+  -webkit-text-security: disc;
+}
+
+/* Botón de envío */
+.login__button {
+  background: #1161ee;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.login__button:hover {
+  background: #0d47c6;
+}
+
+/* Checkbox personalizado */
+.login__label--checkbox {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.login__label--checkbox .login__icon {
+  width: 15px;
+  height: 15px;
+  margin-right: 8px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.login__label--checkbox .login__icon::before,
+.login__label--checkbox .login__icon::after {
+  content: "";
+  position: absolute;
+  background: #fff;
+  transition: all 0.2s ease-in-out;
+}
+
+.login__label--checkbox .login__icon::before {
+  width: 5px;
+  height: 2px;
+  bottom: 6px;
+  left: 3px;
+  transform: scale(0) rotate(0deg);
+}
+
+.login__label--checkbox .login__icon::after {
+  width: 10px;
+  height: 2px;
+  top: 6px;
+  right: 0;
+  transform: scale(0) rotate(0deg);
+}
+
+/* Activación del checkbox */
+.login__check:checked + .login__label--checkbox .login__icon {
+  background: #1161ee;
+}
+
+.login__check:checked + .login__label--checkbox .login__icon::before {
+  transform: scale(1) rotate(45deg);
+}
+
+.login__check:checked + .login__label--checkbox .login__icon::after {
+  transform: scale(1) rotate(-45deg);
+}
+
+/* Línea divisora */
+.login__hr {
+  height: 2px;
+  margin: 60px 0 50px 0;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Footer del login */
+.login__foot-link {
+  text-align: center;
+}
+
+.login__link {
+  color: #fff;
+  font-size: 14px;
+}
+
+.login__label--switch {
+  cursor: pointer;
+  font-size: 14px;
+  color: #aaa;
+  display: block;
+  margin-top: 10px;
+}
+
 .userPerfil__contenedor {
   background-color: #ffd399;
   background-image: radial-gradient(at 43% 24%, hsl(38, 62%, 78%) 0px, transparent 50%), radial-gradient(at 2% 21%, hsl(20, 64%, 79%) 0px, transparent 50%), radial-gradient(at 89% 57%, hsl(292, 79%, 70%) 0px, transparent 50%), radial-gradient(at 32% 61%, hsl(326, 78%, 63%) 0px, transparent 50%), radial-gradient(at 0% 97%, hsl(217, 89%, 63%) 0px, transparent 50%), radial-gradient(at 74% 52%, hsl(86, 67%, 72%) 0px, transparent 50%), radial-gradient(at 98% 87%, hsl(144, 95%, 79%) 0px, transparent 50%);

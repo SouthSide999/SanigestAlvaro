@@ -28,13 +28,7 @@
         <!-- 7. Pagos -->
         <a href="/tesorero/pagos" class="dashboardAgua__enlace">
             <i class="fa-solid fa-credit-card"></i>
-            <span class="dashboardAgua__menu-texto">Pagos</span>
-        </a>
-
-        <!-- 8. Recibos -->
-        <a href="/tesorero/recibos" class="dashboardAgua__enlace">
-            <i class="fa-solid fa-file-invoice-dollar"></i>
-            <span class="dashboardAgua__menu-texto">Recibos</span>
+            <span class="dashboardAgua__menu-texto">Pagos/Recibos </span>
         </a>
     </nav>
 

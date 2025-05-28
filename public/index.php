@@ -374,10 +374,6 @@ $router->post('/tesorero/pagos/detalle', [PagoController::class, 'detallePagos']
 $router->get('/tesorero/pagos/realizar', [PagoController::class, 'realizarPago']); 
 $router->post('/tesorero/pagos/realizar', [PagoController::class, 'realizarPago']); 
 
-$router->get('/tesorero/pagos/recibo', [PagoController::class, 'verRecibo']); 
-$router->post('/tesorero/pagos/recibo', [PagoController::class, 'verRecibo']); 
-
-
 //*lecturador
 $router->get('/lecturador/dashboard', [DashboardLecturadorController::class, 'index']);
 

@@ -10,6 +10,25 @@
     min-height: 15rem;
     display: flex;
     position: relative;
+
+    @include m.telefono {
+        margin: 4rem 0;
+        padding: 2rem;
+    }
+
+    @include m.tablet {
+        margin: 5rem 0;
+        padding: 3rem;
+    }
+
+    @include m.desktop {
+        padding: 4rem;
+    }
+
+    @include m.xl_desktop {
+        padding: 5rem;
+    }
+
 }
 
 .looping-words {
@@ -20,6 +39,21 @@
     line-height: 0.9;
     position: relative;
     color: v.$azul;
+
+    @include m.telefono {
+        font-size: 4rem;
+        height: 2.7em;
+    }
+
+    @include m.tablet {
+        font-size: 6rem;
+        height: 3em;
+    }
+
+    @include m.desktop {
+        font-size: 10rem;
+        height: 2.7em;
+    }
 }
 
 .looping-words__list {
@@ -35,6 +69,22 @@
     list-style: none;
     display: flex;
     position: relative;
+
+    @include m.telefono {
+        font-size: 4rem;
+    }
+
+    @include m.tablet {
+        font-size: 6rem;
+    }
+
+    @include m.desktop {
+        font-size: 8rem;
+    }
+
+    @include m.xl_desktop {
+        font-size: 10rem;
+    }
 }
 
 .looping-words__list.is--primary {

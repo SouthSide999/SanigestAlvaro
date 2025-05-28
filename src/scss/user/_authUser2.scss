@@ -1,0 +1,218 @@
+/* Box model universal */
+*,
+*:after,
+*:before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Clearfix */
+.clearfix::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+/* Enlaces sin subrayado */
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Contenedor general */
+.login {
+    width: 100%;
+    max-width: 525px;
+    min-height: 670px;
+    margin: auto;
+    position: relative;
+    background: url(../img/iglesia-huaro.jpg) no-repeat center;
+    background-size: cover;
+    box-shadow: 0 12px 15px rgba(0, 0, 0, 0.24), 0 17px 50px rgba(0, 0, 0, 0.19);
+    border-radius: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 7rem;
+
+
+}
+
+/* Contenedor interno */
+.login__inner {
+    width: 100%;
+    padding: 90px 70px 110px 70px;
+    background: rgba(40, 57, 101, 0.9);
+    border-radius: 2rem;
+}
+
+/* Ocultar radio buttons y checkbox */
+.login__tab,
+.login__check {
+    display: none;
+}
+
+/* Tabs superiores (Sign In / Sign Up) */
+.login__label--tab {
+    font-size: 22px;
+    margin-right: 15px;
+    display: inline-block;
+    padding-bottom: 5px;
+    border-bottom: 2px solid transparent;
+    color: #aaa;
+    cursor: pointer;
+}
+
+/* Tab activo */
+.login__tab--signin:checked+.login__label--tab,
+.login__tab--signup:checked+.login__label--tab {
+    color: #fff;
+    border-color: #1161ee;
+}
+
+/* Contenedor del formulario */
+.login__form {
+    padding-top: 2rem;
+    position: relative;
+}
+
+/* Secciones SignIn y SignUp ocultas inicialmente */
+.login__section {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Mostrar sección correspondiente según tab activo */
+.login__tab--signin:checked~.login__form .login__section--signin,
+.login__tab--signup:checked~.login__form .login__section--signup {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Agrupación de campos */
+.login__group {
+    margin-bottom: 15px;
+}
+
+/* Etiquetas e inputs */
+.login__label,
+.login__input,
+.login__button {
+    width: 100%;
+    display: block;
+    color: #fff;
+}
+
+.login__label {
+    font-size: 2rem;
+    color: #aaa;
+    margin-bottom: 5px;
+}
+
+.login__input,
+.login__button {
+    padding: 15px 20px;
+    border-radius: 25px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Ocultar texto de password */
+.login__input[data-type="password"] {
+    -webkit-text-security: disc;
+}
+
+/* Botón de envío */
+.login__button {
+    background: #1161ee;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.login__button:hover {
+    background: #0d47c6;
+}
+
+/* Checkbox personalizado */
+.login__label--checkbox {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.login__label--checkbox .login__icon {
+    width: 15px;
+    height: 15px;
+    margin-right: 8px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.login__label--checkbox .login__icon::before,
+.login__label--checkbox .login__icon::after {
+    content: '';
+    position: absolute;
+    background: #fff;
+    transition: all 0.2s ease-in-out;
+}
+
+.login__label--checkbox .login__icon::before {
+    width: 5px;
+    height: 2px;
+    bottom: 6px;
+    left: 3px;
+    transform: scale(0) rotate(0deg);
+}
+
+.login__label--checkbox .login__icon::after {
+    width: 10px;
+    height: 2px;
+    top: 6px;
+    right: 0;
+    transform: scale(0) rotate(0deg);
+}
+
+/* Activación del checkbox */
+.login__check:checked+.login__label--checkbox .login__icon {
+    background: #1161ee;
+}
+
+.login__check:checked+.login__label--checkbox .login__icon::before {
+    transform: scale(1) rotate(45deg);
+}
+
+.login__check:checked+.login__label--checkbox .login__icon::after {
+    transform: scale(1) rotate(-45deg);
+}
+
+/* Línea divisora */
+.login__hr {
+    height: 2px;
+    margin: 60px 0 50px 0;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Footer del login */
+.login__foot-link {
+    text-align: center;
+}
+
+.login__link {
+    color: #fff;
+    font-size: 14px;
+}
+
+.login__label--switch {
+    cursor: pointer;
+    font-size: 14px;
+    color: #aaa;
+    display: block;
+    margin-top: 10px;
+}
