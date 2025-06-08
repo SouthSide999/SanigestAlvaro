@@ -3,106 +3,105 @@
 
 .nosotros {
     position: relative;
-    background-color: v.$blanco;
-    padding: 4rem 0;
-    padding-bottom: 12rem;
+    background: linear-gradient(135deg, v.$blanco 0%, v.$celeste 100%);
+    padding: 2rem 2rem 12rem;
+    color: #222; // texto negro suave para mejor lectura
     overflow: hidden;
 
     @include m.tablet {
-        padding: 5rem 0;
-        padding-bottom: 12rem;
-
+        padding: 2rem 4rem 12rem;
     }
 
-    @include m.desktop {
-        padding: 6rem 0;
-        padding-bottom: 12rem;
+    &__heading {
+        @include m.texto-fluido(3rem, 5rem);
+        font-weight: 900;
+        color: v.$negro;
+        margin: 0 auto 3rem auto; // centrado horizontal
+        position: relative;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
 
+        &::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%); // centrado de la línea decorativa
+            bottom: -0.75rem;
+            width: 6rem;
+            height: 0.5rem;
+            background: linear-gradient(90deg, v.$rojo, v.$amarillo);
+            border-radius: 1rem;
+            transition: width 0.4s ease;
+        }
+
+        &:hover::after {
+            width: 100%;
+        }
     }
 
-    @include m.xl_desktop {
-        padding: 8rem 0;
-        padding-bottom: 12rem;
-
+    &__descripcion {
+        max-width: 600px;
+        font-size: 1.6rem;
+        font-weight: 600;
+        margin: 0 auto 4rem auto; // centrado horizontal
+        color: v.$negro;
+        text-align: center;
     }
 
     &__grid {
         @include m.contenedor;
         @include m.grid(1, 3rem);
-        gap: 2rem;
 
         @include m.tablet {
-            @include m.grid(2, 5rem);
-            align-items: center;
-        }
-
-        @include m.desktop {
             @include m.grid(2, 6rem);
-        }
-
-        @include m.xl_desktop {
-            @include m.grid(2, 8rem);
+            align-items: center;
         }
     }
 
     &__imagen {
         width: 100%;
-        border-radius: 1.5rem;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-        transform: scale(1);
-        transition: transform 0.3s ease;
+        border-radius: 2rem;
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+        transition: transform 0.5s ease, box-shadow 0.3s ease;
 
         &:hover {
-            transform: scale(1.03);
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+            cursor: pointer;
         }
     }
 
     &__contenido {
-        animation: fadeInUp 1s ease-in-out;
-    }
-
-    &__titulo {
-        font-family: 'PP Neue Corp', sans-serif;
-        font-size: 3rem;
-        color: v.$rojo;
-        margin-bottom: 1.5rem;
-        position: relative;
-
-        &::before {
-            content: '';
-            position: absolute;
-            width: 4rem;
-            height: 0.5rem;
-            background-color: v.$azul;
-            bottom: -0.5rem;
-            left: 0;
-            border-radius: 2rem;
-        }
-
-        @include m.tablet {
-            font-size: 3.5rem;
-        }
-
-        @include m.desktop {
-            font-size: 4rem;
-        }
+        animation: fadeInUp 1.2s ease forwards;
+        color: v.$negro;
+        font-size: 1.7rem;
+        line-height: 1.7;
     }
 
     &__texto {
-        color: v.$gris-oscuro;
-        line-height: 1.8;
-        font-size: 1.4rem;
+        margin-bottom: 2rem;
+        color: #333;
+    }
 
-        @include m.tablet {
-            font-size: 1.6rem;
-        }
+    &__btn {
+        display: inline-block;
+        background: linear-gradient(90deg, v.$rojo, v.$amarillo);
+        padding: 1rem 3rem;
+        color: v.$blanco;
+        font-weight: 700;
+        font-size: 1.8rem;
+        border-radius: 3rem;
+        text-transform: uppercase;
+        box-shadow: 0 8px 15px rgba(255, 100, 50, 0.3);
+        transition: background 0.3s ease, transform 0.2s ease;
+        user-select: none;
+        text-decoration: none;
 
-        @include m.desktop {
-            font-size: 1.8rem;
-        }
-
-        @include m.xl_desktop {
-            font-size: 2rem;
+        &:hover {
+            background: linear-gradient(90deg, v.$amarillo, v.$rojo);
+            transform: scale(1.05);
+            cursor: pointer;
         }
     }
 }

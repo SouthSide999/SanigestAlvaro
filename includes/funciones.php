@@ -24,7 +24,6 @@ function is_auth(): bool
     }
     return isset($_SESSION['nombre']) && !empty($_SESSION);
 }
-
 function is_admin(): bool
 {
     if (!isset($_SESSION)) {
@@ -40,7 +39,6 @@ function is_usuario(): bool
 
     return isset($_SESSION['usuario']) && $_SESSION['usuario'] === true;
 }
-
 function is_tesorero(): bool
 {
     if (!isset($_SESSION)) {
@@ -48,7 +46,6 @@ function is_tesorero(): bool
     }
     return isset($_SESSION['rol_id']) && (int)$_SESSION['rol_id'] === 3;
 }
-
 function is_tecnico(): bool
 {
     if (!isset($_SESSION)) {

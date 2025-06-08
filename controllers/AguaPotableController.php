@@ -31,7 +31,53 @@ class AguaPotableController
         ]);
     }
 
-    //*contribuyentes
+    //*CRUD-Contribuyentes
+    public static function contribuyenteCrear(Router $router)
+    {
+        if (!is_auth()) {
+            header('Location: /auth/login');
+            exit;
+        }
+        if (!is_admin()) {
+            header('Location: /auth/login');
+            exit;
+        }
+
+        $alertas = [];
+        $contribuyente = new Contribuyente;
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Generación del código de contribuyente
+            if (empty($_POST['codigo_contribuyente'])) {
+                $ultimo_codigo = Contribuyente::ultimoValor('codigo_contribuyente', 'contribuyentes');
+                if (!$ultimo_codigo) {
+                    $contribuyente->codigo_contribuyente = 'C00001';
+                } else {
+                    $numero = (int) substr($ultimo_codigo, 1);
+                    $numero++;
+                    $contribuyente->codigo_contribuyente = 'C' . str_pad($numero, 5, '0', STR_PAD_LEFT);
+                }
+            }
+
+            // Sincronizar los datos del formulario con el objeto contribuyente
+            $contribuyente->sincronizar($_POST);
+
+            // Validar los datos
+            $alertas = $contribuyente->validar();
+            if (empty($alertas)) {
+                // Guardar el nuevo contribuyente
+                $contribuyente->guardar();
+                header('Location: /admin/contribuyentes/crear?creado=1');
+                exit;
+            }
+        }
+
+        $router->render('admin/agua/contribuyentes/crear', [
+            'titulo' => 'Registrar Contribuyente',
+            'contribuyente' => $contribuyente,
+            'alertas' => $alertas
+        ]);
+    }
     public static function contribuyentes(Router $router)
     {
         if (!is_auth()) {
@@ -125,54 +171,6 @@ class AguaPotableController
             'contribuyente' => $contribuyente
         ]);
     }
-
-    public static function contribuyenteCrear(Router $router)
-    {
-        if (!is_auth()) {
-            header('Location: /auth/login');
-            exit;
-        }
-        if (!is_admin()) {
-            header('Location: /auth/login');
-            exit;
-        }
-
-        $alertas = [];
-        $contribuyente = new Contribuyente;
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Generación del código de contribuyente
-            if (empty($_POST['codigo_contribuyente'])) {
-                $ultimo_codigo = Contribuyente::ultimoValor('codigo_contribuyente', 'contribuyentes');
-                if (!$ultimo_codigo) {
-                    $contribuyente->codigo_contribuyente = 'C00001';
-                } else {
-                    $numero = (int) substr($ultimo_codigo, 1);
-                    $numero++;
-                    $contribuyente->codigo_contribuyente = 'C' . str_pad($numero, 5, '0', STR_PAD_LEFT);
-                }
-            }
-
-            // Sincronizar los datos del formulario con el objeto contribuyente
-            $contribuyente->sincronizar($_POST);
-
-            // Validar los datos
-            $alertas = $contribuyente->validar();
-            if (empty($alertas)) {
-                // Guardar el nuevo contribuyente
-                $contribuyente->guardar();
-                header('Location: /admin/contribuyentes/crear?creado=1');
-                exit;
-            }
-        }
-
-        $router->render('admin/agua/contribuyentes/crear', [
-            'titulo' => 'Registrar Contribuyente',
-            'contribuyente' => $contribuyente,
-            'alertas' => $alertas
-        ]);
-    }
-
     public static function contribuyenteEliminar()
     {
         if (!is_auth()) {

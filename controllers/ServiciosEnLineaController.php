@@ -14,6 +14,9 @@ use Model\EstadoServicio;
 use Model\TiposSolicitud;
 use Classes\Notificaciones;
 use Intervention\Image\ImageManagerStatic as Image;
+use Model\EstadoRecibo;
+use Model\Pago;
+use Model\Recibo;
 
 class ServiciosEnLineaController
 {
@@ -256,8 +259,10 @@ class ServiciosEnLineaController
                 }
 
                 // Si hay algún consumo (actual o pasado)
+
                 if ($consumo) {
-                    $estadoRecibo = EstadoServicio::find($consumo->estado_id);
+
+                    $estadoRecibo = EstadoConsumo::find($consumo->estado_id);
 
                     $resultado = [
                         'predio' => $predio,

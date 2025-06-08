@@ -3,18 +3,32 @@
 
 .servicios-linea {
     @include m.contenedor;
-    padding: 6rem 0 6rem 0;
+    padding: 2rem 2rem 12rem;
 
     &__title {
         text-align: center;
-        padding-bottom: 2rem;
+        font-size: 3rem;
+        color: v.$azul;
+        margin-bottom: 4rem;
+
+        @include m.tablet {
+            font-size: 3.6rem;
+        }
+
+        @include m.desktop {
+            font-size: 4rem;
+        }
     }
 
     &__grid {
         @include m.grid(1, 2rem);
 
         @include m.tablet {
-            @include m.grid(4, 2rem);
+            @include m.grid(2, 3rem);
+        }
+
+        @include m.desktop {
+            @include m.grid(4, 3rem);
         }
     }
 }
@@ -26,9 +40,14 @@
         radial-gradient(at 95% 65%, hsla(140, 64%, 64%, 1) 0px, transparent 50%),
         radial-gradient(at 13% 79%, hsla(335, 68%, 65%, 1) 0px, transparent 50%),
         radial-gradient(at 67% 8%, hsla(219, 75%, 72%, 1) 0px, transparent 50%);
-    padding: 5rem;
+    padding: 4rem 2rem;
     border-radius: 2rem;
     transition: transform 0.3s ease-in-out, background 0.3s ease-in-out;
+    text-align: center;
+
+    @include m.tablet {
+        padding: 5rem 3rem;
+    }
 
     &:hover {
         background-color: #ff999c;
@@ -38,27 +57,125 @@
             radial-gradient(at 64% 41%, hsla(301, 61%, 69%, 1) 0px, transparent 50%),
             radial-gradient(at 61% 86%, hsla(83, 67%, 73%, 1) 0px, transparent 50%);
         cursor: pointer;
-        transform: scale(1.1);
-    }
-
-    &-title {
-        color: v.$blanco;
-        font-size: 3rem;
-        text-align: center;
+        transform: scale(1.05);
     }
 
     &-icono {
+        font-size: 6rem;
         color: v.$blanco;
-        font-size: 8rem;
-        padding: 1rem;
+        margin-bottom: 2rem;
         display: flex;
         justify-content: center;
         align-items: center;
+
+        @include m.tablet {
+            font-size: 7rem;
+        }
+
+        @include m.desktop {
+            font-size: 8rem;
+        }
+    }
+
+    &-title {
+        font-size: 2.4rem;
+        color: v.$blanco;
+        margin-bottom: 1.5rem;
+
+        @include m.tablet {
+            font-size: 2.6rem;
+        }
+
+        @include m.desktop {
+            font-size: 3rem;
+        }
     }
 
     &-description {
+        font-size: 1.6rem;
         color: v.$blanco;
+
+        @include m.tablet {
+            font-size: 1.8rem;
+        }
+
+        @include m.desktop {
+            font-size: 2rem;
+        }
+    }
+}
+
+.requisitos {
+    &__titulo {
+        font-size: 3rem;
         text-align: center;
+        margin-bottom: 3rem;
+
+        @include m.tablet {
+            font-size: 3.5rem;
+        }
+
+        @include m.desktop {
+            font-size: 4rem;
+        }
+    }
+
+    &__lista {
+        @include m.contenedor-md;
+        @include m.reset-lista;
+
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    &__item {
+        padding: 1.5rem 0;
+        border-bottom: 1px solid lighten(v.$gris, 30%);
+        font-size: 1.6rem;
+        line-height: 1.6;
+
+        @include m.tablet {
+            font-size: 1.8rem;
+        }
+    }
+
+    &__nota {
+        font-size: 1.4rem;
+        color: v.$gris-oscuro;
+        text-align: center;
+        margin-top: 2rem;
+
+        @include m.tablet {
+            font-size: 1.5rem;
+        }
+    }
+
+    &__botones {
+        padding: 3rem 0;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+        justify-content: center;
+
+        @include m.tablet {
+            flex-direction: row;
+            gap: 3rem;
+        }
+    }
+
+    &__boton {
+        @include m.boton(v.$azul, v.$blanco);
+        width: 100%;
+        max-width: 30rem;
+        border-radius: 1rem;
+
+        &:hover {
+            background-color: v.$celeste;
+        }
     }
 }
 
@@ -70,61 +187,6 @@
     margin-top: 2rem;
     padding: 2rem;
     border-radius: 2rem;
-}
-
-.requisitos {
-
-    &__titulo {
-        font-size: 4rem;
-        text-align: center;
-    }
-
-    &__lista {
-        @include m.contenedor-md;
-        list-style: none;
-        padding: 0;
-    }
-
-    &__item {
-        padding: 1rem 0;
-        border-bottom: 1px solid #ccc;
-    }
-
-    &__nota {
-        font-size: 1.5rem;
-        color: #666;
-        text-align: center;
-        margin-top: 1rem;
-    }
-
-    &__botones {
-        padding: 2rem 0;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        justify-content: center;
-    }
-
-    &__boton {
-        background-color: v.$azul;
-        padding: 1.5rem 4rem;
-        color: v.$blanco;
-        font-size: 1.8rem;
-        font-weight: 700;
-        border: none;
-        transition-property: background-color;
-        transition-duration: .3s;
-        text-align: center;
-        width: 30rem;
-        display: inline-block;
-        border-radius: 1rem;
-
-        &:hover {
-            background-color: v.$celeste;
-            cursor: pointer;
-        }
-    }
-
 }
 
 .nuevaconexion__formulario {
@@ -161,12 +223,70 @@
         &--asignar {
             background-color: hsla(39, 100%, 50%, 1); // Amarillo intenso
         }
+
         &--aceptar {
             background-color: v.$verde;
         }
 
     }
 }
+
+.formularioservicios{
+    &__fieldset {
+        @include m.card;
+        @include m.shadow;
+        border-radius: 1rem;
+        margin-bottom: 3rem;
+        background-color: #fff;
+    }
+    
+    &__legend {
+        @include m.headings;
+        font-size: 2.4rem;
+        color: v.$azul;
+        border-bottom: 2px solid v.$azul;
+        padding-bottom: 1rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+    
+    &__campo {
+@include m.grid(1, 2rem);
+  margin-bottom: 2rem;
+
+  @include m.tablet {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 2rem;
+    align-items: center;
+  }
+    }
+    
+    &__label {
+        font-size: 1.6rem;
+        font-weight: v.$bold;
+        color: v.$gris-oscuro;
+    }
+    
+    &__input {
+        padding: 1.2rem;
+        font-size: 1.6rem;
+        border-radius: 0.8rem;
+        border: 1px solid v.$gris;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    
+        &:focus {
+            border-color: v.$azul;
+            box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.2);
+            outline: none;
+        }
+    
+        &.error {
+            border-color: red;
+        }
+    }
+}
+
 
 .nuevaconexion__contenedor-botones {
     @include m.grid(1, 2rem);
@@ -184,42 +304,49 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    padding: 2rem;
 
     &--contenido {
-        background: v.$blanco;
-        padding: 2rem;
-        width: 90%;
-        max-width: 600px;
-        border-radius: 10px;
-        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+        background-color: v.$blanco;
+        padding: 3rem 2rem;
+        width: 100%;
+        max-width: 60rem;
+        border-radius: 1.5rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         text-align: center;
         animation: fadeIn 0.3s ease-in-out;
 
         h2 {
-            font-size: 3rem;
+            font-size: 2.6rem;
             color: v.$negro;
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
+
+            @include m.tablet {
+                font-size: 3rem;
+            }
         }
 
         p {
-            font-size: 2rem;
+            font-size: 1.6rem;
             color: v.$gris-oscuro;
-            margin-bottom: 1.5rem;
-            line-height: 1.5;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+
+            @include m.tablet {
+                font-size: 1.8rem;
+            }
         }
 
         .requisitos__boton {
-            background-color: v.$azul;
-            color: v.$blanco;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s ease-in-out;
+            @include m.boton(v.$azul, v.$blanco);
+            padding: 1.2rem 3rem;
+            font-size: 1.6rem;
+            border-radius: 1rem;
+            transition: background-color 0.3s ease-in-out;
 
             &:hover {
                 background-color: v.$celeste;
@@ -252,38 +379,65 @@
 .estadoconexion {
     &__contenedor {
         @include m.contenedor-sm;
-        padding-left: 10rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        margin-bottom: 4rem;
+
+        @include m.tablet {
+            padding-left: 5rem;
+            padding-right: 5rem;
+        }
+
+        @include m.desktop {
+            padding-left: 10rem;
+            padding-right: 10rem;
+        }
 
         &--ticket {
             @include m.contenedor;
-            margin-bottom: 10rem;
+            margin-bottom: 8rem;
+
+            @include m.tablet {
+                margin-bottom: 10rem;
+            }
         }
     }
 
     &__formulario {
         @include m.contenedor-sm;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        margin-bottom: 4rem;
 
         @include m.tablet {
-            display: flex;
-            justify-content: start;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 2rem;
             margin-bottom: 5rem;
+        }
+    }
+
+    &__contenedor-boton {
+        padding-top: 2rem;
+
+        @include m.tablet {
+            padding-top: 0;
         }
     }
 
     &__boton-buscador {
         @include m.boton(v.$azul, v.$blanco);
-        margin: 3rem;
-        margin-left: 1rem;
-        text-transform: uppercase;
         font-size: 1.4rem;
+        text-transform: uppercase;
+        width: 100%;
+        margin: 0;
 
         @include m.tablet {
             width: auto;
+            margin-left: 1rem;
         }
-    }
-
-    &__contenedor-boton {
-        padding-top: 2.5rem;
     }
 }
 
@@ -298,6 +452,7 @@
     justify-content: center;
     align-items: center;
 }
+
 .modalnuevaconexion-contenido {
     background: white;
     padding: 20px;
@@ -305,5 +460,5 @@
     text-align: center;
     display: flex;
     flex-direction: column;
-    
+
 }

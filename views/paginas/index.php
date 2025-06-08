@@ -32,8 +32,26 @@
 include __DIR__ . '/noticias.php';
 ?>
 
+<section class="mapa">
+    <h2 <?php aos_animacion(); ?> class="mapa__heading">Donde Estamos? </h2>
 
-<section class="resumen">
+    <div class="mapa__descripcion">
+        <p <?php aos_animacion(); ?> class="mapa__texto">
+            El sistema Sanigest se encuentra ubicado en la Municipalidad Distrital de Huaro, específicamente en el área de UGM (Unidad de Gestión Municipal).
+            Este sistema, que tiene como objetivo la administración y optimización de los servicios de agua y saneamiento en el distrito de Huaro, es manejado
+            directamente por el personal de la UGM.
+        </p>
+
+        <p <?php aos_animacion(); ?> class="mapa__texto">
+            El equipo de la UGM se encarga de la operación y gestión del software Sanigest, garantizando la eficiencia y efectividad en el control y la optimización
+            de los recursos hídricos y de saneamiento en la comunidad. La Municipalidad Distrital de Huaro es el centro neurálgico de este sistema, permitiendo un mejor
+            servicio para los habitantes del distrito.
+        </p>
+    </div>
+    <div id="mapa" class="mapa__mapa"></div>
+</section>
+
+<section class="resumen" <?php aos_animacion(); ?>>
     <div class="resumen__grid">
         <div <?php aos_animacion(); ?> class="resumen__bloque">
             <p class="resumen__texto resumen__texto--numero"><?php echo $ponentes_total; ?></p>
@@ -58,145 +76,7 @@ include __DIR__ . '/noticias.php';
 </section>
 
 
-<!-- <section class="speakers">
-
-    <h2 class="speakers__heading">Speakers</h2>
-    <p class="speakers__descripcion">Conoce a nuestros expertos de DevWebCamp</p>
-
-    <div class="speakers__grid">
-
-        <?php foreach ($ponentes as $ponente) { ?>
-
-            <div <?php aos_animacion(); ?> class="speaker">
-
-                <picture>
-                    <source srcset="img/speakers/<?php echo $ponente->imagen; ?>.webp" type="image/webp">
-                    <source srcset="img/speakers/<?php echo $ponente->imagen; ?>.png" type="image/png">
-                    <img class="speaker__imagen" loading="lazy" width="200" height="300" src="img/speakers/<?php echo $ponente->imagen; ?>.png" alt="Imagen Ponente">
-                </picture>
-
-                <div class="speaker__informacion">
-                    <h4 class="speaker__nombre">
-                        <?php echo $ponente->nombre . ' ' . $ponente->apellido; ?>
-                    </h4>
-
-                    <p class="speaker__ubicacion">
-                        <?php echo $ponente->ciudad . ', ' . $ponente->pais; ?>
-                    </p>
-
-                    <nav class="speaker-sociales">
-                        <?php
-                        $redes =  json_decode($ponente->redes); //acceder a redes
-                        ?>
-
-                        <?php if (!empty($redes->facebook)) { ?>
-                            <a class="speaker-sociales__enlace" rel="noopener noreferrer" target="_blank" href="<?php echo $redes->facebook; ?>">
-                                <span class="speaker-sociales__ocultar">Facebook</span>
-                            </a>
-                        <?php } ?>
-
-                        <?php if (!empty($redes->twitter)) { ?>
-                            <a class="speaker-sociales__enlace" rel="noopener noreferrer" target="_blank" href="<?php echo $redes->twitter; ?>">
-                                <span class="speaker-sociales__ocultar">Twitter</span>
-                            </a>
-                        <?php } ?>
-
-                        <?php if (!empty($redes->youtube)) { ?>
-                            <a class="speaker-sociales__enlace" rel="noopener noreferrer" target="_blank" href="<?php echo $redes->youtube; ?>">
-                                <span class="speaker-sociales__ocultar">YouTube</span>
-                            </a>
-                        <?php } ?>
-
-                        <?php if (!empty($redes->instagram)) { ?>
-                            <a class="speaker-sociales__enlace" rel="noopener noreferrer" target="_blank" href="<?php echo $redes->instagram; ?>">
-                                <span class="speaker-sociales__ocultar">Instagram</span>
-                            </a>
-                        <?php } ?>
-
-                        <?php if (!empty($redes->tiktok)) { ?>
-                            <a class="speaker-sociales__enlace" rel="noopener noreferrer" target="_blank" href="<?php echo $redes->tiktok; ?>">
-                                <span class="speaker-sociales__ocultar">Tiktok</span>
-                            </a>
-                        <?php } ?>
-
-                        <?php if (!empty($redes->github)) { ?>
-                            <a class="speaker-sociales__enlace" rel="noopener noreferrer" target="_blank" href="<?php echo $redes->github; ?>">
-                                <span class="speaker-sociales__ocultar">Github</span>
-                            </a>
-                        <?php } ?>
-                    </nav>
-
-                    <ul class="speaker__listado-skills">
-                        <?php
-                        $tags = explode(',', $ponente->tags); //separar tags
-                        foreach ($tags as $tag) {
-                        ?>
-                            <li class="speaker__skill"><?php echo $tag; ?></li>
-                        <?php } ?>
-                    </ul>
-
-                </div>
-            </div>
-        <?php } ?>
-    </div>
-</section> -->
-<section class="mapa">
-    <h2 <?php aos_animacion(); ?> class="mapa__heading">Donde Estamos? </h2>
-
-    <div class="mapa__descripcion">
-        <p <?php aos_animacion(); ?> class="mapa__texto">
-            El sistema Sanigest se encuentra ubicado en la Municipalidad Distrital de Huaro, específicamente en el área de UGM (Unidad de Gestión Municipal).
-            Este sistema, que tiene como objetivo la administración y optimización de los servicios de agua y saneamiento en el distrito de Huaro, es manejado
-            directamente por el personal de la UGM.
-        </p>
-
-        <p <?php aos_animacion(); ?> class="mapa__texto">
-            El equipo de la UGM se encarga de la operación y gestión del software Sanigest, garantizando la eficiencia y efectividad en el control y la optimización
-            de los recursos hídricos y de saneamiento en la comunidad. La Municipalidad Distrital de Huaro es el centro neurálgico de este sistema, permitiendo un mejor
-            servicio para los habitantes del distrito.
-        </p>
-    </div>
-    <div id="mapa" class="mapa__mapa"></div>
-</section>
-
-<!-- <section class="boletos">
-
-    <h2 class="boletos__heading">Boletos & Precios</h2>
-    <div class="boletos__descripcion">Precios para DevWebCamp</div>
-
-    <div class="boletos__grid">
-
-        <div class="boleto boleto--presencial">
-            <h4 class="boleto__logo">
-                &#60;DevWebCamp />
-            </h4>
-            <p class="boleto__plan">Presencial</p>
-            <p class="boleto__precio">$199.99</p>
-        </div>
-
-        <div class="boleto boleto--virtual">
-            <h4 class="boleto__logo">
-                &#60;DevWebCamp />
-            </h4>
-            <p class="boleto__plan">Virtual</p>
-            <p class="boleto__precio">$49.99</p>
-        </div>
-
-        <div class="boleto boleto--gratis">
-            <h4 class="boleto__logo">
-                &#60;DevWebCamp />
-            </h4>
-            <p class="boleto__plan">Gratis</p>
-            <p class="boleto__precio">Gratis - $00.00</p>
-        </div>
-    </div>
-    <div class="boleto__enlace-contenedor">
-        <a href="/paquetes" class="boleto__enlace">Ver Paquetes</a>
-    </div>
-</section> -->
-
-
-<section class="carrusel">
+<!-- <section class="carrusel">
 
     <div class="carrusel_contenedor">
         <div class="slide">
@@ -249,4 +129,4 @@ include __DIR__ . '/noticias.php';
         </div>
     </div>
 
-</section>
+</section> -->

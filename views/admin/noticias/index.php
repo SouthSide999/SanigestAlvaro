@@ -56,7 +56,7 @@
             </tbody>
         </table>
     <?php } else { ?>
-        <p class="text-center">No Hay Eventos Aún</p>
+        <p class="text-center">No Hay Noticias Aún</p>
     <?php } ?>
 </div>
 

@@ -19,7 +19,6 @@ class Router
 
     public function comprobarRutas()
     {
-
         $url_actual = strtok($_SERVER['REQUEST_URI'], '?') ?? '/';
         // $_SERVER['PATH_INFO'] ?? '/';
         $method = $_SERVER['REQUEST_METHOD'];
@@ -42,17 +41,11 @@ class Router
         foreach ($datos as $key => $value) {
             $$key = $value;
         }
-
         ob_start();
-
         include_once __DIR__ . "/views/$view.php";
-
         $contenido = ob_get_clean(); // Limpia el Buffer
-
-        // Utilizar el Layout de acuerdo a la URL
+       // Utilizar el Layout de acuerdo a la URL
         $url_actual = strtok($_SERVER['REQUEST_URI'], '?') ?? '/';
-
-
         if (str_contains($url_actual, '/admin')) {
             include_once __DIR__ . '/views/admin-layout.php';
         } elseif (str_contains($url_actual, '/user')) {

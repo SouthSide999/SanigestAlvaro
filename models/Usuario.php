@@ -31,7 +31,6 @@ class Usuario extends ActiveRecord {
         $this->confirmado = $args['confirmado'] ?? 0;
         $this->token = $args['token'] ?? '';
         $this->rol_id = $args['rol_id'] ?? 1;
-
     }
 
     // Validar el Login de Usuarios
@@ -46,7 +45,6 @@ class Usuario extends ActiveRecord {
             self::$alertas['error'][] = 'El Password no puede ir vacio';
         }
         return self::$alertas;
-
     }
 
     // Validación para cuentas nuevas
