@@ -144,11 +144,11 @@ class AguaPotableTesoreroController
             if (empty($_POST['codigo_contribuyente'])) {
                 $ultimo_codigo = Contribuyente::ultimoValor('codigo_contribuyente', 'contribuyentes');
                 if (!$ultimo_codigo) {
-                    $contribuyente->codigo_contribuyente = 'C00001';
+                    $contribuyente->codigo_contribuyente = 'COSG00001';
                 } else {
-                    $numero = (int) substr($ultimo_codigo, 1);
+                    $numero = (int) substr($ultimo_codigo, 4);
                     $numero++;
-                    $contribuyente->codigo_contribuyente = 'C' . str_pad($numero, 5, '0', STR_PAD_LEFT);
+                    $contribuyente->codigo_contribuyente = 'COSG' . str_pad($numero, 5, '0', STR_PAD_LEFT);
                 }
             }
 
@@ -287,7 +287,7 @@ class AguaPotableTesoreroController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (empty($_POST['codigo_predio'])) {
                 $ultimo_codigo = Predio::ultimoValor('codigo_predio', 'predios');
-                $predio->codigo_predio = $ultimo_codigo ? 'P' . str_pad((int)substr($ultimo_codigo, 1) + 1, 5, '0', STR_PAD_LEFT) : 'P00001';
+                $predio->codigo_predio = $ultimo_codigo ? 'PESG' . str_pad((int)substr($ultimo_codigo, 4) + 1, 5, '0', STR_PAD_LEFT) : 'PESG00001';
             }
 
             $ultimo_secuencia = Predio::ultimoValor('secuencia', 'predios');

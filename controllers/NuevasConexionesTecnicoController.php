@@ -222,7 +222,7 @@ class NuevasConexionesTecnicoController
                 $notificacion->enviarConexionFinalizadaCliente($nueva->direccion_principal);
             } else {
                 $nueva->estado_id = '3'; // Observado / Rechazado
-                $nueva->tecnico_id = 100; // Reasignar al técnico con ID 100
+                $nueva->tecnico_id = 1; // Reasignar al técnico con ID 100
                 $notificacion->enviarObservacionRechazoCliente($nueva->direccion_principal, $nueva->observacion_rechazo);
             }
 

@@ -92,7 +92,7 @@ class SolicitudController
             if ($solicitud->observaciones === 'ninguna') {
                 $solicitud->estado_id = '4'; // Estado aceptado o algo similar
             } else {
-                $solicitud->personal_asignado = '100';
+                $solicitud->personal_asignado = '1';
                 $solicitud->estado_id = '3'; // Estado rechazado o algo similar
             }
 
@@ -188,7 +188,7 @@ class SolicitudController
 
 
             if ($solicitud->estado_id === '3') {
-                $solicitud->personal_asignado = 100; // Reasignar al técnico con ID 100
+                $solicitud->personal_asignado = 1; // Reasignar al técnico con ID 100
                 $notificacion->enviarSolicitudRechazadaCliente($tipo->nombre, $solicitud->descripcion, $solicitud->observaciones);
             } else {
                 $solicitud->estado_id = '5';
@@ -278,7 +278,7 @@ class SolicitudController
 
 
             if ($solicitud->estado_id === '3') {
-                $solicitud->personal_asignado = 100; // Reasignar al técnico con ID 100
+                $solicitud->personal_asignado = 1; // Reasignar al técnico con ID 100
                 $notificacion->enviarSolicitudRechazadaCliente($tipo->nombre, $solicitud->descripcion, $solicitud->observaciones);
             } else {
                 $solicitud->estado_id = '5';
@@ -368,7 +368,7 @@ class SolicitudController
             );
 
             if ($solicitud->estado_id === '3') {
-                $solicitud->personal_asignado = 100;
+                $solicitud->personal_asignado = 1;
                 $notificacion->enviarSolicitudRechazadaCliente(
                     $solicitud->tipo->nombre,
                     $solicitud->descripcion,

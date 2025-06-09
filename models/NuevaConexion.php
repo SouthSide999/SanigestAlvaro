@@ -105,7 +105,7 @@ class NuevaConexion extends ActiveRecord
         $this->fecha_solicitud = $args['fecha_solicitud'] ?? date('Y-m-d');
         $this->codigo_seguimiento = $args['codigo_seguimiento'] ?? '';
         $this->estado_id = $args['estado_id'] ?? '1';
-        $this->tecnico_id = $args['tecnico_id'] ?? '100';
+        $this->tecnico_id = $args['tecnico_id'] ?? '1';
         $this->observacion_rechazo = $args['observacion_rechazo'] ?? 'ninguna';
 
 

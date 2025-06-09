@@ -47,7 +47,7 @@ class Solicitud extends ActiveRecord
         $this->evidencia = $args['evidencia'] ?? '';
         $this->fecha = $args['fecha'] ?? date('Y-m-d H:i:s');
         $this->estado_id = $args['estado_id'] ??'1';
-        $this->personal_asignado = $args['personal_asignado'] ?? '100';
+        $this->personal_asignado = $args['personal_asignado'] ?? '1';
         $this->codigo_seguimiento = $args['codigo_seguimiento'] ?? '';
         $this->observaciones = $args['observaciones'] ?? 'ninguna';
     }

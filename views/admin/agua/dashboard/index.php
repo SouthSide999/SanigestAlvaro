@@ -31,24 +31,6 @@
             <span class="dashboardAgua__menu-texto">Medidores</span>
         </a>
 
-        <!-- 6. Consumos -->
-        <a href="/admin/consumos" class="dashboardAgua__enlace">
-            <i class="fa-solid fa-droplet"></i>
-            <span class="dashboardAgua__menu-texto">Consumos</span>
-        </a>
-
-        <!-- 7. Pagos -->
-        <a href="/admin/pagos" class="dashboardAgua__enlace">
-            <i class="fa-solid fa-credit-card"></i>
-            <span class="dashboardAgua__menu-texto">Pagos</span>
-        </a>
-
-        <!-- 8. Recibos -->
-        <a href="/admin/recibos" class="dashboardAgua__enlace">
-            <i class="fa-solid fa-file-invoice-dollar"></i>
-            <span class="dashboardAgua__menu-texto">Recibos</span>
-        </a>
-
         <!-- 9. Tarifas -->
         <a href="/admin/tarifas" class="dashboardAgua__enlace">
             <i class="fa-solid fa-tags"></i>
