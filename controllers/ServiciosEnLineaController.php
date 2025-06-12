@@ -133,7 +133,7 @@ class ServiciosEnLineaController
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $criterio = $_POST['criterio'] ?? null;
-            $dato = $_POST['dato'] ?? null;
+            $dato = sanitizarBusqueda($_POST['dato'] ?? null);
             $tipoBusqueda = $criterio;
 
             if ($criterio === 'nueva_conexion') {
@@ -222,7 +222,7 @@ class ServiciosEnLineaController
     }
     public static function consultarRecibo(Router $router)
     {
-        $codigo = $_POST['codigo_predio'] ?? null;
+        $codigo = sanitizarBusqueda($_POST['codigo_predio'] ?? null);
         $resultado = null;
         $mensaje = null;
 

@@ -1,0 +1,16 @@
+@use 'base/mixins' as m;
+
+.auth {
+    @include m.contenedor-sm;
+    padding: 5rem 2rem;
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center; // centra verticalmente
+
+    &__grid {
+        @include m.grid(2, 2rem);
+        flex: 1;
+    }
+}

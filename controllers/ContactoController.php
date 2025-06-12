@@ -140,7 +140,7 @@ class ContactoController
         }
 
         $router->render('admin/contacto/buscar', [
-            'titulo' => 'Buscar',
+            'titulo' => 'Buscar Contactos Realizados',
             'contactos' => $contacto
         ]);
     }

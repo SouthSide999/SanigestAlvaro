@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (btnRechazar) {
         btnRechazar.addEventListener('click', function () {
-            document.getElementById('estadoSolicitud').value = '3';
+            document.getElementById('estadoSolicitud-Nueva').value = '3';
             document.getElementById('modalnuevaconexionObservaciones').style.display = 'flex';
         });
     }

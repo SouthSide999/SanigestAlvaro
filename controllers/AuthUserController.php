@@ -4,6 +4,7 @@ namespace Controllers;
 
 use MVC\Router;
 use Model\Predio;
+use Classes\Email;
 use Model\Cliente;
 use Classes\Notificaciones;
 
@@ -125,5 +126,94 @@ class AuthUserController
             $_SESSION = [];
             header('Location: /');
         }
+    }
+
+    public static function olvide(Router $router)
+    {
+        $alertas = [];
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $cliente = new Cliente($_POST);
+            $alertas = $cliente->validarEmail();
+
+            if (empty($alertas)) {
+
+                $cliente = Cliente::where('email', $cliente->email);
+
+                if ($cliente) {
+                    $cliente->crearToken();
+
+                    unset($cliente->password2);
+                    $cliente->guardar();
+                    $email = new Email($cliente->email, $cliente->nombre, $cliente->token);
+                    $email->enviarInstruccionesCliente();
+
+                    Cliente::setAlerta('exito', 'Hemos enviado las instrucciones a tu email');
+                    $alertas['exito'][] = 'Hemos enviado las instrucciones a tu email';
+                } else {
+                    Cliente::setAlerta('error', 'El Cliente no existe');
+                    $alertas['error'][] = 'El Cliente no existe';
+                }
+            }
+        }
+
+        $router->render('user/auth/olvide', [
+            'titulo' => 'Olvide mi Password',
+            'alertas' => $alertas
+        ]);
+    }
+
+    public static function reestablecer(Router $router)
+    {
+
+        $token = s($_GET['token']);
+
+        $token_valido = true;
+
+        if (!$token) header('Location: /');
+
+        // Identificar el usuario con este token
+        $cliente = Cliente::where('token', $token);
+
+        if (empty($cliente)) {
+            Cliente::setAlerta('error', 'Token No Válido, intenta de nuevo');
+            $token_valido = false;
+        }
+
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            // Añadir el nuevo password
+            $cliente->sincronizar($_POST);
+
+            // Validar el password
+            $alertas = $cliente->validarPassword();
+
+            if (empty($alertas)) {
+                // Hashear el nuevo password
+                $cliente->hashPassword();
+
+                // Eliminar el Token
+                $cliente->token = null;
+
+                // Guardar el usuario en la BD
+                $resultado = $cliente->guardar();
+
+                // Redireccionar
+                if ($resultado) {
+                    header('Location: /loginUser?contraseñaActualizada=1');
+                    exit;
+                }
+            }
+        }
+
+        $alertas = Cliente::getAlertas();
+
+        // Muestra la vista
+        $router->render('user/auth/reestablecer', [
+            'titulo' => 'Reestablecer Password',
+            'alertas' => $alertas,
+            'token_valido' => $token_valido
+        ]);
     }
 }

@@ -2,6 +2,7 @@
 @use 'base/variables' as v;
 
 .masinformacion {
+    flex: 1;
     padding-bottom: 6rem;
 
     &__grid {

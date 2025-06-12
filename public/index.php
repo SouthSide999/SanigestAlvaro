@@ -272,6 +272,11 @@ $router->post('/loginUser', [AuthUserController::class, 'login']);
 $router->post('/logoutUser', [AuthUserController::class, 'logout']);
 $router->get('/registroUser', [AuthUserController::class, 'registro']);
 $router->post('/registroUser', [AuthUserController::class, 'registro']);
+$router->get('/olvideUser', [AuthUserController::class, 'olvide']);
+$router->post('/olvideUser', [AuthUserController::class, 'olvide']);
+$router->get('/reestablecerUser', [AuthUserController::class, 'reestablecer']);
+$router->post('/reestablecerUser', [AuthUserController::class, 'reestablecer']);
+
 
 $router->get('/user/dashboard', [DashboardUserController::class, 'index']);
 //reclamos

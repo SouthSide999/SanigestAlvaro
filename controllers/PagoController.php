@@ -40,7 +40,7 @@ class PagoController
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $criterio = $_POST['criterio'] ?? '';
-            $dato = $_POST['dato'] ?? '';
+            $dato = sanitizarBusqueda($_POST['dato'] ?? '');
 
             if ($criterio && $dato) {
                 // Filtrar todos los predios según criterio y dato

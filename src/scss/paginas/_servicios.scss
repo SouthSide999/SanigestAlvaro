@@ -2,6 +2,8 @@
 @use 'base/variables' as v;
 
 .servicios-linea {
+    flex: 1;
+
     @include m.contenedor;
     padding: 2rem 2rem 12rem;
 
@@ -181,6 +183,7 @@
 
 //* nueva conexion 
 .nuevaconexion {
+    flex: 1;
     @include m.contenedor;
     @include m.shadow;
     margin-bottom: 10rem;
@@ -231,7 +234,7 @@
     }
 }
 
-.formularioservicios{
+.formularioservicios {
     &__fieldset {
         @include m.card;
         @include m.shadow;
@@ -239,7 +242,7 @@
         margin-bottom: 3rem;
         background-color: #fff;
     }
-    
+
     &__legend {
         @include m.headings;
         font-size: 2.4rem;
@@ -249,38 +252,38 @@
         margin-bottom: 2rem;
         text-align: center;
     }
-    
-    &__campo {
-@include m.grid(1, 2rem);
-  margin-bottom: 2rem;
 
-  @include m.tablet {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    column-gap: 2rem;
-    align-items: center;
-  }
+    &__campo {
+        @include m.grid(1, 2rem);
+        margin-bottom: 2rem;
+
+        @include m.tablet {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            column-gap: 2rem;
+            align-items: center;
+        }
     }
-    
+
     &__label {
         font-size: 1.6rem;
         font-weight: v.$bold;
         color: v.$gris-oscuro;
     }
-    
+
     &__input {
         padding: 1.2rem;
         font-size: 1.6rem;
         border-radius: 0.8rem;
         border: 1px solid v.$gris;
         transition: border-color 0.3s, box-shadow 0.3s;
-    
+
         &:focus {
             border-color: v.$azul;
             box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.2);
             outline: none;
         }
-    
+
         &.error {
             border-color: red;
         }
@@ -378,6 +381,7 @@
 
 .estadoconexion {
     &__contenedor {
+        flex: 1;
         @include m.contenedor-sm;
         padding-left: 2rem;
         padding-right: 2rem;

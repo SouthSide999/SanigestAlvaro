@@ -15,7 +15,8 @@
                     <i class="fa-solid fa-x"></i>
                     Rechazar
                 </a>
-                <button id="btnConfirmarRechazo" class="nuevaconexion__formulario__boton nuevaconexion__formulario__boton--aceptar">Finalizar</button>
+                <input type="hidden" id="estadoSolicitud-Nueva" name="estado_id" value="">
+                <input type="submit" class="nuevaconexion__formulario__boton nuevaconexion__formulario__boton--aceptar" value="Finalizar">
             </div>
 
             <!-- Modal de Observaciones -->

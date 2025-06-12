@@ -37,7 +37,7 @@
                     <i class="fa-solid fa-x"></i>
                     Rechazar
                 </a>
-                <input type="hidden" id="estadoSolicitud" name="estado_id" value="">
+                <input type="hidden" id="estadoSolicitud-Nueva" name="estado_id" value="">
                 <input type="submit" class="nuevaconexion__formulario__boton nuevaconexion__formulario__boton--aceptar" value="Finalizar">
             </div>
 

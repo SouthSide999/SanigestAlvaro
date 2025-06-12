@@ -12,34 +12,31 @@
 </div>
 
 <div class="dashboard__contenedor-buscador">
-    <form class="dashboard__formulario__buscardor" action="/admin/conexiones" method="POST">
+    <form class="dashboard__formulario__buscardor" action="/admin/conexiones" enctype="multipart/form-data" method="POST">
         <fieldset class="formulario__fieldset">
             <div class="formulario__campo">
-                <label for="criterio" class="formulario__label">Buscar por:</label>
-                <select id="criterio" name="criterio" class="formulario__input">
-                    <option disabled selected>Selecciona una opción</option>
-                    <option value="predio_id">ID Predio</option>
-                    <option value="contribuyente_id">ID Contribuyente</option>
-                </select>
-            </div>
-
-            <div class="formulario__campo">
-                <label for="dato" class="formulario__label">Valor de búsqueda:</label>
+                <label for="nombre_sector" class="formulario__label">Buscar Predio:</label>
                 <input
                     type="text"
                     class="formulario__input"
-                    id="dato"
-                    name="dato"
-                    placeholder="ID de Predio o ID de Contribuyente">
+                    id="predio_id"
+                    name="predio_id"
+                    placeholder="Ingrese el Codigo de Predio">
             </div>
         </fieldset>
 
         <div class="dashboard__contenedor__boton">
-            <input type="submit" value="Buscar Conexión" class="dashboard__boton__buscardor">
-            <a href="/admin/conexiones" class="dashboard__boton__buscardor">Lista Completa</a>
+            <input
+                type="submit"
+                value="Buscar Sector"
+                class="dashboard__boton__buscardor">
+            <a href="/admin/conexiones" class="dashboard__boton__buscardor">
+                Lista Completa
+            </a>
         </div>
     </form>
 </div>
+
 
 <div class="dashboard__contenedor">
     <?php if (!empty($conexiones)) { ?>

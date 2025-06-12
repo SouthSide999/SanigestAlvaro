@@ -9,6 +9,12 @@ use Model\Evento;
 use Model\Noticia;
 use Model\Ponente;
 use Model\Categoria;
+use Model\Cliente;
+use Model\Contacto;
+use Model\NuevaConexion;
+use Model\Reclamo;
+use Model\Solicitud;
+use Model\Usuario;
 
 class PaginasController
 {
@@ -17,25 +23,27 @@ class PaginasController
 
         $noticia = Noticia::all('DESC');
 
-        $ponentes_total = Ponente::total(); //obtener ponentes_total
+        $usuarios_total = Cliente::total(); //obtener ponentes_total
 
-        $conferencia_total = Evento::total('categoria_id', '1'); //obtener conferencia_total
-
-        $workshops_total = Evento::total('categoria_id', '2'); //obtener conferencia_total
+        $personal_total = Usuario::total();  //obtener conferencia_total
 
 
-        $ponentes = Ponente::all(); //obtener ponentes
+        $solicitudes = Solicitud::total();
+        $nuevasconexiones = NuevaConexion::total();
+        $reclamos = Reclamo::total();
+        $contactos = Contacto::total();
 
 
 
+
+        $total_atendidos = $solicitudes + $nuevasconexiones + $reclamos + $contactos;
 
         $router->render('paginas/index', [
             'titulo' => 'Inicio',
             'noticias' => $noticia,
-            'ponentes_total' => $ponentes_total,
-            'conferencia_total' => $conferencia_total,
-            'workshops_total' => $workshops_total,
-            'ponentes' => $ponentes
+            'usuarios_total' => $usuarios_total,
+            'personal_total' => $personal_total,
+            'total_atendidos' => $total_atendidos
 
         ]);
     }

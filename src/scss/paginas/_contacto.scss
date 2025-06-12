@@ -2,6 +2,8 @@
 @use 'base/variables' as v;
 
 .contacto {
+    flex: 1;
+
     @include m.contenedor;
 
     &__informacion {

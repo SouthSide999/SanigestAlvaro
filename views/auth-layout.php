@@ -17,9 +17,7 @@
 <body>
     <?php
     include_once __DIR__ . '/templates/auth-header.php';
-
     echo $contenido;
-
     include_once __DIR__ . '/templates/footer-bubbles.php';
     ?>
     <script src="/build/js/main.min.js" defer></script>

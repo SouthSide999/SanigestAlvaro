@@ -1,4 +1,4 @@
-<main class="nosotros">
+<section class="nosotros">
     <h2 <?php aos_animacion(); ?> class="nosotros__heading"><?php echo $titulo; ?></h2>
     <p <?php aos_animacion(); ?> class="nosotros__descripcion">Gestión eficiente del agua y saneamiento urbano al servicio del Distrito de Huaro</p>
 
@@ -23,4 +23,4 @@
             <a <?php aos_animacion(); ?> href="/contacto/crear" class="nosotros__btn">Contáctanos</a>
     </div>
     </div>
-</main>
+</section>

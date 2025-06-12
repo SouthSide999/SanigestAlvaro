@@ -12,6 +12,12 @@ function s($html): string
     $s = htmlspecialchars($html);
     return $s;
 }
+
+function sanitizarBusqueda($valor): ?string {
+    if (!isset($valor)) return null;
+    return htmlspecialchars(trim($valor), ENT_QUOTES, 'UTF-8');
+}
+
 function pagina_actual($path): bool
 {
     return str_contains($_SERVER['PATH_INFO'] ?? '/', $path) ? true : false;

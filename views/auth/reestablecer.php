@@ -1,4 +1,4 @@
-<main class="auth__3">
+<main class="auth">
         <h2 class="auth__heading"><?php echo $titulo; ?></h2>
         <p class="auth__texto">Coloca tu nuevo password</p>
 

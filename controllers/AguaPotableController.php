@@ -96,7 +96,7 @@ class AguaPotableController
         // Búsqueda por POST
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $criterio = $_POST['criterio'] ?? '';
-            $dato = $_POST['dato'] ?? '';
+            $dato = sanitizarBusqueda($_POST['dato'] ?? '');
 
             if ($criterio && $dato) {
                 $contribuyentes = Contribuyente::buscar($criterio, $dato);
@@ -225,7 +225,7 @@ class AguaPotableController
         // Búsqueda por POST
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $criterio = 'nombre_zona';
-            $dato = $_POST['nombre_zona'] ?? '';
+            $dato = sanitizarBusqueda($_POST['nombre_zona'] ?? '');
 
             if ($criterio && $dato) {
                 $zonas = Zona::buscar($criterio, $dato);
@@ -251,7 +251,6 @@ class AguaPotableController
             'paginacion' => $paginacion
         ]);
     }
-
     // Crear zona
     public static function zonaCrear(Router $router)
     {
@@ -301,7 +300,6 @@ class AguaPotableController
             'alertas' => $alertas
         ]);
     }
-
     // Editar zona
     public static function zonaEditar(Router $router)
     {
@@ -393,7 +391,7 @@ class AguaPotableController
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $criterio = 'nombre_sector';
-            $dato = $_POST['nombre_sector'] ?? '';
+            $dato = sanitizarBusqueda($_POST['nombre_sector'] ?? '');
 
             if ($criterio && $dato) {
                 $sectores = Sector::buscar($criterio, $dato);
@@ -555,7 +553,7 @@ class AguaPotableController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $criterio = $_POST['criterio'] ?? '';
-            $dato = $_POST['dato'] ?? '';
+            $dato = sanitizarBusqueda($_POST['dato'] ?? '');
 
             if ($criterio && $dato) {
                 // Búsqueda normal (LIKE)
@@ -774,7 +772,7 @@ class AguaPotableController
         // Búsqueda por POST
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $criterio = $_POST['criterio'] ?? '';
-            $dato = $_POST['dato'] ?? '';
+            $dato = sanitizarBusqueda($_POST['dato'] ?? '');
 
             if ($criterio && $dato) {
                 $tarifas = Tarifa::buscar($criterio, $dato);
@@ -836,7 +834,7 @@ class AguaPotableController
         }
 
         $router->render('admin/agua/tarifas/crear', [
-            'titulo' => 'Registrar Sector',
+            'titulo' => 'Registrar Tarifa',
             'tarifa' => $tarifa,
             'alertas' => $alertas
         ]);
@@ -922,7 +920,7 @@ class AguaPotableController
         // Búsqueda por POST
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $criterio = $_POST['criterio'] ?? '';
-            $dato = $_POST['dato'] ?? '';
+            $dato = sanitizarBusqueda($_POST['dato'] ?? '');
 
             if ($criterio && $dato) {
                 $medidores = Medidor::buscar($criterio, $dato);
@@ -1089,11 +1087,11 @@ class AguaPotableController
 
         // Búsqueda por POST
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $criterio = $_POST['criterio'] ?? '';
-            $dato = $_POST['dato'] ?? '';
+            $dato = sanitizarBusqueda($_POST['predio_id'] ?? '');
+            $codigo = Predio::where('codigo_predio', $dato);
 
-            if ($criterio && $dato) {
-                $conexiones = Conexion::buscar($criterio, $dato);
+            if ($dato) {
+                $conexiones = Conexion::buscarestricto('predio_id', $codigo->id);
                 foreach ($conexiones as $conexion) {
                     $conexion->predio = Predio::find($conexion->predio_id);
                     if ($conexion->predio) {

@@ -51,7 +51,7 @@ class AguaPotableTesoreroController
         // Búsqueda por POST
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $criterio = $_POST['criterio'] ?? '';
-            $dato = $_POST['dato'] ?? '';
+            $dato = sanitizarBusqueda($_POST['dato'] ?? '');
 
             if ($criterio && $dato) {
                 $contribuyentes = Contribuyente::buscar($criterio, $dato);
@@ -223,7 +223,7 @@ class AguaPotableTesoreroController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $criterio = $_POST['criterio'] ?? '';
-            $dato = $_POST['dato'] ?? '';
+            $dato = sanitizarBusqueda($_POST['dato'] ?? '');
 
             if ($criterio && $dato) {
                 // Búsqueda normal (LIKE)

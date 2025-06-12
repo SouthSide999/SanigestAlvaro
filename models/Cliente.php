@@ -5,7 +5,7 @@ namespace Model;
 class Cliente extends ActiveRecord
 {
     protected static $tabla = 'cliente';
-    protected static $columnasDB = ['id', 'nombre', 'apellido', 'email', 'password', 'codigo_predio', 'dni', 'celular'];
+    protected static $columnasDB = ['id', 'nombre', 'apellido', 'email', 'password', 'codigo_predio', 'dni', 'celular', 'token'];
 
     public $id;
     public $nombre;
@@ -16,6 +16,8 @@ class Cliente extends ActiveRecord
     public $codigo_predio;
     public $dni;
     public $celular;
+    public $token;
+
 
     // Campos auxiliares (opcional para cambio de contraseña)
     public $password_actual;
@@ -32,6 +34,8 @@ class Cliente extends ActiveRecord
         $this->codigo_predio = $args['codigo_predio'] ?? '';
         $this->dni = $args['dni'] ?? '';
         $this->celular = $args['celular'] ?? '';
+        $this->token = $args['token'] ?? '';
+
         $this->password_actual = $args['password_actual'] ?? '';
         $this->password_nuevo = $args['password_nuevo'] ?? '';
     }
@@ -134,6 +138,36 @@ class Cliente extends ActiveRecord
         }
         if (!$this->codigo_predio) {
             self::$alertas['error'][] = 'Debe seleccionar un predio';
+        }
+        return self::$alertas;
+    }
+
+    // Generar un Token
+    public function crearToken(): void
+    {
+        $this->token = uniqid();
+    }
+
+    // Valida un email
+    public function validarEmail()
+    {
+        if (!$this->email) {
+            self::$alertas['error'][] = 'El Email es Obligatorio';
+        }
+        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            self::$alertas['error'][] = 'Email no válido';
+        }
+        return self::$alertas;
+    }
+
+    // Valida el Password 
+    public function validarPassword()
+    {
+        if (!$this->password) {
+            self::$alertas['error'][] = 'El Password no puede ir vacio';
+        }
+        if (strlen($this->password) < 6) {
+            self::$alertas['error'][] = 'El password debe contener al menos 6 caracteres';
         }
         return self::$alertas;
     }

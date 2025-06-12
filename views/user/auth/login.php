@@ -29,12 +29,12 @@
                         </label>
                     </div>
                     <div class="login__group">
-                        <input type="submit" class="login__button" value="Sign In">
+                        <input type="submit" class="login__button" value="Ingresar">
                     </div>
                 </form>
                 <div class="login__hr"></div>
                 <div class="login__foot-link">
-                    <a href="/olvide" class="login__link">¿Olvidaste tu contraseña?</a>
+                    <a href="/olvideUser" class="login__link">¿Olvidaste tu contraseña?</a>
                 </div>
             </div>
 
@@ -73,7 +73,7 @@
                         <input id="signup__celular" name="celular" type="tel" class="login__input" value="<?= $cliente->celular ?? '' ?>">
                     </div>
                     <div class="login__group">
-                        <input type="submit" class="login__button" value="Sign Up">
+                        <input type="submit" class="login__button" value="Crear">
                     </div>
                 </form>
                 <div class="login__hr"></div>
@@ -113,5 +113,19 @@ endif; ?>
         `,
             confirmButtonText: 'Intentar de nuevo'
         });
+    </script>
+<?php endif; ?>
+
+<?php if (isset($_GET['contraseñaActualizada']) && $_GET['contraseñaActualizada'] == '1'): ?>
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Contraseña cambiada correctamente',
+            text: 'Ahora puedes iniciar sesión con tu nueva contraseña.',
+            confirmButtonText: 'Iniciar sesión'
+        });
+
+        // Elimina ?creado=1 de la URL
+        window.history.replaceState(null, null, window.location.pathname);
     </script>
 <?php endif; ?>

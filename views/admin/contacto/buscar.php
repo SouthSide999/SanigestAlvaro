@@ -17,13 +17,13 @@
                     class="formulario__input"
                     id="nombre"
                     name="nombre"
-                    placeholder="Nombre de la Noticia">
+                    placeholder="Nombre de la persona que realizo el contacto">
             </div>
         </fieldset>
         <div class="dashboard__contenedor__boton">
             <input
                 type="submit"
-                value="Buscar Noticias"
+                value="Buscar"
                 class="dashboard__boton__buscardor">
         </div>
     </form>

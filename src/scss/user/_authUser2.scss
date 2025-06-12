@@ -22,6 +22,7 @@ a {
 
 /* Contenedor general */
 .login {
+    flex: 1;
     width: 100%;
     max-width: 525px;
     min-height: 670px;
@@ -33,9 +34,11 @@ a {
     border-radius: 2rem;
     margin-top: 1rem;
     margin-bottom: 7rem;
-
-
+    display: flex;
+    /* Asegura comportamiento flexible */
+    align-items: center;
 }
+
 
 /* Contenedor interno */
 .login__inner {
@@ -43,7 +46,16 @@ a {
     padding: 90px 70px 110px 70px;
     background: rgba(40, 57, 101, 0.9);
     border-radius: 2rem;
+    height: 100%;
+    /* Asegura que tome todo el alto del contenedor padre */
+    min-height: 670px;
+    /* Fuerza el alto mínimo igual en todas */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Centra el contenido verticalmente */
 }
+
 
 /* Ocultar radio buttons y checkbox */
 .login__tab,

@@ -38,7 +38,7 @@
             <p <?php aos_animacion(); ?> class="header__texto">Eficiencia y transparencia en la gestión del agua y saneamiento urbano.</p>
             <p <?php aos_animacion(); ?> class="header__texto header__texto--modalidad">Municipalidad Distrital de Huaro</p>
 
-            <a <?php aos_animacion(); ?> href="/auth/registro" class="header__boton">Crea tu Cuenta</a>
+            <a <?php aos_animacion(); ?> href="/loginUser" class="header__boton">Crea tu Cuenta</a>
         </div>
     </div>
 </header>

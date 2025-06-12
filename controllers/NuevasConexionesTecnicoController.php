@@ -210,11 +210,12 @@ class NuevasConexionesTecnicoController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $nueva->sincronizar($_POST);
 
+            
             // Crear instancia de notificación
             $notificacion = new Notificaciones(
                 $nueva->email,
                 $nueva->nombre,
-                $nueva->apellido1               
+                $nueva->apellido1
             );
             if ($nueva->observacion_rechazo === 'ninguna') {
                 $nueva->estado_id = '5'; // Finalizado
@@ -225,7 +226,6 @@ class NuevasConexionesTecnicoController
                 $nueva->tecnico_id = 1; // Reasignar al técnico con ID 100
                 $notificacion->enviarObservacionRechazoCliente($nueva->direccion_principal, $nueva->observacion_rechazo);
             }
-
             $resultado = $nueva->guardar();
 
             if ($resultado) {

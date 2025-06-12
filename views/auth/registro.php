@@ -1,6 +1,5 @@
-<main class="auth">
-
-    <div class="auth__1">
+<main class="auth__grid">
+    <div class="auth">
         <h2 class="auth__heading"><?php echo $titulo; ?></h2>
         <p class="auth__texto">Regístrate en SaniGest</p>
 
@@ -70,7 +69,6 @@
             <a href="/auth/olvide" class="acciones__enlace">¿Olvidaste tu Password?</a>
         </div>
     </div>
-
 
     <div>
         <?php

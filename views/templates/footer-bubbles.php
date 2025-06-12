@@ -144,22 +144,22 @@
         </div>
 
         <nav class="menu-redes">
-            <a class="menu-redes__enlace" rel="noopener noreferrer" target="_blank" href="https://facebook.com/C%C3%B3digo-Con-Juan-103341632130628">
+            <a class="menu-redes__enlace" rel="noopener noreferrer" target="_blank" href="https://www.facebook.com/profile.php?id=61552002960348">
                 <span class="menu-redes__ocultar">Facebook</span>
             </a>
-            <a class="menu-redes__enlace" rel="noopener noreferrer" target="_blank" href="https://twitter.com/codigoconjuan">
+            <!-- <a class="menu-redes__enlace" rel="noopener noreferrer" target="_blank" href="">
                 <span class="menu-redes__ocultar">Twitter</span>
             </a>
-            <a class="menu-redes__enlace" rel="noopener noreferrer" target="_blank" href="https://youtube.com/codigoconjuan">
+            <a class="menu-redes__enlace" rel="noopener noreferrer" target="_blank" href="">
                 <span class="menu-redes__ocultar">YouTube</span>
             </a>
-            <a class="menu-redes__enlace" rel="noopener noreferrer" target="_blank" href="https://instagram.com/codigoconjuan">
+            <a class="menu-redes__enlace" rel="noopener noreferrer" target="_blank" href="">
                 <span class="menu-redes__ocultar">Instagram</span>
             </a>
-            <a class="menu-redes__enlace" rel="noopener noreferrer" target="_blank" href="https://tiktok.com/@codigoconjuan">
+            <a class="menu-redes__enlace" rel="noopener noreferrer" target="_blank" href="">
                 <span class="menu-redes__ocultar">Tiktok</span>
-            </a>
-            <a class="menu-redes__enlace" rel="noopener noreferrer" target="_blank" href="https://github.com/codigoconjuan">
+            </a> -->
+            <a class="menu-redes__enlace" rel="noopener noreferrer" target="_blank" href="https://github.com/SouthSide999">
                 <span class="menu-redes__ocultar">Github</span>
             </a>
         </nav>
@@ -187,6 +187,7 @@
             $fecha = new DateTime();
             echo $fecha->format('j') . ' de ' . $meses[(int)$fecha->format('n')] . ' de ' . $fecha->format('Y');
             ?>
+            - Cesar Alvaro Zapata Kida
         </span>
     </p>
 

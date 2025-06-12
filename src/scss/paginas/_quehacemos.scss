@@ -2,6 +2,8 @@
 @use 'base/variables' as v;
 
 .quehacemos {
+    flex: 1;
+
     &__grid {
         padding-bottom: 12rem;
         @include m.contenedor;

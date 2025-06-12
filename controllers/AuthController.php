@@ -216,9 +216,9 @@ class AuthController
                 // Guardar el usuario en la BD
                 $resultado = $usuario->guardar();
 
-                // Redireccionar
                 if ($resultado) {
-                    header('Location: /');
+                    header('Location: /auth/login?contraseñaActualizada=1');
+                    exit;
                 }
             }
         }

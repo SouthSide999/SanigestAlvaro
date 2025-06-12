@@ -3,6 +3,31 @@
 
 <?php echo $paginacion; ?>
 
+
+<div class="dashboard__contenedor-boton">
+    <?php if ($usuariorol === '2') { ?>
+        <a class="dashboard__boton" href="/admin/dashboard">
+            <i class="fa-solid fa-circle-arrow-left"></i>
+            Volver
+        </a>
+    <?php } elseif ($usuariorol === '3') { ?>
+        <a class="dashboard__boton" href="/tesorero/dashboard">
+            <i class="fa-solid fa-circle-arrow-left"></i>
+            Volver
+        </a>
+    <?php } elseif ($usuariorol === '4') { ?>
+        <a class="dashboard__boton" href="/tecnico/dashboard">
+            <i class="fa-solid fa-circle-arrow-left"></i>
+            Volver
+        </a>
+    <?php } elseif ($usuariorol === '5') { ?>
+        <a class="dashboard__boton" href="/lecturador/dashboard">
+            <i class="fa-solid fa-circle-arrow-left"></i>
+            Volver
+        </a>
+    <?php } ?>
+</div>
+
 <div class="dashboard__contenedor">
     <?php if (!empty($solicitudes)) { ?>
         <table class="table">
@@ -69,9 +94,7 @@ if (isset($_SESSION['exito'])) :
             icon: 'success',
             timer: 3000,
             confirmButtonText: 'OK'
-        }).then(() => {
-            window.location.href = '/tesorero/solicitudes'; // Redirigir después de cerrar la alerta
-        });
+        })
     </script>
 <?php
     unset($_SESSION['exito']); // Limpiar la variable de sesión para que no se muestre de nuevo

@@ -2,6 +2,7 @@
 @use 'base/variables' as v;
 
 .nosotros {
+    flex: 1;
     position: relative;
     background: linear-gradient(135deg, v.$blanco 0%, v.$celeste 100%);
     padding: 2rem 2rem 12rem;

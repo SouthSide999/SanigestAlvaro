@@ -54,22 +54,22 @@ include __DIR__ . '/noticias.php';
 <section class="resumen" <?php aos_animacion(); ?>>
     <div class="resumen__grid">
         <div <?php aos_animacion(); ?> class="resumen__bloque">
-            <p class="resumen__texto resumen__texto--numero"><?php echo $ponentes_total; ?></p>
+            <p class="resumen__texto resumen__texto--numero"><?php echo $usuarios_total; ?></p>
             <p class="resumen__texto">Cantidad de usuarios registrados</p>
         </div>
 
         <div <?php aos_animacion(); ?> class="resumen__bloque">
-            <p class="resumen__texto resumen__texto--numero"><?php echo $conferencia_total; ?></p>
+            <p class="resumen__texto resumen__texto--numero"><?php echo $usuarios_total; ?></p>
             <p class="resumen__texto">Usuarios activos</p>
         </div>
 
         <div <?php aos_animacion(); ?> class=" resumen__bloque">
-            <p class="resumen__texto resumen__texto--numero"><?php echo $workshops_total; ?></p>
+            <p class="resumen__texto resumen__texto--numero"><?php echo $personal_total; ?></p>
             <p class="resumen__texto">Personal de la UGM capacitado</p>
         </div>
 
         <div <?php aos_animacion(); ?> class="resumen__bloque">
-            <p class="resumen__texto resumen__texto--numero">18</p>
+            <p class="resumen__texto resumen__texto--numero"><?php echo $total_atendidos; ?></p>
             <p class="resumen__texto">Número de incidentes solucionados</p>
         </div>
     </div>
