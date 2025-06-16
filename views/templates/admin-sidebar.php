@@ -89,5 +89,12 @@
                 Contactos
             </span>
         </a>
+
+        <a href="/admin/ayuda" class="dashboard__enlace <?php echo pagina_actual('/ayuda') ? 'dashboard__enlace--actual' : ''; ?>">
+            <i class="fa-solid fa-circle-question"></i>
+            <span class="dashboard__menu-texto">
+                Ayuda
+            </span>
+        </a>
     </nav>
 </aside>

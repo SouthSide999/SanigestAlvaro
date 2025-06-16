@@ -56,7 +56,6 @@ class DashboardController
         foreach ($reclamos_pendientes as $reclamo) {
             $reclamo->cliente = Cliente::find($reclamo->cliente_id);
             $reclamo->estado = Estados::find($reclamo->estado_id);
-
         }
 
         // Trabajos técnicos programados
@@ -69,6 +68,12 @@ class DashboardController
             'predios_endeudados' => $predios_endeudados,
             'reclamos_pendientes' => $reclamos_pendientes,
             'trabajos_programados' => $trabajos_programados
+        ]);
+    }
+    public static function ayuda(Router $router)
+    {
+        $router->render('admin/dashboard/ayuda', [
+            'titulo' => 'Necesitas Ayuda'
         ]);
     }
 }

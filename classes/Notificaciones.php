@@ -26,11 +26,12 @@ class Notificaciones
         $mail->isSMTP();
         $mail->Host = $_ENV['EMAIL_HOST'];
         $mail->SMTPAuth = true;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; 
         $mail->Port = $_ENV['EMAIL_PORT'];
         $mail->Username = $_ENV['EMAIL_USER'];
         $mail->Password = $_ENV['EMAIL_PASS'];
 
-        $mail->setFrom('cuentas@sanigest.com', 'SaniGest');
+        $mail->setFrom('sanigesthuaro@gmail.com');
         $mail->addAddress($this->email, $this->nombre . ' ' . $this->apellido);
         $mail->Subject = 'Nueva Asignación de Trabajo - SaniGest';
 
@@ -58,11 +59,12 @@ class Notificaciones
         $mail->isSMTP();
         $mail->Host = $_ENV['EMAIL_HOST'];
         $mail->SMTPAuth = true;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; 
         $mail->Port = $_ENV['EMAIL_PORT'];
         $mail->Username = $_ENV['EMAIL_USER'];
         $mail->Password = $_ENV['EMAIL_PASS'];
 
-        $mail->setFrom('cuentas@sanigest.com', 'SaniGest');
+        $mail->setFrom('sanigesthuaro@gmail.com');
         $mail->addAddress($this->email, $this->nombre . ' ' . $this->apellido);
         $mail->Subject = 'Conexión Finalizada - SaniGest';
 
@@ -94,11 +96,12 @@ class Notificaciones
         $mail->isSMTP();
         $mail->Host = $_ENV['EMAIL_HOST'];
         $mail->SMTPAuth = true;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; 
         $mail->Port = $_ENV['EMAIL_PORT'];
         $mail->Username = $_ENV['EMAIL_USER'];
         $mail->Password = $_ENV['EMAIL_PASS'];
 
-        $mail->setFrom('cuentas@sanigest.com', 'SaniGest');
+        $mail->setFrom('sanigesthuaro@gmail.com');
         $mail->addAddress($this->email, $this->nombre . ' ' . $this->apellido);
         $mail->Subject = 'Observación en Conexión - SaniGest';
 
@@ -134,11 +137,12 @@ class Notificaciones
         $mail->isSMTP();
         $mail->Host = $_ENV['EMAIL_HOST'];
         $mail->SMTPAuth = true;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; 
         $mail->Port = $_ENV['EMAIL_PORT'];
         $mail->Username = $_ENV['EMAIL_USER'];
         $mail->Password = $_ENV['EMAIL_PASS'];
 
-        $mail->setFrom('cuentas@sanigest.com', 'SaniGest');
+        $mail->setFrom('sanigesthuaro@gmail.com');
         $mail->addAddress($this->email, $this->nombre . ' ' . $this->apellido);
         $mail->Subject = '¡Bienvenido a SaniGest! - Cuenta Creada con Éxito';
 
@@ -166,11 +170,12 @@ class Notificaciones
         $mail->isSMTP();
         $mail->Host = $_ENV['EMAIL_HOST'];
         $mail->SMTPAuth = true;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; 
         $mail->Port = $_ENV['EMAIL_PORT'];
         $mail->Username = $_ENV['EMAIL_USER'];
         $mail->Password = $_ENV['EMAIL_PASS'];
 
-        $mail->setFrom('cuentas@sanigest.com', 'SaniGest');
+        $mail->setFrom('sanigesthuaro@gmail.com');
         $mail->addAddress($this->email, $this->nombre . ' ' . $this->apellido);
         $mail->Subject = 'Actualización de Datos - SaniGest';
 
@@ -203,11 +208,12 @@ class Notificaciones
         $mail->isSMTP();
         $mail->Host = $_ENV['EMAIL_HOST'];
         $mail->SMTPAuth = true;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; 
         $mail->Port = $_ENV['EMAIL_PORT'];
         $mail->Username = $_ENV['EMAIL_USER'];
         $mail->Password = $_ENV['EMAIL_PASS'];
 
-        $mail->setFrom('notificaciones@sanigest.com', 'SaniGest');
+        $mail->setFrom('sanigesthuaro@gmail.com');
         $mail->addAddress($this->email, $this->nombre . ' ' . $this->apellido);
         $mail->Subject = 'Confirmación de Solicitud - SaniGest';
 
@@ -231,11 +237,12 @@ class Notificaciones
         $mail->isSMTP();
         $mail->Host = $_ENV['EMAIL_HOST'];
         $mail->SMTPAuth = true;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; 
         $mail->Port = $_ENV['EMAIL_PORT'];
         $mail->Username = $_ENV['EMAIL_USER'];
         $mail->Password = $_ENV['EMAIL_PASS'];
 
-        $mail->setFrom('notificaciones@sanigest.com', 'SaniGest');
+        $mail->setFrom('sanigesthuaro@gmail.com');
         $mail->addAddress($this->email, $this->nombre . ' ' . $this->apellido);
         $mail->Subject = 'Confirmación de Nueva Conexión - SaniGest';
 
@@ -259,11 +266,12 @@ class Notificaciones
         $mail->isSMTP();
         $mail->Host = $_ENV['EMAIL_HOST'];
         $mail->SMTPAuth = true;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; 
         $mail->Port = $_ENV['EMAIL_PORT'];
         $mail->Username = $_ENV['EMAIL_USER'];
         $mail->Password = $_ENV['EMAIL_PASS'];
 
-        $mail->setFrom('cuentas@sanigest.com', 'SaniGest');
+        $mail->setFrom('sanigesthuaro@gmail.com');
         $mail->addAddress($this->email, $this->nombre . ' ' . $this->apellido);
         $mail->Subject = 'Nueva Solicitud Asignada - SaniGest';
 
@@ -298,11 +306,12 @@ class Notificaciones
         $mail->isSMTP();
         $mail->Host = $_ENV['EMAIL_HOST'];
         $mail->SMTPAuth = true;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; 
         $mail->Port = $_ENV['EMAIL_PORT'];
         $mail->Username = $_ENV['EMAIL_USER'];
         $mail->Password = $_ENV['EMAIL_PASS'];
 
-        $mail->setFrom('cuentas@sanigest.com', 'SaniGest');
+        $mail->setFrom('sanigesthuaro@gmail.com');
         $mail->addAddress($this->email, $this->nombre . ' ' . $this->apellido);
         $mail->Subject = 'Solicitud Resuelta - SaniGest';
 
@@ -334,11 +343,12 @@ class Notificaciones
         $mail->isSMTP();
         $mail->Host = $_ENV['EMAIL_HOST'];
         $mail->SMTPAuth = true;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; 
         $mail->Port = $_ENV['EMAIL_PORT'];
         $mail->Username = $_ENV['EMAIL_USER'];
         $mail->Password = $_ENV['EMAIL_PASS'];
 
-        $mail->setFrom('cuentas@sanigest.com', 'SaniGest');
+        $mail->setFrom('sanigesthuaro@gmail.com');
         $mail->addAddress($this->email, $this->nombre . ' ' . $this->apellido);
         $mail->Subject = 'Solicitud Observada - SaniGest';
 

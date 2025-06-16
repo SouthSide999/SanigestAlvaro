@@ -25,5 +25,10 @@ class DashboardTecnicoController
 
         ]);
     }
-
+    public static function ayuda(Router $router)
+    {
+        $router->render('tecnico/dashboard/ayuda', [
+            'titulo' => 'Necesitas Ayuda'
+        ]);
+    }
 }

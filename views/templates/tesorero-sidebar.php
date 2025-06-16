@@ -19,6 +19,12 @@
                 Solicitudes
             </span>
         </a>
+        <a href="/tesorero/ayuda" class="dashboardTesorero__enlace <?php echo pagina_actual('/ayuda') ? 'dashboardTesorero__enlace--actual' : ''; ?>">
+            <i class="fa-solid fa-circle-question"></i>
+            <span class="dashboardTesorero__menu-texto">
+                Ayuda
+            </span>
+        </a>
 
     </nav>
 </aside>

@@ -10,6 +10,11 @@
                 <i class="dashboardlecturador__navegacion-icono fa-solid fa-file-lines"></i>
                 <h4 class="dashboardlecturador__navegacion-etiqueta">Solicitudes</h4>
             </a>
+            <a class="dashboardlecturador__navegacion-enlace" href="/lecturador/ayuda">
+                <i class="dashboardlecturador__navegacion-icono fa-solid fa-circle-question"></i>
+                <h4 class="dashboardlecturador__navegacion-etiqueta">Ayuda</h4>
+            </a>
+
         </div>
     </div>
 

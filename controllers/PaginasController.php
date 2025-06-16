@@ -139,4 +139,11 @@ class PaginasController
             'titulo' => 'Página no encontrada'
         ]);
     }
+
+    public static function ayuda(Router $router)
+    {
+        $router->render('paginas/ayuda', [
+            'titulo' => 'Necesitas Ayuda'
+        ]);
+    }
 }

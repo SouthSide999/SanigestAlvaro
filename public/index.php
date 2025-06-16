@@ -66,6 +66,8 @@ $router->get('/auth/confirmar-cuenta', [AuthController::class, 'confirmar']);
 // Area de administración
 $router->get('/admin/dashboard', [DashboardController::class, 'index']);
 
+$router->get('/admin/ayuda', [DashboardController::class, 'ayuda']);
+
 $router->get('/admin/ponentes', [PonentesController::class, 'index']);
 $router->get('/admin/ponentes/buscar', [PonentesController::class, 'buscar']);
 $router->post('/admin/ponentes/buscar', [PonentesController::class, 'buscar']);
@@ -232,6 +234,8 @@ $router->get('/noticias', [PaginasController::class, 'noticias']);
 $router->get('/paquetes', [PaginasController::class, 'paquetes']);
 $router->get('/workshops-conferencias', [PaginasController::class, 'conferencias']);
 $router->get('/masinformacion', [PaginasController::class, 'masinformacion']);
+$router->get('/necesitas-ayuda', [PaginasController::class, 'ayuda']);
+
 
 //servicios en linea
 $router->get('/serviciosenlinea', [ServiciosEnLineaController::class, 'serviciosenlinea']);
@@ -304,6 +308,8 @@ $router->get('/user/historial', [HistorialController::class, 'historial']);
 
 //*area tecnico
 $router->get('/tecnico/dashboard', [DashboardTecnicoController::class, 'index']);
+$router->get('/tecnico/ayuda', [DashboardTecnicoController::class, 'ayuda']);
+
 //nuevas conexiones
 $router->get('/tecnico/nuevasconexiones/index', [NuevasConexionesTecnicoController::class, 'index']);
 $router->get('/tecnico/nuevasconexiones', [NuevasConexionesTecnicoController::class, 'trabajos']);
@@ -324,6 +330,8 @@ $router->post('/tecnico/solicitudes/finalizar', [SolicitudController::class, 'fi
 
 //*area tesorero 
 $router->get('/tesorero/dashboard', [DashboardTesoreroController::class, 'index']);
+$router->get('/tesorero/ayuda', [DashboardTesoreroController::class, 'ayuda']);
+
 
 //agua-potable
 $router->get('/tesorero/agua', [AguaPotableTesoreroController::class, 'index']);
@@ -381,6 +389,8 @@ $router->post('/tesorero/pagos/realizar', [PagoController::class, 'realizarPago'
 
 //*lecturador
 $router->get('/lecturador/dashboard', [DashboardLecturadorController::class, 'index']);
+$router->get('/lecturador/ayuda', [DashboardLecturadorController::class, 'ayuda']);
+
 
 //consumos lecturador
 $router->get('/lecturador/lectura', [FacturacionLecturadorController::class, 'indexLectura']);

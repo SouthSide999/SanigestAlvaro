@@ -26,4 +26,11 @@ class DashboardLecturadorController
 
         ]);
     }
+
+    public static function ayuda(Router $router)
+    {
+        $router->render('lecturador/dashboard/ayuda', [
+            'titulo' => 'Necesitas Ayuda'
+        ]);
+    }
 }

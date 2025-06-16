@@ -10,6 +10,12 @@
                 <i class="dashboardtecnico__navegacion-icono fa-solid fa-file-lines"></i>
                 <h4 class="dashboardtecnico__navegacion-etiqueta">Solicitudes</h4>
             </a>
+
+            <a class="dashboardtecnico__navegacion-enlace" href="/tecnico/ayuda">
+                <i class="dashboardtecnico__navegacion-icono fa-solid fa-circle-question"></i>
+                <h4 class="dashboardtecnico__navegacion-etiqueta">Ayuda</h4>
+            </a>
+
         </div>
     </div>
 

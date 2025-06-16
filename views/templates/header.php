@@ -53,9 +53,10 @@
         <nav class="navegacion">
             <a href="/nosotros" class="navegacion__enlace <?php echo pagina_actual('/nosotros') ? 'navegacion__enlace--actual' : '' ?>">Sobre Nosotros</a>
             <a href="/quehacemos" class="navegacion__enlace <?php echo pagina_actual('/quehacemos') ? 'navegacion__enlace--actual' : '' ?>">Que Hacemos</a>
-            <a href="/noticias" class="navegacion__enlace <?php echo pagina_actual('/noticias') ? 'navegacion__enlace--actual' : '' ?>">Noticias y Avisos</a>
+            <a href="/noticias" class="navegacion__enlace <?php echo pagina_actual('/noticias') ? 'navegacion__enlace--actual' : '' ?>">Noticias</a>
             <a href="/serviciosenlinea" class="navegacion__enlace <?php echo pagina_actual('/serviciosenlinea') ? 'navegacion__enlace--actual' : '' ?>">Servicios en Linea</a>
             <a href="/contacto/crear" class="navegacion__enlace <?php echo pagina_actual('/contacto') ? 'navegacion__enlace--actual' : '' ?>">Contacto</a>
+            <a href="/necesitas-ayuda" class="navegacion__enlace <?php echo pagina_actual('/ayuda') ? 'navegacion__enlace--actual' : '' ?>">Ayuda</a>
             <a href="/loginUser" class="navegacion__enlace <?php echo pagina_actual('/loginUser') ? 'navegacion__enlace--actual' : '' ?>">Iniciar Sesión</a>
 
 

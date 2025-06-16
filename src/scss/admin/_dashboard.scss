@@ -46,6 +46,7 @@
     }
 
     &__sidebar {
+        flex: 1;
         background-color: lighten(v.$gris-oscuro, 10);
         width: 12rem;
     }

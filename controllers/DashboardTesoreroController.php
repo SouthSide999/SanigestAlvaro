@@ -48,4 +48,11 @@ class DashboardTesoreroController
             'predios_endeudados' => $predios_endeudados
         ]);
     }
+
+        public static function ayuda(Router $router)
+    {
+        $router->render('tesorero/dashboard/ayuda', [
+            'titulo' => 'Necesitas Ayuda'
+        ]);
+    }
 }
