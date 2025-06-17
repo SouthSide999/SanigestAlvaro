@@ -23,7 +23,7 @@ class NuevaConexionController
         }
 
 
-        $por_pagina = 10;
+        $por_pagina = 30;
         $total = NuevaConexion::total();
         $paginacion = new Paginacion($pagina_actual, $por_pagina, $total);
         $nuevaconexion = NuevaConexion::paginar($por_pagina, $paginacion->offset());

@@ -35,7 +35,7 @@ class PagoController
             exit;
         }
 
-        $por_pagina = 30;
+        $por_pagina = 50;
         $predios_con_consumo = [];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -53,6 +53,7 @@ class PagoController
                         $predio->contribuyente = Contribuyente::find($predio->contribuyente_id);
                         $predio->zona = Zona::find($predio->zona_id);
                         $predio->sector = Sector::find($predio->sector_id);
+                        $predio->deudas = Consumo::totalArray(['predio_id' => $predio->id, 'estado_id' => '1']);
                         $predios_con_consumo[] = $predio;
                     }
                 }
@@ -66,6 +67,7 @@ class PagoController
                     $predio->contribuyente = Contribuyente::find($predio->contribuyente_id);
                     $predio->zona = Zona::find($predio->zona_id);
                     $predio->sector = Sector::find($predio->sector_id);
+                    $predio->deudas = Consumo::totalArray(['predio_id' => $predio->id, 'estado_id' => '1']);
                     $predios_con_consumo[] = $predio;
                 }
             }
@@ -191,7 +193,7 @@ class PagoController
                 if (empty($alertas)) {
                     $consumo->guardar();
                     $resultado = $pago->guardar();
-                    $id=$resultado['id'];
+                    $id = $resultado['id'];
                     if ($resultado) {
                         $recibo = new Recibo;
                         $recibo->pago_id = $id;
@@ -208,7 +210,7 @@ class PagoController
 
                         // Generar PDF
                         $nombreArchivo = \Classes\PDF::generarComprobante($pago, $consumo, $contribuyente, $predio, $usuario);
-                        $rutaPublica = "/documents/$nombreArchivo";
+                        $rutaPublica = "/comprobantePago/$nombreArchivo";
 
                         // Redirigir y abrir PDF
                         echo "

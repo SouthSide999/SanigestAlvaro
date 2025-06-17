@@ -50,7 +50,7 @@ class ContactoController
         if (!$pagina_actual || $pagina_actual < 1) {
             header('Location: /admin/contacto?page=1');
         }
-        $por_pagina = 5;
+        $por_pagina = 20;
         $total = Contacto::total();
         $paginacion = new Paginacion($pagina_actual, $por_pagina, $total);
         $contacto = Contacto::paginar($por_pagina, $paginacion->offset());

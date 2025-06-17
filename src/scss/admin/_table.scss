@@ -47,6 +47,9 @@
         white-space: nowrap;
 
         &:hover {
+            background-color: lighten(v.$azul, 40%);
+            box-shadow: inset 4px 0 0 0 v.$azul;
+            cursor: pointer;
             background-color: lighten(v.$blanco, 30%);
         }
 
@@ -130,6 +133,30 @@
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
                 outline: none;
             }
+        }
+
+        @keyframes parpadeo-alerta {
+
+            0%,
+            100% {
+                background-color: v.$rojo-alerta;
+                ;
+                box-shadow: 0 0 5px v.$rojo-alerta;
+            }
+
+            50% {
+                background-color: darken(v.$rojo-alerta, 10%);
+                box-shadow: 0 0 20px v.$rojo-alerta;
+            }
+        }
+
+        &--moroso {
+            color: v.$blanco;
+            background-color: v.$rojo-alerta;
+            border: 2px solid v.$rojo-alerta;
+            font-weight: bold;
+            animation: parpadeo-alerta 1s infinite;
+            text-transform: uppercase;
         }
 
         &:hover {
@@ -243,5 +270,29 @@
         &__td--acciones {
             gap: 2.5rem;
         }
+    }
+
+    &--scroll {
+        max-height: calc(7rem * 5 + 1rem); // 42px ≈ alto de una fila; puedes ajustar
+        overflow-y: auto;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+
+        scrollbar-width: thin;
+        scrollbar-color: #ccc transparent;
+
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #ccc;
+            border-radius: 4px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
     }
 }

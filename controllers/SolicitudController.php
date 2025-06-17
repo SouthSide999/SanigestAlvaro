@@ -33,7 +33,7 @@ class SolicitudController
             exit;
         }
 
-        $por_pagina = 10;
+        $por_pagina = 30;
         $total = Solicitud::total();
         $paginacion = new Paginacion($pagina_actual, $por_pagina, $total);
         $solicitudes = Solicitud::paginar($por_pagina, $paginacion->offset());

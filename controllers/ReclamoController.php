@@ -195,7 +195,7 @@ class ReclamoController
             header('Location: /admin/reclamos?page=1');
         }
 
-        $por_pagina = 5;
+        $por_pagina = 30;
         $total = Reclamo::total();
         $paginacion = new Paginacion($pagina_actual, $por_pagina, $total);
         $reclamos = Reclamo::paginar($por_pagina, $paginacion->offset());

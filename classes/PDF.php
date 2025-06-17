@@ -23,7 +23,7 @@ class PDF
 
         // Definir ruta y nombre del archivo en el servidor
         $filename = "comprobante_{$pago->numero_comprobante}.pdf";
-        $ruta = __DIR__ . "/../public/documents/" . $filename;
+        $ruta = __DIR__ . "/../public/comprobantePago/" . $filename;
 
         // Guardar el archivo
         file_put_contents($ruta, $pdfContent);

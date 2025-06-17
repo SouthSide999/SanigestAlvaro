@@ -29,7 +29,7 @@ class PersonalController
             header('Location: /admin/personal?page=1');
         }
 
-        $por_pagina = 5;
+        $por_pagina = 10;
         $total = Usuario::total();
         $paginacion = new Paginacion($pagina_actual, $por_pagina, $total);
         $personal = Usuario::paginar($por_pagina, $paginacion->offset());

@@ -30,7 +30,7 @@ class ClienteController
             return;
         }
 
-        $por_pagina = 5;
+        $por_pagina = 20;
         $total = Cliente::total(); // Debes tener este método en tu modelo Cliente
         $paginacion = new Paginacion($pagina_actual, $por_pagina, $total);
 

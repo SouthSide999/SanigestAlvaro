@@ -22,12 +22,7 @@
                         <label for="login__password" class="login__label">Password</label>
                         <input id="login__password" name="password" type="password" class="login__input" data-type="password">
                     </div>
-                    <div class="login__group">
-                        <input id="login__keep-signed" type="checkbox" class="login__check" checked>
-                        <label for="login__keep-signed" class="login__label login__label--checkbox">
-                            <span class="login__icon"></span> Mantener sesión iniciada
-                        </label>
-                    </div>
+    
                     <div class="login__group">
                         <input type="submit" class="login__button" value="Ingresar">
                     </div>

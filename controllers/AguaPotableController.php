@@ -109,7 +109,7 @@ class AguaPotableController
                 header('Location: /admin/contribuyentes?page=1');
             }
 
-            $por_pagina = 20;
+            $por_pagina = 50;
             $total = Contribuyente::total();
             $paginacion = new Paginacion($pagina_actual, $por_pagina, $total);
             $contribuyentes = Contribuyente::paginar($por_pagina, $paginacion->offset());
@@ -238,7 +238,7 @@ class AguaPotableController
                 header('Location: /admin/zonas?page=1');
             }
 
-            $por_pagina = 10;
+            $por_pagina = 20;
             $total = Zona::total();
             $paginacion = new Paginacion($pagina_actual, $por_pagina, $total);
             $zonas = Zona::paginar($por_pagina, $paginacion->offset());
@@ -406,7 +406,7 @@ class AguaPotableController
                 header('Location: /admin/sectores?page=1');
             }
 
-            $por_pagina = 10;
+            $por_pagina = 20;
             $total = Sector::total();
             $paginacion = new Paginacion($pagina_actual, $por_pagina, $total);
             $sectores = Sector::paginar($por_pagina, $paginacion->offset());
@@ -573,7 +573,7 @@ class AguaPotableController
                 header('Location: /admin/predios?page=1');
             }
 
-            $por_pagina = 20;
+            $por_pagina = 50;
             $total = Predio::total();
             $paginacion = new Paginacion($pagina_actual, $por_pagina, $total);
             $predios = Predio::paginar($por_pagina, $paginacion->offset());
@@ -786,7 +786,7 @@ class AguaPotableController
                 header('Location: /admin/tarifas?page=1');
             }
 
-            $por_pagina = 20;
+            $por_pagina = 10;
             $total = Tarifa::total();
             $paginacion = new Paginacion($pagina_actual, $por_pagina, $total);
             $tarifas = Tarifa::paginar($por_pagina, $paginacion->offset());
@@ -938,7 +938,7 @@ class AguaPotableController
                 header('Location: /admin/medidores?page=1');
             }
 
-            $por_pagina = 20;
+            $por_pagina = 50;
             $total = Medidor::total();
             $paginacion = new Paginacion($pagina_actual, $por_pagina, $total);
             $medidores = Medidor::paginar($por_pagina, $paginacion->offset());
@@ -1108,7 +1108,7 @@ class AguaPotableController
                 header('Location: /admin/conexiones?page=1');
             }
 
-            $por_pagina = 20;
+            $por_pagina = 50;
             $total = Conexion::total();
             $paginacion = new Paginacion($pagina_actual, $por_pagina, $total);
             $conexiones = Conexion::paginar($por_pagina, $paginacion->offset());
@@ -1285,7 +1285,7 @@ class AguaPotableController
                 exit;
             }
 
-            $por_pagina = 20;
+            $por_pagina = 50;
             $total = Predio::total();
             $paginacion_obj = new Paginacion($pagina_actual, $por_pagina, $total);
             $registros = Predio::paginar($por_pagina, $paginacion_obj->offset());

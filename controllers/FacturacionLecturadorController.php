@@ -30,7 +30,7 @@ class FacturacionLecturadorController
         }
 
         $consumos = [];
-        $por_pagina = 30;
+        $por_pagina = 50;
         $paginacion = null; // Inicializamos por defecto
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

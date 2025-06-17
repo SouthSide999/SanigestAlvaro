@@ -26,7 +26,7 @@ class EventosController
             header('Location: /admin/eventos?page=1');
         }
 
-        $por_pagina = 10;
+        $por_pagina = 50;
         $total = Evento::total();
         $paginacion = new Paginacion($pagina_actual, $por_pagina, $total);
         $eventos = Evento::paginar($por_pagina, $paginacion->offset());

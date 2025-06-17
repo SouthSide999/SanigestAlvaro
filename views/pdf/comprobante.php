@@ -65,6 +65,7 @@ if (!isset($usuario)) {
 <body>
     <div class="header">
         <h1>Municipalidad Distrital de Huaro</h1>
+        <h2>Sanigest</h2>
         <h2>Comprobante de Pago</h2>
         <p><strong>N°:</strong> <?= $pago->numero_comprobante ?></p>
     </div>

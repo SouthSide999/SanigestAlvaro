@@ -50,6 +50,7 @@
             radial-gradient(at 0% 0%, hsla(209, 100%, 47%, 1) 0px, transparent 50%);
     }
 
+
     &--virtual {
         background-color: v.$secundario;
     }
@@ -57,27 +58,108 @@
     &--gratis {
         background-color: v.$azul;
     }
+
+    // ANIMACIONES POR ESTADO
+    @keyframes parpadeo-pendiente {
+
+        0%,
+        100% {
+            background-color: #ffd500;
+            box-shadow: 0 0 5px #ffd500;
+        }
+
+        50% {
+            background-color: darken(#ffd500, 10%);
+            box-shadow: 0 0 20px #ffd500;
+        }
+    }
+
+    @keyframes parpadeo-aprobado {
+
+        0%,
+        100% {
+            background-color: #8e24aa;
+            box-shadow: 0 0 5px #8e24aa;
+        }
+
+        50% {
+            background-color: darken(#8e24aa, 10%);
+            box-shadow: 0 0 20px #8e24aa;
+        }
+    }
+
+    @keyframes parpadeo-rechazado {
+
+        0%,
+        100% {
+            background-color: #d50000;
+            box-shadow: 0 0 5px #d50000;
+        }
+
+        50% {
+            background-color: darken(#d50000, 10%);
+            box-shadow: 0 0 20px #d50000;
+        }
+    }
+
+    @keyframes parpadeo-proceso {
+
+        0%,
+        100% {
+            background-color: #2979ff;
+            box-shadow: 0 0 5px #2979ff;
+        }
+
+        50% {
+            background-color: darken(#2979ff, 10%);
+            box-shadow: 0 0 20px #2979ff;
+        }
+    }
+
+    @keyframes parpadeo-realizado {
+
+        0%,
+        100% {
+            background-color: #00c853;
+            box-shadow: 0 0 5px #00c853;
+        }
+
+        50% {
+            background-color: darken(#00c853, 10%);
+            box-shadow: 0 0 20px #00c853;
+        }
+    }
+
+    // ESTILOS POR ESTADO
     &--pendiente {
-        background-color: hsla(39, 100%, 50%, 1); // Amarillo intenso
+        background-color: #ffd500;
+        color: #000;
+        animation: parpadeo-pendiente 1s infinite;
     }
-    
+
     &--aprobado {
-        background-color: hsla(120, 100%, 40%, 1); // Verde intenso
+        background-color: #8e24aa;
+        color: #fff;
+        animation: parpadeo-aprobado 1s infinite;
     }
-    
+
     &--rechazado {
-        background-color: hsla(0, 100%, 50%, 1); // Rojo vibrante
+        background-color: #d50000;
+        color: #fff;
+        animation: parpadeo-rechazado 1s infinite;
     }
-    
+
     &--proceso {
-        background-color: hsla(220, 100%, 50%, 1); // Azul fuerte
+        background-color: #2979ff;
+        color: #fff;
+        animation: parpadeo-proceso 1s infinite;
     }
-    
+
     &--realizado {
-        background-color: hsla(260, 100%, 50%, 1); // Púrpura brillante
+        background-color: #00c853;
+        color: #fff;
+        animation: parpadeo-realizado 1s infinite;
     }
-    
-    
 
 
 
@@ -91,6 +173,7 @@
         text-transform: uppercase;
         margin: 3rem 0 0 0;
     }
+
     &__observacion {
         font-size: 1.5rem;
         text-transform: uppercase;
@@ -158,7 +241,7 @@
             @include m.tablet {
 
                 rotate: 90deg;
-                transform-origin: 0 0;//resetear posicion absoluta
+                transform-origin: 0 0; //resetear posicion absoluta
                 width: 30rem;
                 top: 0;
                 left: calc(100% - 5rem);

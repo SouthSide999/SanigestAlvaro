@@ -65,7 +65,7 @@ class AguaPotableTesoreroController
                 exit;
             }
 
-            $por_pagina = 20;
+            $por_pagina = 50;
             $total = Contribuyente::total();
             $paginacion = new Paginacion($pagina_actual, $por_pagina, $total);
             $contribuyentes = Contribuyente::paginar($por_pagina, $paginacion->offset());
@@ -243,7 +243,7 @@ class AguaPotableTesoreroController
                 header('Location: /admin/predios?page=1');
             }
 
-            $por_pagina = 20;
+            $por_pagina = 50;
             $total = Predio::total();
             $paginacion = new Paginacion($pagina_actual, $por_pagina, $total);
             $predios = Predio::paginar($por_pagina, $paginacion->offset());
@@ -452,7 +452,7 @@ class AguaPotableTesoreroController
                 exit;
             }
 
-            $por_pagina = 20;
+            $por_pagina = 50;
             $total = Predio::total();
             $paginacion_obj = new Paginacion($pagina_actual, $por_pagina, $total);
             $registros = Predio::paginar($por_pagina, $paginacion_obj->offset());

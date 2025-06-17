@@ -21,7 +21,7 @@ class NoticiasController
         if (!$pagina_actual || $pagina_actual < 1) {
             header('Location: /admin/noticias?page=1');
         }
-        $por_pagina = 3;
+        $por_pagina = 20;
         $total = Noticia::total();
         $paginacion = new Paginacion($pagina_actual, $por_pagina, $total);
         $noticias = Noticia::paginar($por_pagina, $paginacion->offset());

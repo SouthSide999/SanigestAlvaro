@@ -64,11 +64,18 @@
                         <td class="table__td">
                             Zona ID: <?php echo $predio->zona_id; ?> /
                             Sector ID: <?php echo $predio->sector_id; ?>
+                            Numero De Deudas: <?php echo $predio->deudas; ?>
                         </td>
                         <td class="table__td--acciones">
                             <a class="table__accion table__accion--editar" href="/tesorero/pagos/detalle?predio_id=<?php echo $predio->id; ?>">
                                 <i class="fa-solid fa-eye"></i> Ver Pagos/Deudas
                             </a>
+                            <?php if ($predio->deudas >= 3): ?>
+                                <a class="table__accion table__accion--moroso"
+                                    <span class="badge-alerta">Moroso</span>
+                                </a>
+                            <?php endif; ?>
+
                         </td>
                     </tr>
                 <?php } ?>
