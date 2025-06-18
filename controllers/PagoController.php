@@ -214,18 +214,17 @@ class PagoController
 
                         // Redirigir y abrir PDF
                         echo "
-                <!DOCTYPE html>
-                <html lang='es'>
-                <head><meta charset='UTF-8'><title>Generando Comprobante...</title></head>
-                <body>
-                    <p>Generando comprobante de pago...</p>
-                    <script>
-                        window.open('$rutaPublica', '_blank');
-                        window.location.href = '/tesorero/pagos/detalle?predio_id={$consumo->predio_id}';
-                    </script>
-                </body>
-                </html>
-                ";
+                        <!DOCTYPE html>
+                        <html lang='es'>
+                        <head><meta charset='UTF-8'><title>Generando Comprobante...</title></head>
+                        <body>
+                            <p>Haga clic en el botón para ver el comprobante:</p>
+                            <form action='/tesorero/pagos/detalle?predio_id={$consumo->predio_id}' method='get' onsubmit=\"window.open('$rutaPublica', '_blank');\">
+                                <button type='submit'>Ver Comprobante</button>
+                            </form>
+                        </body>
+                        </html>
+                        ";
                         exit;
                     }
                 }
