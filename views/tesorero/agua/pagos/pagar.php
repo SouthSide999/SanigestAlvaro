@@ -24,19 +24,6 @@
 </div>
 
 
-<?php if (isset($_GET['pagado'])) : ?>
-    <script>
-        Swal.fire({
-            title: "¡Pago realizado!",
-            text: "El pago se ha registrado correctamente.",
-            icon: "success",
-            timer: 3000,
-            confirmButtonText: "OK"
-        }).then(() => {
-            window.location.href = "/tesorero/agua/consumos"; // Redirigir a la lista de consumos
-        });
-    </script>
-<?php endif; ?>
 
 <?php if (isset($alertas['error']) && !empty($alertas['error'])): ?>
     <script>

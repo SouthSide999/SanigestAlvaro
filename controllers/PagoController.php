@@ -207,62 +207,33 @@ class PagoController
                         $predio = Predio::find($consumo->predio_id);
                         $contribuyente = $predio ? Contribuyente::find($predio->contribuyente_id) : null;
                         $usuario = Usuario::find($pago->usuario_id);
+                        
+                        // crear carpeta de imagenes
+                        $carperta_imagenes = '../public/comprobantePago';
+                        if (!is_dir($carperta_imagenes)) {
+                            mkdir($carperta_imagenes, 0755, true);
+                        }
 
                         // Generar PDF
                         $nombreArchivo = \Classes\PDF::generarComprobante($pago, $consumo, $contribuyente, $predio, $usuario);
                         $rutaPublica = "/comprobantePago/$nombreArchivo";
 
+
                         // Redirigir y abrir PDF
                         echo "
                         <!DOCTYPE html>
                         <html lang='es'>
-                        <head>
-                            <meta charset='UTF-8'> 
-                            <title>Generando Comprobante...</title>
-                            <style>
-                                body {
-                                    font-family: Arial, sans-serif;
-                                    text-align: center;
-                                    margin-top: 50px;
-                                }
-                                .mensaje {
-                                    font-size: 18px;
-                                }
-                                .reloj {
-                                    font-weight: bold;
-                                    font-size: 24px;
-                                    margin-top: 10px;
-                                    color: #007BFF;
-                                }
-                            </style>
-                        </head>
+                        <head><meta charset='UTF-8'><title>Generando Comprobante...</title></head>
                         <body>
-                            <p class='mensaje'>El comprobante se abrirá en una nueva pestaña.<br>
-                            Redirigiendo al detalle de pagos en <span class='reloj' id='contador'>3</span> segundos...</p>
-
+                            <p>Generando comprobante de pago...</p>
                             <script>
-                                // Abrir la nueva pestaña
                                 window.open('$rutaPublica', '_blank');
-
-                                // Contador regresivo
-                                let segundos = 3;
-                                const contador = document.getElementById('contador');
-
-                                const intervalo = setInterval(function() {
-                                    segundos--;
-                                    contador.textContent = segundos;
-                                    if (segundos <= 0) {
-                                        clearInterval(intervalo);
-                                        window.location.href = '/tesorero/pagos/detalle?predio_id={$consumo->predio_id}';
-                                    }
-                                }, 1000);
+                                window.location.href = '/tesorero/pagos/detalle?predio_id={$consumo->predio_id}';
                             </script>
                         </body>
                         </html>
                         ";
                         exit;
-
-
                     }
                 }
             }
