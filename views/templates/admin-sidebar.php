@@ -97,4 +97,7 @@
             </span>
         </a>
     </nav>
+    <div class="dashboard__footer">
+        © 2025 Sanigest
+    </div>
 </aside>
