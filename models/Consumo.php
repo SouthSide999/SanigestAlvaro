@@ -1,7 +1,9 @@
-<?php  
+<?php
+
 namespace Model;
 
-class Consumo extends ActiveRecord {
+class Consumo extends ActiveRecord
+{
     protected static $tabla = 'consumos';
     protected static $columnasDB = [
         'id',
@@ -11,6 +13,8 @@ class Consumo extends ActiveRecord {
         'fecha_fin',
         'anio',
         'consumo_m3',
+        'monto_agua',
+        'monto_desague',
         'monto_total',
         'created_at',
         'estado_id'
@@ -23,11 +27,14 @@ class Consumo extends ActiveRecord {
     public $fecha_fin;
     public $anio;
     public $consumo_m3;
+    public $monto_agua;
+    public $monto_desague;
     public $monto_total;
     public $created_at;
     public $estado_id;
 
-    public function __construct($args = []) {
+    public function __construct($args = [])
+    {
         $this->id = $args['id'] ?? null;
         $this->predio_id = $args['predio_id'] ?? null;
         $this->mes = $args['mes'] ?? null;
@@ -35,13 +42,16 @@ class Consumo extends ActiveRecord {
         $this->fecha_fin = $args['fecha_fin'] ?? null;
         $this->anio = $args['anio'] ?? null;
         $this->consumo_m3 = $args['consumo_m3'] ?? null;
+        $this->monto_agua = $args['monto_agua'] ?? null;
+        $this->monto_desague = $args['monto_desague'] ?? null;
         $this->monto_total = $args['monto_total'] ?? null;
         $this->created_at = $args['created_at'] ?? date('Y-m-d H:i:s');
         $this->estado_id = $args['estado_id'] ?? '1'; // Por defecto estado 1
     }
 
     // Método para validar los datos del consumo
-    public function validar() {
+    public function validar()
+    {
         $alertas = [];
 
         if (!$this->predio_id) {
@@ -64,11 +74,19 @@ class Consumo extends ActiveRecord {
             $alertas['error'][] = 'La fecha de fin es obligatoria';
         }
 
-        if (!$this->consumo_m3 || $this->consumo_m3 < 0) {
+        if (!is_numeric($this->consumo_m3) || $this->consumo_m3 < 0) {
             $alertas['error'][] = 'Debe ingresar un consumo válido en m³';
         }
 
-        if (!$this->monto_total || $this->monto_total < 0) {
+        if (!is_numeric($this->monto_agua) || $this->monto_agua < 0) {
+            $alertas['error'][] = 'Debe ingresar un monto de agua válido';
+        }
+
+        if (!is_numeric($this->monto_desague) || $this->monto_desague < 0) {
+            $alertas['error'][] = 'Debe ingresar un monto de desagüe válido';
+        }
+
+        if (!is_numeric($this->monto_total) || $this->monto_total < 0) {
             $alertas['error'][] = 'Debe ingresar un monto total válido';
         }
 

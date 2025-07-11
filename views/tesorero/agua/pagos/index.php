@@ -75,6 +75,11 @@
                                     <span class="badge-alerta">Moroso</span>
                                 </a>
                             <?php endif; ?>
+                            <?php if ($predio->deudas >= 4): ?>
+                                <a class="table__accion table__accion--corte"
+                                    <span class="badge-alerta">Corte</span>
+                                </a>
+                            <?php endif; ?>
 
                         </td>
                     </tr>

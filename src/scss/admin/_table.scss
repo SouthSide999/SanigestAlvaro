@@ -150,7 +150,32 @@
             }
         }
 
+        @keyframes parpadeo-naranja {
+
+            0%,
+            100% {
+                background-color: v.$naranja-alerta;
+                box-shadow: 0 0 5px v.$naranja-alerta;
+            }
+
+            50% {
+                background-color: darken(v.$naranja-alerta, 10%);
+                box-shadow: 0 0 20px v.$naranja-alerta;
+            }
+        }
+
+
         &--moroso {
+            color: v.$blanco;
+            background-color: v.$naranja-alerta;
+            border: 2px solid v.$naranja-alerta;
+            font-weight: bold;
+            animation: parpadeo-naranja 1s infinite;
+            text-transform: uppercase;
+        }
+
+
+        &--corte {
             color: v.$blanco;
             background-color: v.$rojo-alerta;
             border: 2px solid v.$rojo-alerta;
@@ -158,6 +183,7 @@
             animation: parpadeo-alerta 1s infinite;
             text-transform: uppercase;
         }
+
 
         &:hover {
             cursor: pointer;

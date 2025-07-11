@@ -2,6 +2,8 @@
 
 namespace Model;
 
+use PDO;
+
 class ActiveRecord
 {
 
@@ -187,7 +189,6 @@ class ActiveRecord
         return $resultado;
     }
 
-
     // Busqueda Where con Columna 
     public static function where($columna, $valor)
     {
@@ -254,6 +255,39 @@ class ActiveRecord
 
         $resultado = self::consultarSQL($query);
         return $resultado;
+    }
+    public static function whereArrayOrderLimit($array = [], $orden = 'id DESC', $limite = 10)
+    {
+        $query = "SELECT * FROM " . static::$tabla . " WHERE ";
+
+        foreach ($array as $key => $value) {
+            if ($key === array_key_last($array)) {
+                $query .= " ${key} = '${value}'";
+            } else {
+                $query .= " ${key} = '${value}' AND ";
+            }
+        }
+
+        $query .= " ORDER BY {$orden} LIMIT {$limite}";
+
+        return self::consultarSQL($query);
+    }
+
+    public static function whereArrayOrder($array = [], $orden = 'id DESC')
+    {
+        $query = "SELECT * FROM " . static::$tabla . " WHERE ";
+
+        foreach ($array as $key => $value) {
+            if ($key === array_key_last($array)) {
+                $query .= " ${key} = '${value}'";
+            } else {
+                $query .= " ${key} = '${value}' AND ";
+            }
+        }
+
+        $query .= " ORDER BY {$orden}";
+
+        return self::consultarSQL($query);
     }
 
 
@@ -406,5 +440,47 @@ class ActiveRecord
         $resultado = self::$db->query($query . $joins . $where);
         $total = $resultado->fetch_array()[0];
         return $total;
+    }
+
+    //funciones especificas
+    //obtener pagos realizados por predio
+    public static function buscarAvanzado($sql, $params = [], $className = null)
+    {
+        $stmt = self::$db->prepare($sql);
+
+        if (!$stmt) {
+            throw new Exception("Error al preparar la consulta: " . self::$db->error);
+        }
+        if (!empty($params)) {
+            $types = str_repeat('s', count($params));
+            $stmt->bind_param($types, ...$params);
+        }
+
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+
+        $clase = $className ?? get_called_class();
+        $objetos = [];
+
+        while ($fila = $resultado->fetch_assoc()) {
+            $objeto = new $clase;
+            foreach ($fila as $key => $value) {
+                $objeto->$key = $value;
+            }
+            $objetos[] = $objeto;
+        }
+
+        return $objetos;
+    }
+
+    public static function obtenerPagosRealizadosPorPredio($predio_id)
+    {
+        $sql = "SELECT p.*, c.mes, c.anio
+            FROM pagos p
+            INNER JOIN consumos c ON p.consumo_id = c.id
+            WHERE c.predio_id = ?
+            ORDER BY c.anio DESC, c.mes DESC";
+
+        return self::buscarAvanzado($sql, [$predio_id]);
     }
 }

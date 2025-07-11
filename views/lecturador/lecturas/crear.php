@@ -37,6 +37,7 @@
         });
     </script>
 <?php endif; ?>
+
 <?php if (isset($alertas['error']) && !empty($alertas['error'])): ?>
     <script>
         Swal.fire({

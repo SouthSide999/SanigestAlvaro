@@ -16,6 +16,8 @@ import './carrosel.js'
 import './slider2.js'
 import './consumos.js'
 import './historial.js'
+import './meses.js'
+
 
 
 

@@ -293,8 +293,11 @@ class AreaConmercialController
                         'fecha_inicio' => $fecha_inicio,
                         'fecha_fin' => $fecha_fin,
                         'anio' => $anio,
-                        'consumo_m3' => 1, // Puedes reemplazar por el cálculo real
-                        'monto_total' => 4  // Puedes reemplazar por el cálculo real
+                        'consumo_m3' => 1,
+                        'monto_agua' => 1,
+                        'monto_desague' => 1,
+                        'monto_total' => 4,
+                        'estado_id' => 1
                     ]);
                     $lectura->guardar();
                 }

@@ -6,6 +6,10 @@
         Volver
     </a>
 </div>
+<a href="/tesorero/pagos/exportar?predio_id=<?php echo $_GET['predio_id']; ?>" class="dashboard__boton">
+    <i class="fa-solid fa-file-excel"></i>
+    Exportar a Excel
+</a>
 
 <!-- PAGOS PENDIENTES -->
 <h3 class="dashboard__subtitulo">Pagos Pendientes</h3>

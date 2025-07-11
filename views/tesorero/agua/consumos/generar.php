@@ -6,6 +6,13 @@ $anioActual = date('Y');
 
 <h2>Generar Consumos Múltiples</h2>
 
+<div class="dashboard__contenedor-boton">
+    <a class="dashboard__boton" href="/tesorero/consumos">
+        <i class="fa-solid fa-circle-arrow-left"></i>
+        Volver
+    </a>
+</div>
+
 <form class="dashboard__formulario" action="/tesorero/consumos/generar" method="POST">
     <?php
     include_once __DIR__ . '/../../../templates/alertas.php';

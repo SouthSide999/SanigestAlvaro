@@ -13,6 +13,10 @@ use Model\Consumo;
 use Model\Usuario;
 use Classes\Paginacion;
 use Model\Contribuyente;
+use Model\Tarifa;
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class PagoController
 {
@@ -106,7 +110,8 @@ class PagoController
         }
 
         // Pagos pendientes: consumos con estado_id = 1 (registrado)
-        $consumos = Consumo::buscarestricto('predio_id', $predio_id);
+        // $consumos = Consumo::buscarestricto('predio_id', $predio_id);
+        $consumos = Consumo::whereArrayOrder(['predio_id' => $predio_id], 'anio DESC, mes DESC');
         $consumos_pendientes = array_filter($consumos, function ($c) {
             return $c->estado_id == 1;
         });
@@ -154,6 +159,8 @@ class PagoController
             header('Location: /tesorero/pagos');
             exit;
         }
+        $predio = Predio::find($consumo->predio_id);
+        $tarifa = Tarifa::find($predio->tarifa_id);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -207,15 +214,20 @@ class PagoController
                         $predio = Predio::find($consumo->predio_id);
                         $contribuyente = $predio ? Contribuyente::find($predio->contribuyente_id) : null;
                         $usuario = Usuario::find($pago->usuario_id);
-                        
-                        // crear carpeta de imagenes
+
+                        $consumos_anteriores = Consumo::whereArrayOrderLimit(['predio_id' => $consumo->predio_id], 'mes DESC', 5);
+
+
+                        $tarifa = Tarifa::find($predio->tarifa_id);
+
+                        // crear carpeta
                         $carperta_imagenes = '../public/comprobantePago';
                         if (!is_dir($carperta_imagenes)) {
                             mkdir($carperta_imagenes, 0755, true);
                         }
 
                         // Generar PDF
-                        $nombreArchivo = \Classes\PDF::generarComprobante($pago, $consumo, $contribuyente, $predio, $usuario);
+                        $nombreArchivo = \Classes\PDF::generarComprobante($pago, $consumo, $contribuyente, $predio, $usuario, $tarifa, $consumos_anteriores);
                         $rutaPublica = "/comprobantePago/$nombreArchivo";
 
 
@@ -243,7 +255,91 @@ class PagoController
         $router->render('tesorero/agua/pagos/pagar', [
             'titulo' => 'Detalle de Deuda',
             'pago' => $consumo,
-            'alertas' => $alertas
+            'alertas' => $alertas,
+            'tarifa' => $tarifa
         ]);
+    }
+
+    public static function exportarExcel()
+    {
+        if (!is_auth()) {
+            header('Location: /auth/login');
+            exit;
+        }
+        if (!is_tesorero()) {
+            header('Location: /auth/login');
+            exit;
+        }
+        if (!isset($_GET['predio_id'])) {
+            header('Location: /tesorero/pagos');
+            exit;
+        }
+
+        $predio_id = $_GET['predio_id'];
+        $predio = Predio::find($predio_id);
+
+
+        // Obtener datos
+        $consumos = Consumo::whereArrayOrder([
+            'predio_id' => $predio_id,
+            'estado_id' => 1
+        ], 'anio DESC, mes DESC');
+
+        //segunda forma
+        
+        // $pagos = Pago::all(); 
+        // $pagos_realizados = [];
+
+        // foreach ($pagos as $pago) {
+        //     $consumo = Consumo::find($pago->consumo_id);
+        //     if ($consumo && $consumo->predio_id == $predio_id) {
+        //         $pago->mes = $consumo->mes;
+        //         $pago->anio = $consumo->anio;
+        //         $pagos_realizados[] = $pago;
+        //     }
+        // }
+
+        $pagos_realizados = Pago::obtenerPagosRealizadosPorPredio($predio_id);
+
+        // Exportar Excel
+        $spreadsheet = new Spreadsheet();
+
+        //Pagos Pendientes 
+        $hojaPendientes = $spreadsheet->getActiveSheet();
+        $hojaPendientes->setTitle("Pagos Pendientes");
+        $hojaPendientes->fromArray(['Mes', 'Año', 'Periodo', 'Consumo (m³)', 'Monto Total (S/)'], null, 'A1');
+
+        $fila = 2;
+        foreach ($consumos as $c) {
+            $hojaPendientes->setCellValue("A$fila", nombreMes($c->mes));
+            $hojaPendientes->setCellValue("B$fila", $c->anio);
+            $hojaPendientes->setCellValue("C$fila", $c->fecha_inicio . ' al ' . $c->fecha_fin);
+            $hojaPendientes->setCellValue("D$fila", $c->consumo_m3);
+            $hojaPendientes->setCellValue("E$fila", $c->monto_total);
+            $fila++;
+        }
+
+        //Pagos Realizados 
+        $hojaRealizados = $spreadsheet->createSheet();
+        $hojaRealizados->setTitle("Pagos Realizados");
+        $hojaRealizados->fromArray(['Mes', 'Año', 'Fecha de Pago', 'Monto Pagado (S/)'], null, 'A1');
+
+        $fila = 2;
+        foreach ($pagos_realizados as $p) {
+            $hojaRealizados->setCellValue("A$fila", nombreMes($p->mes));
+            $hojaRealizados->setCellValue("B$fila", $p->anio);
+            $hojaRealizados->setCellValue("C$fila", $p->fecha_pago);
+            $hojaRealizados->setCellValue("D$fila", $p->monto_pagado);
+            $fila++;
+        }
+
+        $filename = 'Pagos_Predio_Codigo: ' . $predio->codigo_predio . '.xlsx';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+        header('Cache-Control: max-age=0');
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('php://output');
+        exit;
     }
 }

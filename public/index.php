@@ -384,6 +384,9 @@ $router->post('/tesorero/pagos', [PagoController::class, 'index']);
 $router->get('/tesorero/pagos/detalle', [PagoController::class, 'detallePagos']); 
 $router->post('/tesorero/pagos/detalle', [PagoController::class, 'detallePagos']);
 
+$router->get('/tesorero/pagos/exportar', [PagoController::class, 'exportarExcel']);
+
+
 $router->get('/tesorero/pagos/realizar', [PagoController::class, 'realizarPago']); 
 $router->post('/tesorero/pagos/realizar', [PagoController::class, 'realizarPago']); 
 

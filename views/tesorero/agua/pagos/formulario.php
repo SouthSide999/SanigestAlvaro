@@ -10,8 +10,6 @@
             name="mes"
             value="<?php echo nombreMes($pago->mes); ?>"
             readonly>
-
-
     </div>
 
     <div class="formulario__campo">
@@ -45,6 +43,17 @@
     </div>
 
     <div class="formulario__campo">
+        <label for="nombre_tarifa" class="formulario__label">Tarifa</label>
+        <input
+            type="text"
+            class="formulario__input"
+            id="nombre_tarifa"
+            name="nombre_tarifa"
+            value="<?php echo $tarifa->nombre_tarifa; ?>"
+            readonly>
+    </div>
+
+    <div class="formulario__campo">
         <label for="consumo_m3" class="formulario__label">Consumo (m³)</label>
         <input
             type="number"
@@ -53,7 +62,37 @@
             id="consumo_m3"
             name="consumo_m3"
             value="<?php echo $pago->consumo_m3; ?>" readonly>
-
+    </div>
+    <div class="formulario__campo">
+        <label for="cargo_fijo" class="formulario__label">Cargo Fijo</label>
+        <input
+            type="number"
+            class="formulario__input"
+            id="cargo_fijo"
+            name="cargo_fijo"
+            value="<?php echo $tarifa->cargo_fijo; ?>" readonly>
+    </div>
+    <div class="formulario__campo">
+        <label for="monto_agua" class="formulario__label">Monto de Agua (S/)</label>
+        <input
+            type="text"
+            class="formulario__input"
+            id="monto_agua"
+            name="monto_agua"
+            placeholder="Calculado automáticamente"
+            value="<?php echo $pago->monto_agua; ?>"
+            readonly readonly>
+    </div>
+    <div class="formulario__campo">
+        <label for="monto_desague" class="formulario__label">Monto de Desague (S/)</label>
+        <input
+            type="text"
+            class="formulario__input"
+            id="monto_desague"
+            name="monto_desague"
+            placeholder="Calculado automáticamente"
+            value="<?php echo $pago->monto_desague; ?>"
+            readonly readonly>
     </div>
 
     <div class="formulario__campo">

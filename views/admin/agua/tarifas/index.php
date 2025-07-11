@@ -48,7 +48,12 @@
                 <tr>
                     <th scope="col" class="table__th">Código</th>
                     <th scope="col" class="table__th">Nombre</th>
-                    <th scope="col" class="table__th">Valor (S/.)</th>
+                    <th scope="col" class="table__th">Clase</th>
+                    <th scope="col" class="table__th">Categoría</th>
+                    <th scope="col" class="table__th">Rango (m³)</th>
+                    <th scope="col" class="table__th">Agua (S/)</th>
+                    <th scope="col" class="table__th">Desagüe (S/)</th>
+                    <th scope="col" class="table__th">Cargo Fijo (S/)</th>
                     <th scope="col" class="table__th">Acciones</th>
                 </tr>
             </thead>
@@ -58,7 +63,12 @@
                     <tr class="table__tr">
                         <td class="table__td"><?php echo $tarifa->codigo_tarifa; ?></td>
                         <td class="table__td"><?php echo $tarifa->nombre_tarifa; ?></td>
-                        <td class="table__td">S/ <?php echo number_format($tarifa->valor_tarifa, 2); ?></td>
+                        <td class="table__td"><?php echo $tarifa->clase; ?></td>
+                        <td class="table__td"><?php echo $tarifa->categoria; ?></td>
+                        <td class="table__td"><?php echo $tarifa->rango_min . ' - ' . ($tarifa->rango_max ?? '∞'); ?></td>
+                        <td class="table__td">S/ <?php echo number_format($tarifa->tarifa_agua, 2); ?></td>
+                        <td class="table__td">S/ <?php echo number_format($tarifa->tarifa_desague, 2); ?></td>
+                        <td class="table__td">S/ <?php echo number_format($tarifa->cargo_fijo, 2); ?></td>
                         <td class="table__td--acciones">
                             <a class="table__accion table__accion--editar" href="/admin/tarifas/editar?id=<?php echo $tarifa->id; ?>">
                                 <i class="fa-solid fa-pen-to-square"></i> Editar
@@ -79,6 +89,7 @@
     <?php } ?>
 </div>
 
+
 <?php echo $paginacion ?? ''; ?>
 
 <?php
@@ -93,5 +104,5 @@ if (isset($_SESSION['eliminado'])) :
             confirmButtonText: 'OK'
         });
     </script>
-<?php unset($_SESSION['eliminado']); endif; ?>
-
+<?php unset($_SESSION['eliminado']);
+endif; ?>

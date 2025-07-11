@@ -7,7 +7,7 @@ use Dompdf\Dompdf;
 class PDF
 {
 
-    public static function generarComprobante($pago, $consumo, $contribuyente, $predio, $usuario)
+    public static function generarComprobante($pago, $consumo, $contribuyente, $predio, $usuario, $tarifa, $consumos_anteriores)
     {
         ob_start();
         include __DIR__ . '/../views/pdf/comprobante.php';
