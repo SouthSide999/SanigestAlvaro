@@ -8,6 +8,8 @@ use Model\Tarifa;
 use Model\Consumo;
 use Classes\Paginacion;
 use Model\EstadoConsumo;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class AreaConmercialController
 {
@@ -313,5 +315,73 @@ class AreaConmercialController
             'meses' => $meses,
             'alertas' => $alertas
         ]);
+    }
+    public static function exportarExcelConsumos()
+    {
+        if (!is_auth()) {
+            header('Location: /auth/login');
+            exit;
+        }
+        if (!is_tesorero()) {
+            header('Location: /auth/login');
+            exit;
+        }
+
+        // Obtener todos los consumos
+        $consumos = Consumo::all('ASC');
+
+        // Cargar relaciones necesarias
+        foreach ($consumos as $c) {
+            $c->predio = Predio::find($c->predio_id);
+            $c->estado = EstadoConsumo::find($c->estado_id);
+        }
+
+        $spreadsheet = new Spreadsheet();
+        $hoja = $spreadsheet->getActiveSheet();
+        $hoja->setTitle("Consumos");
+
+        // Encabezados
+        $hoja->fromArray([
+            'ID',
+            'Código Predio',
+            'Mes',
+            'Año',
+            'Fecha Inicio',
+            'Fecha Fin',
+            'Consumo (m³)',
+            'Monto Agua (S/)',
+            'Monto Desagüe (S/)',
+            'Monto Total (S/)',
+            'Fecha Registro',
+            'Estado'
+        ], null, 'A1');
+
+        // Llenar datos
+        $fila = 2;
+        foreach ($consumos as $c) {
+            $hoja->setCellValue("A$fila", $c->id);
+            $hoja->setCellValue("B$fila", $c->predio->codigo_predio ?? '');
+            $hoja->setCellValue("C$fila", nombreMes($c->mes)); // Usa tu helper si lo tienes
+            $hoja->setCellValue("D$fila", $c->anio);
+            $hoja->setCellValue("E$fila", $c->fecha_inicio);
+            $hoja->setCellValue("F$fila", $c->fecha_fin);
+            $hoja->setCellValue("G$fila", $c->consumo_m3);
+            $hoja->setCellValue("H$fila", $c->monto_agua);
+            $hoja->setCellValue("I$fila", $c->monto_desague);
+            $hoja->setCellValue("J$fila", $c->monto_total);
+            $hoja->setCellValue("K$fila", $c->created_at);
+            $hoja->setCellValue("L$fila", $c->estado->nombre ?? '');
+            $fila++;
+        }
+
+        // Descargar archivo
+        $filename = 'Consumos_Sanigest.xlsx';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+        header('Cache-Control: max-age=0');
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('php://output');
+        exit;
     }
 }

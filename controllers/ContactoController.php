@@ -8,6 +8,9 @@ use Model\Contacto;
 use Classes\Paginacion;
 
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 class ContactoController
 {
     public static function crear(Router $router)
@@ -37,7 +40,6 @@ class ContactoController
             'contacto' => $contacto
         ]);
     }
-
     public static function index(Router $router)
     {
         if (!is_admin()) {
@@ -143,5 +145,67 @@ class ContactoController
             'titulo' => 'Buscar Contactos Realizados',
             'contactos' => $contacto
         ]);
+    }
+    // Exportar contactos
+    public static function exportarExcel()
+    {
+        if (!is_auth()) {
+            header('Location: /auth/login');
+            exit;
+        }
+        if (!is_admin()) {
+            header('Location: /auth/login');
+            exit;
+        }
+
+        // Obtener todos los contactos
+        $contactos = Contacto::all('ASC'); // Asegúrate que el modelo se llama "Contacto"
+
+        $spreadsheet = new Spreadsheet();
+        $hoja = $spreadsheet->getActiveSheet();
+        $hoja->setTitle("Contactos");
+
+        // Encabezados
+        $hoja->fromArray([
+            'ID',
+            'Nombre',
+            'Número',
+            'Asunto',
+            'Mensaje',
+            'Estado'
+        ], null, 'A1');
+
+        // Llenar datos
+        $fila = 2;
+        foreach ($contactos as $c) {
+            $hoja->setCellValue("A$fila", $c->id);
+            $hoja->setCellValue("B$fila", $c->nombre ?? '');
+            $hoja->setCellValue("C$fila", $c->numero ?? '');
+            $hoja->setCellValue("D$fila", $c->asunto ?? '');
+            $hoja->setCellValue("E$fila", $c->mensaje ?? '');
+
+            // Mostrar estado como texto
+            $estadoTexto = '';
+            if ($c->estado === 0) {
+                $estadoTexto = 'No leído';
+            } elseif ($c->estado === 1) {
+                $estadoTexto = 'Leído';
+            } else {
+                $estadoTexto = 'Desconocido';
+            }
+
+            $hoja->setCellValue("F$fila", $estadoTexto);
+            $fila++;
+        }
+
+        // Descargar archivo
+        $filename = 'Contactos_Sanigest.xlsx';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+        header('Cache-Control: max-age=0');
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('php://output');
+        exit;
     }
 }

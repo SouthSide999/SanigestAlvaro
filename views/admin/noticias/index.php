@@ -8,8 +8,13 @@
         <i class="fa-solid fa-magnifying-glass"></i>
         Buscar Noticia o Avisos
     </a>
-
 </div>
+
+<a href="/admin/noticias/exportar" class="dashboard__boton">
+    <i class="fa-solid fa-file-excel"></i>
+    Exportar a Excel las Noticias
+</a>
+
 
 <div class="dashboard__contenedor">
     <?php if (!empty($noticias)) { ?>

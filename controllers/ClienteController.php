@@ -6,7 +6,8 @@ use MVC\Router;
 use Model\Predio;
 use Model\Cliente;
 use Classes\Paginacion;
-
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 class ClienteController
 {
 
@@ -110,9 +111,6 @@ class ClienteController
             'alertas' => $alertas
         ]);
     }
-
-
-
     public static function eliminar()
     {
         if (!is_auth()) {
@@ -144,4 +142,62 @@ class ClienteController
 
         }
     }
+    public static function exportarExcel()
+{
+    if (!is_auth()) {
+        header('Location: /auth/login');
+        exit;
+    }
+    if (!is_admin()) {
+        header('Location: /auth/login');
+        exit;
+    }
+
+    // Obtener todos los clientes
+    $clientes = Cliente::all('ASC'); // Asegúrate de tener un modelo Cliente
+
+    // Cargar relación con predio si deseas mostrar su código
+    foreach ($clientes as $c) {
+        $c->predio = Predio::find($c->codigo_predio); // Ajusta si usas otro nombre
+    }
+
+    $spreadsheet = new Spreadsheet();
+    $hoja = $spreadsheet->getActiveSheet();
+    $hoja->setTitle("Clientes");
+
+    // Encabezados
+    $hoja->fromArray([
+        'ID',
+        'Nombre',
+        'Apellido',
+        'Email',
+        'DNI',
+        'Celular',
+        'Código Predio'
+    ], null, 'A1');
+
+    // Llenar datos
+    $fila = 2;
+    foreach ($clientes as $c) {
+        $hoja->setCellValue("A$fila", $c->id);
+        $hoja->setCellValue("B$fila", $c->nombre ?? '');
+        $hoja->setCellValue("C$fila", $c->apellido ?? '');
+        $hoja->setCellValue("D$fila", $c->email ?? '');
+        $hoja->setCellValue("E$fila", $c->dni ?? '');
+        $hoja->setCellValue("F$fila", $c->celular ?? '');
+        $hoja->setCellValue("G$fila", $c->predio->codigo_predio ?? $c->codigo_predio);
+        $fila++;
+    }
+
+    // Descargar archivo
+    $filename = 'Clientes_Sanigest.xlsx';
+    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    header("Content-Disposition: attachment; filename=\"$filename\"");
+    header('Cache-Control: max-age=0');
+
+    $writer = new Xlsx($spreadsheet);
+    $writer->save('php://output');
+    exit;
+}
+
 }

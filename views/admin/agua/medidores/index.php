@@ -41,6 +41,11 @@
     </form>
 </div>
 
+<a href="/admin/medidores/exportar" class="dashboard__boton">
+    <i class="fa-solid fa-file-excel"></i>
+    Exportar a Excel
+</a>
+
 <div class="dashboard__contenedor">
     <?php if (!empty($medidores)) { ?>
         <table class="table">
@@ -58,9 +63,8 @@
             <tbody class="table__tbody">
                 <?php foreach ($medidores as $medidor) { ?>
                     <tr class="table__tr">
-                        <td class="table__td"><?php echo $medidor->predio->codigo_predio.'-'.$medidor->contribuyente->nombres.' '.
-                          $medidor->contribuyente->apellidos
-                        ; ?></td>
+                        <td class="table__td"><?php echo $medidor->predio->codigo_predio . '-' . $medidor->contribuyente->nombres . ' ' .
+                                                    $medidor->contribuyente->apellidos; ?></td>
                         <td class="table__td"><?php echo $medidor->numero_medidor; ?></td>
                         <td class="table__td"><?php echo $medidor->numero_personas; ?></td>
                         <td class="table__td"><?php echo $medidor->inquilinos; ?></td>

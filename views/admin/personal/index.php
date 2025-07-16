@@ -1,5 +1,9 @@
 <h2><?php echo $titulo; ?></h2>
 
+<a href="/admin/personal/exportar" class="dashboard__boton">
+    <i class="fa-solid fa-file-excel"></i>
+    Exportar a Excel Personal
+</a>
 
 <div class="dashboard__contenedor">
     <?php if (!empty($personal)) { ?>

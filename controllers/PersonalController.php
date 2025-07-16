@@ -8,6 +8,10 @@ use Classes\Paginacion;
 use Model\Roles;
 use Model\Usuario;
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
+
 class PersonalController
 {
 
@@ -72,7 +76,7 @@ class PersonalController
         $personal = Usuario::find($id);
         $id = filter_var($id, FILTER_VALIDATE_INT);
 
-        $roles=Roles::all();
+        $roles = Roles::all();
 
         if (!$personal) {
             header('Location: /admin/personal');
@@ -82,13 +86,13 @@ class PersonalController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Guardamos temporalmente la contraseña original
             $passwordActual = $personal->password;
-        
+
             // Sincronizamos los datos del formulario
             $personal->sincronizar($_POST);
-        
+
             // Validamos los datos
             $alertas = $personal->validar_personal();
-        
+
             if (empty($alertas)) {
                 // Si se ingresó una nueva contraseña, la hasheamos
                 if (!empty($_POST['password'])) {
@@ -97,18 +101,18 @@ class PersonalController
                     // Si no se ingresó, restauramos la contraseña anterior
                     $personal->password = $passwordActual;
                 }
-        
+
                 // Guardamos en la base de datos
                 $resultado = $personal->guardar();
-        
+
                 if ($resultado) {
                     header("Location: /admin/personal/editar?id=$id&actualizado=1");
                     exit;
                 }
             }
         }
-        
-        
+
+
         // debuguear($personal);
         $router->render('admin/personal/editar', [
             'titulo' => 'Editar Personal',
@@ -145,5 +149,62 @@ class PersonalController
                 exit;
             }
         }
+    }
+    public static function exportarExcel()
+    {
+        if (!is_auth()) {
+            header('Location: /auth/login');
+            exit;
+        }
+        if (!is_admin()) {
+            header('Location: /auth/login');
+            exit;
+        }
+
+        // Obtener todos los usuarios
+        $usuarios = Usuario::all('ASC'); // Asegúrate de que tu modelo se llame "Usuario"
+
+        // Cargar relación con rol
+        foreach ($usuarios as $u) {
+            $u->rol = Roles::find($u->rol_id); // Si el usuario tiene relación con roles
+        }
+
+        $spreadsheet = new Spreadsheet();
+        $hoja = $spreadsheet->getActiveSheet();
+        $hoja->setTitle("Usuarios");
+
+        // Encabezados seguros
+        $hoja->fromArray([
+            'ID',
+            'Nombre',
+            'Apellido',
+            'Email',
+            'Confirmado',
+            'Rol'
+        ], null, 'A1');
+
+        $fila = 2;
+        foreach ($usuarios as $u) {
+            $confirmado = ($u->confirmado == 1) ? 'Sí' : 'No';
+            $rolNombre = $u->rol->nombre ?? '';
+
+            $hoja->setCellValue("A$fila", $u->id);
+            $hoja->setCellValue("B$fila", $u->nombre ?? '');
+            $hoja->setCellValue("C$fila", $u->apellido ?? '');
+            $hoja->setCellValue("D$fila", $u->email ?? '');
+            $hoja->setCellValue("E$fila", $confirmado);
+            $hoja->setCellValue("F$fila", $rolNombre);
+            $fila++;
+        }
+
+        // Descargar archivo
+        $filename = 'Usuarios_Sanigest.xlsx';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+        header('Cache-Control: max-age=0');
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('php://output');
+        exit;
     }
 }

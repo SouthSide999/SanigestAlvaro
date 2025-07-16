@@ -12,7 +12,8 @@ use Model\TiposSolicitud;
 use Classes\Notificaciones;
 use Model\Roles;
 use Model\TiposReclamos;
-
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 class SolicitudController
 {
     public static function index(Router $router)
@@ -398,5 +399,74 @@ class SolicitudController
             'solicitud' => $solicitud,
             'usuariorol' => $usuariorol
         ]);
+    }
+    public static function exportarExcel()
+    {
+        if (!is_auth()) {
+            header('Location: /auth/login');
+            exit;
+        }
+        if (!is_admin()) {
+            header('Location: /auth/login');
+            exit;
+        }
+
+        // Obtener todas las solicitudes
+        $solicitudes = Solicitud::all('ASC'); // Ajusta si tu modelo tiene otro nombre
+
+        // Cargar relaciones
+        foreach ($solicitudes as $s) {
+            $s->tipo = TiposSolicitud::find($s->tipo_solicitud_id);
+            $s->estado = Estados::find($s->estado_id);
+            $s->personal = Usuario::find($s->personal_asignado);
+        }
+
+        $spreadsheet = new Spreadsheet();
+        $hoja = $spreadsheet->getActiveSheet();
+        $hoja->setTitle("Solicitudes");
+
+        // Encabezados (sin campo evidencia)
+        $hoja->fromArray([
+            'ID',
+            'Nombres',
+            'Apellidos',
+            'DNI',
+            'Email',
+            'Tipo de Solicitud',
+            'Descripción',
+            'Fecha',
+            'Estado',
+            'Personal Asignado',
+            'Código de Seguimiento',
+            'Observaciones'
+        ], null, 'A1');
+
+        // Llenar datos
+        $fila = 2;
+        foreach ($solicitudes as $s) {
+            $hoja->setCellValue("A$fila", $s->id);
+            $hoja->setCellValue("B$fila", $s->nombres ?? '');
+            $hoja->setCellValue("C$fila", $s->apellidos ?? '');
+            $hoja->setCellValue("D$fila", $s->dni ?? '');
+            $hoja->setCellValue("E$fila", $s->email ?? '');
+            $hoja->setCellValue("F$fila", $s->tipo->nombre ?? '');
+            $hoja->setCellValue("G$fila", $s->descripcion ?? '');
+            $hoja->setCellValue("H$fila", $s->fecha ?? '');
+            $hoja->setCellValue("I$fila", $s->estado->nombre ?? '');
+            $hoja->setCellValue("J$fila", trim(($s->personal->nombre ?? '') . ' ' . ($s->personal->apellido ?? '')));
+            $hoja->setCellValue("K$fila", $s->codigo_seguimiento ?? '');
+            $hoja->setCellValue("L$fila", $s->observaciones ?? '');
+            $fila++;
+        }
+
+        // Descargar archivo
+        $filename = 'Solicitudes_Sanigest.xlsx';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+        header('Cache-Control: max-age=0');
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('php://output');
+        exit;
     }
 }

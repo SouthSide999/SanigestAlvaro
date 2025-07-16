@@ -7,6 +7,8 @@ use Model\Noticia;
 use Model\Ponente;
 use Classes\Paginacion;
 use Intervention\Image\ImageManagerStatic as Image;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class NoticiasController
 {
@@ -158,7 +160,7 @@ class NoticiasController
             $alertas = $noticia->validar();
 
             if (empty($alertas)) {
-                
+
                 if (isset($nombre_imagen)) {
                     //guardar imagenes
                     $imagen_png->save($carperta_imagenes . '/' . $nombre_imagen . ".png");
@@ -196,5 +198,49 @@ class NoticiasController
             'titulo' => 'Buscar la Noticia',
             'noticias' => $noticia
         ]);
+    }
+    public static function exportarExcel()
+    {
+        if (!is_auth()) {
+            header('Location: /auth/login');
+            exit;
+        }
+        if (!is_admin()) {
+            header('Location: /auth/login');
+            exit;
+        }
+
+        // Obtener todas las noticias
+        $noticias = Noticia::all('ASC'); // Asegúrate de que el modelo sea correcto
+
+        $spreadsheet = new Spreadsheet();
+        $hoja = $spreadsheet->getActiveSheet();
+        $hoja->setTitle("Noticias");
+
+        // Encabezados
+        $hoja->fromArray([
+            'ID',
+            'Título',
+            'Contenido',
+        ], null, 'A1');
+
+        // Llenar datos
+        $fila = 2;
+        foreach ($noticias as $n) {
+            $hoja->setCellValue("A$fila", $n->id);
+            $hoja->setCellValue("B$fila", $n->nombre ?? '');
+            $hoja->setCellValue("C$fila", $n->contenido ?? '');
+            $fila++;
+        }
+
+        // Descargar archivo
+        $filename = 'Noticias_Sanigest.xlsx';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+        header('Cache-Control: max-age=0');
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('php://output');
+        exit;
     }
 }

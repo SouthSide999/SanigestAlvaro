@@ -6,6 +6,7 @@
         Volver
     </a>
 </div>
+
 <div class="dashboard__contenedor-buscador">
     <form class="dashboard__formulario__buscardor" action="/tesorero/pagos" enctype="multipart/form-data" method="POST">
         <fieldset class="formulario__fieldset">

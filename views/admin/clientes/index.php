@@ -1,5 +1,10 @@
 <h2><?php echo $titulo; ?></h2>
 
+<a href="/admin/cliente/exportar" class="dashboard__boton">
+    <i class="fa-solid fa-file-excel"></i>
+    Exportar a Excel los Clientes
+</a>
+
 <div class="dashboard__contenedor">
     <?php if (!empty($clientes)) { ?>
         <table class="table">

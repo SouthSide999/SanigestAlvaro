@@ -37,6 +37,10 @@
     </form>
 </div>
 
+<a href="/admin/conexiones/exportar" class="dashboard__boton">
+    <i class="fa-solid fa-file-excel"></i>
+    Exportar a Excel
+</a>
 
 <div class="dashboard__contenedor">
     <?php if (!empty($conexiones)) { ?>

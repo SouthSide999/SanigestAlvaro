@@ -13,6 +13,9 @@ use Classes\Paginacion;
 use Model\Contribuyente;
 use Model\EstadoServicio;
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 class AguaPotableTesoreroController
 {
 
@@ -201,6 +204,46 @@ class AguaPotableTesoreroController
                 exit;
             }
         }
+    }
+        //exportasr contribuyente
+    public static function exportarExcelContribuyentes()
+    {
+        if (!is_auth()) {
+            header('Location: /auth/login');
+            exit;
+        }
+        if (!is_tesorero()) {
+            header('Location: /auth/login');
+            exit;
+        }
+
+        $contribuyentes = Contribuyente::all('ASC');
+
+        $spreadsheet = new Spreadsheet();
+
+        $hojaPendientes = $spreadsheet->getActiveSheet();
+        $hojaPendientes->setTitle("Contribuyentes");
+        $hojaPendientes->fromArray(['Codigo de Contribuyente', 'Nombres', 'Apellidos', 'Tipo', 'Documento De Identidad', 'Estado Civil', 'Fecha Inscripcion'], null, 'A1');
+
+        $fila = 2;
+        foreach ($contribuyentes as $c) {
+            $hojaPendientes->setCellValue("A$fila", $c->codigo_contribuyente);
+            $hojaPendientes->setCellValue("B$fila", $c->nombres);
+            $hojaPendientes->setCellValue("C$fila", $c->apellidos);
+            $hojaPendientes->setCellValue("D$fila", $c->tipo_usuario);
+            $hojaPendientes->setCellValue("E$fila", $c->estado_civil);
+            $hojaPendientes->setCellValue("F$fila", $c->fecha_inscripcion);
+            $fila++;
+        }
+
+        $filename = 'Contribuyentes_Sanigest.xlsx';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+        header('Cache-Control: max-age=0');
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('php://output');
+        exit;
     }
 
     //*predios
@@ -397,6 +440,62 @@ class AguaPotableTesoreroController
                 exit;
             }
         }
+    }
+
+        //exportar sectores
+    public static function exportarExcelPredios()
+    {
+        if (!is_auth()) {
+            header('Location: /auth/login');
+            exit;
+        }
+        if (!is_tesorero()) {
+            header('Location: /auth/login');
+            exit;
+        }
+
+        $predios = Predio::all('ASC');
+
+        foreach ($predios as $predio) {
+            $predio->contribuyente = Contribuyente::find($predio->contribuyente_id);
+            $predio->tarifa = Tarifa::find($predio->tarifa_id);
+            $predio->zona = Zona::find($predio->zona_id);
+            $predio->sector = Sector::find($predio->sector_id);
+            $predio->estado = EstadoServicio::find($predio->estado_servicio_id);
+        }
+
+        $spreadsheet = new Spreadsheet();
+
+        $hoja = $spreadsheet->getActiveSheet();
+        $hoja->setTitle("Zonas");
+        $hoja->fromArray(['Codigo Predio', 'Contribuyente', 'Tarifa', 'Zona', 'Sector', 'Manzana', 'Lote', 'Direccion', 'Secuencia', 'Fecha Registro', 'Estado Servicio'], null, 'A1');
+
+        $fila = 2;
+        foreach ($predios as $p) {
+            $hoja->setCellValue("A$fila", $p->codigo_predio);
+            $hoja->setCellValue("B$fila", trim(($p->contribuyente->nombres ?? '') . ' ' . ($p->contribuyente->apellidos ?? '')));
+            $hoja->setCellValue("C$fila", $p->tarifa->nombre ?? '');
+            $hoja->setCellValue("D$fila", $p->zona->nombre_zona ?? '');
+            $hoja->setCellValue("E$fila", $p->sector->nombre_sector ?? '');
+            $hoja->setCellValue("F$fila", $p->manzana ?? '');
+            $hoja->setCellValue("G$fila", $p->lote ?? '');
+            $hoja->setCellValue("H$fila", $p->direccion ?? '');
+            $hoja->setCellValue("I$fila", $p->secuencia ?? '');
+            $hoja->setCellValue("J$fila", $p->created_at ?? '');
+            $hoja->setCellValue("K$fila", $p->estado->nombre ?? '');
+
+
+            $fila++;
+        }
+
+        $filename = 'Predios_Sanigest.xlsx';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+        header('Cache-Control: max-age=0');
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('php://output');
+        exit;
     }
 
     //resumen

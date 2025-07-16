@@ -21,6 +21,10 @@
                     class="dashboard__boton__buscardor">
             </div>
         </form>
+        <a href="/admin/reclamos/exportar" class="dashboard__boton">
+            <i class="fa-solid fa-file-excel"></i>
+            Exportar a Excel Todos los Reclamos
+        </a>
         <h2>Todos Los Reclamos: </h2>
         <div class="dashboardUser__contenedor">
             <?php if (!empty($reclamos)) { ?>

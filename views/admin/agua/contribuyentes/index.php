@@ -50,12 +50,16 @@
             </a>
         </div>
     </form>
+
 </div>
 
-
-
+<a href="/admin/contribuyentes/exportar" class="dashboard__boton">
+    <i class="fa-solid fa-file-excel"></i>
+    Exportar a Excel
+</a>
 
 <div class="dashboard__contenedor">
+
     <?php if (!empty($contribuyentes)) { ?>
         <table class="table">
             <thead class="table__thead">

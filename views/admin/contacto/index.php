@@ -16,6 +16,11 @@
     </a>
 </div>
 
+<a href="/admin/contacto/exportar" class="dashboard__boton">
+    <i class="fa-solid fa-file-excel"></i>
+    Exportar a Excel los Contactos Existentes
+</a>
+
 <div class="dashboard__contenedor">
     <?php if (!empty($contactos)) { ?>
         <table class="table">

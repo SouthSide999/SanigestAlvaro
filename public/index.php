@@ -94,25 +94,22 @@ $router->post('/admin/noticias/crear', [NoticiasController::class, 'crear']);
 $router->get('/admin/noticias/editar', [NoticiasController::class, 'editar']);
 $router->post('/admin/noticias/editar', [NoticiasController::class, 'editar']);
 $router->post('/admin/noticias/eliminar', [NoticiasController::class, 'eliminar']);
+$router->get('/admin/noticias/exportar', [NoticiasController::class, 'exportarExcel']);
+
 
 //admin-contacto
 $router->get('/admin/contacto', [ContactoController::class, 'index']);
-
 $router->get('/contacto/crear', [ContactoController::class, 'crear']);
 $router->post('/contacto/crear', [ContactoController::class, 'crear']);
-
 $router->post('/admin/contacto/editar', [ContactoController::class, 'editarTarea']);
-
 $router->get('/admin/contacto/buscar', [ContactoController::class, 'buscar']);
 $router->post('/admin/contacto/buscar', [ContactoController::class, 'buscar']);
-
 $router->get('/admin/contacto/pendiente', [ContactoController::class, 'pendiente']);
 $router->post('/admin/contacto/pendiente', [ContactoController::class, 'pendiente']);
-
 $router->get('/admin/contacto/atendido', [ContactoController::class, 'atendido']);
 $router->post('/admin/contacto/atendido', [ContactoController::class, 'atendido']);
-
 $router->post('/admin/contacto/eliminar', [ContactoController::class, 'eliminar']);
+$router->get('/admin/contacto/exportar', [ContactoController::class, 'exportarExcel']);
 
 
 //admin-reclamos
@@ -125,6 +122,8 @@ $router->post('/admin/reclamos/buscar', [ReclamoController::class, 'buscar']);
 $router->get('/admin/reclamos/editarB', [ReclamoController::class, 'editarEstadoB']);
 $router->post('/admin/reclamos/editarB', [ReclamoController::class, 'editarEstadoB']);
 $router->post('/admin/reclamos/eliminarB', [ReclamoController::class, 'eliminarB']);
+$router->get('/admin/reclamos/exportar', [ReclamoController::class, 'exportarExcel']);
+
 
 //admin-personal
 $router->get('/admin/personal', [PersonalController::class, 'index']);
@@ -132,6 +131,8 @@ $router->get('/admin/personal/editar', [PersonalController::class, 'editar']);
 $router->post('/admin/personal/editar', [PersonalController::class, 'editar']);
 $router->get('/admin/personal/eliminar', [PersonalController::class, 'eliminar']);
 $router->post('/admin/personal/eliminar', [PersonalController::class, 'eliminar']);
+$router->get('/admin/personal/exportar', [PersonalController::class, 'exportarExcel']);
+
 
 
 //admin-clientes
@@ -140,17 +141,21 @@ $router->get('/admin/cliente/editar', [ClienteController::class, 'editar']);
 $router->post('/admin/cliente/editar', [ClienteController::class, 'editar']);
 $router->get('/admin/cliente/eliminar', [ClienteController::class, 'eliminar']);
 $router->post('/admin/cliente/eliminar', [ClienteController::class, 'eliminar']);
+$router->get('/admin/cliente/exportar', [ClienteController::class, 'exportarExcel']);
+
 
 //nueva-conexion
 $router->get('/admin/nuevaconexion', [NuevaConexionController::class, 'index']);
 $router->get('/admin/nuevaconexion/revisar', [NuevaConexionController::class, 'revisar']);
 $router->post('/admin/nuevaconexion/revisar', [NuevaConexionController::class, 'revisar']);
+$router->get('/admin/nuevaconexion/exportar', [NuevaConexionController::class, 'exportarExcel']);
 
 
 //solicitudesAdmin
 $router->get('/admin/solicitudes', [SolicitudController::class, 'index']);
 $router->get('/admin/solicitudes/revisar', [SolicitudController::class, 'revisar']);
 $router->post('/admin/solicitudes/revisar', [SolicitudController::class, 'revisar']);
+$router->get('/admin/solicitudes/exportar', [SolicitudController::class, 'exportarExcel']);
 
 
 //*agua-potable
@@ -163,6 +168,8 @@ $router->post('/admin/contribuyentes/crear', [AguaPotableController::class, 'con
 $router->get('/admin/contribuyentes/editar', [AguaPotableController::class, 'contribuyenteEditar']);
 $router->post('/admin/contribuyentes/editar', [AguaPotableController::class, 'contribuyenteEditar']);
 $router->post('/admin/contribuyentes/eliminar', [AguaPotableController::class, 'contribuyenteEliminar']);
+$router->get('/admin/contribuyentes/exportar', [AguaPotableController::class, 'exportarExcelContribuyentes']);
+
 //zonas
 $router->get('/admin/zonas', [AguaPotableController::class, 'zonas']);
 $router->post('/admin/zonas', [AguaPotableController::class, 'zonas']);
@@ -171,6 +178,8 @@ $router->post('/admin/zonas/crear', [AguaPotableController::class, 'zonaCrear'])
 $router->get('/admin/zonas/editar', [AguaPotableController::class, 'zonaEditar']);
 $router->post('/admin/zonas/editar', [AguaPotableController::class, 'zonaEditar']);
 $router->post('/admin/zonas/eliminar', [AguaPotableController::class, 'zonaEliminar']);
+$router->get('/admin/zonas/exportar', [AguaPotableController::class, 'exportarExcelZonas']);
+
 // sectores
 $router->get('/admin/sectores', [AguaPotableController::class, 'sectores']);
 $router->post('/admin/sectores', [AguaPotableController::class, 'sectores']);
@@ -179,6 +188,8 @@ $router->post('/admin/sectores/crear', [AguaPotableController::class, 'sectorCre
 $router->get('/admin/sectores/editar', [AguaPotableController::class, 'sectorEditar']);
 $router->post('/admin/sectores/editar', [AguaPotableController::class, 'sectorEditar']);
 $router->post('/admin/sectores/eliminar', [AguaPotableController::class, 'sectorEliminar']);
+$router->get('/admin/sectores/exportar', [AguaPotableController::class, 'exportarExcelSectores']);
+
 // predios
 $router->get('/admin/predios', [AguaPotableController::class, 'predios']);
 $router->post('/admin/predios', [AguaPotableController::class, 'predios']);
@@ -187,6 +198,8 @@ $router->post('/admin/predios/crear', [AguaPotableController::class, 'predioCrea
 $router->get('/admin/predios/editar', [AguaPotableController::class, 'predioEditar']);
 $router->post('/admin/predios/editar', [AguaPotableController::class, 'predioEditar']);
 $router->post('/admin/predios/eliminar', [AguaPotableController::class, 'predioEliminar']);
+$router->get('/admin/predios/exportar', [AguaPotableController::class, 'exportarExcelPredios']);
+
 //tarifa
 $router->get('/admin/tarifas', [AguaPotableController::class, 'tarifas']);
 $router->post('/admin/tarifas', [AguaPotableController::class, 'tarifas']);
@@ -195,6 +208,9 @@ $router->post('/admin/tarifas/crear', [AguaPotableController::class, 'tarifaCrea
 $router->get('/admin/tarifas/editar', [AguaPotableController::class, 'tarifaEditar']);
 $router->post('/admin/tarifas/editar', [AguaPotableController::class, 'tarifaEditar']);
 $router->post('/admin/tarifas/eliminar', [AguaPotableController::class, 'tarifaEliminar']);
+$router->get('/admin/tarifas/exportar', [AguaPotableController::class, 'exportarExcelTarifas']);
+
+
 // Medidor
 $router->get('/admin/medidores', [AguaPotableController::class, 'medidores']);
 $router->post('/admin/medidores', [AguaPotableController::class, 'medidores']);
@@ -203,6 +219,8 @@ $router->post('/admin/medidores/crear', [AguaPotableController::class, 'medidorC
 $router->get('/admin/medidores/editar', [AguaPotableController::class, 'medidorEditar']);
 $router->post('/admin/medidores/editar', [AguaPotableController::class, 'medidorEditar']);
 $router->post('/admin/medidores/eliminar', [AguaPotableController::class, 'medidorEliminar']);
+$router->get('/admin/medidores/exportar', [AguaPotableController::class, 'exportarExcelMedidores']);
+
 // Conexión
 $router->get('/admin/conexiones', [AguaPotableController::class, 'conexiones']);
 $router->post('/admin/conexiones', [AguaPotableController::class, 'conexiones']);
@@ -211,6 +229,8 @@ $router->post('/admin/conexiones/crear', [AguaPotableController::class, 'conexio
 $router->get('/admin/conexiones/editar', [AguaPotableController::class, 'conexionEditar']);
 $router->post('/admin/conexiones/editar', [AguaPotableController::class, 'conexionEditar']);
 $router->post('/admin/conexiones/eliminar', [AguaPotableController::class, 'conexionEliminar']);
+$router->get('/admin/conexiones/exportar', [AguaPotableController::class, 'exportarExcelConexiones']);
+
 //resumen
 $router->get('/admin/resumen', [AguaPotableController::class, 'resumen']);
 $router->post('/admin/resumen', [AguaPotableController::class, 'resumen']);
@@ -345,6 +365,7 @@ $router->post('/tesorero/contribuyentes/crear', [AguaPotableTesoreroController::
 $router->get('/tesorero/contribuyentes/editar', [AguaPotableTesoreroController::class, 'contribuyenteEditar']);
 $router->post('/tesorero/contribuyentes/editar', [AguaPotableTesoreroController::class, 'contribuyenteEditar']);
 $router->post('/tesorero/contribuyentes/eliminar', [AguaPotableTesoreroController::class, 'contribuyenteEliminar']);
+$router->get('/tesorero/contribuyentes/exportar', [AguaPotableTesoreroController::class, 'exportarExcelContribuyentes']);
 
 // predios
 $router->get('/tesorero/predios', [AguaPotableTesoreroController::class, 'predios']);
@@ -354,6 +375,8 @@ $router->post('/tesorero/predios/crear', [AguaPotableTesoreroController::class, 
 $router->get('/tesorero/predios/editar', [AguaPotableTesoreroController::class, 'predioEditar']);
 $router->post('/tesorero/predios/editar', [AguaPotableTesoreroController::class, 'predioEditar']);
 $router->post('/tesorero/predios/eliminar', [AguaPotableTesoreroController::class, 'predioEliminar']);
+$router->get('/tesorero/predios/exportar', [AguaPotableTesoreroController::class, 'exportarExcelPredios']);
+
 
 // resumen
 $router->get('/tesorero/resumen', [AguaPotableTesoreroController::class, 'resumen']);
@@ -377,6 +400,8 @@ $router->post('/tesorero/consumos/editar', [AreaConmercialController::class, 'ed
 $router->post('/tesorero/consumos/eliminar', [AreaConmercialController::class, 'eliminarConsumos']);
 $router->get('/tesorero/consumos/generar', [AreaConmercialController::class, 'generarConsumos']);
 $router->post('/tesorero/consumos/generar', [AreaConmercialController::class, 'generarConsumos']);
+$router->get('/tesorero/consumos/exportar', [AreaConmercialController::class, 'exportarExcelConsumos']);
+
 //pago
 $router->get('/tesorero/pagos', [PagoController::class, 'index']); 
 $router->post('/tesorero/pagos', [PagoController::class, 'index']);
@@ -405,6 +430,8 @@ $router->post('/lecturador/lectura/editar', [FacturacionLecturadorController::cl
 $router->post('/lecturador/lectura/eliminar', [FacturacionLecturadorController::class, 'eliminarLectura']);
 $router->get('/lecturador/lectura/generar', [FacturacionLecturadorController::class, 'generarLectura']);
 $router->post('/lecturador/lectura/generar', [FacturacionLecturadorController::class, 'generarLectura']);
+$router->get('/lecturador/lectura/exportar', [FacturacionLecturadorController::class, 'exportarExcelLectura']);
+
 
 
 // solicitudes para lecturador

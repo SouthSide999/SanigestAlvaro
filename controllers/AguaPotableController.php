@@ -13,6 +13,9 @@ use Classes\Paginacion;
 use Model\Contribuyente;
 use Model\EstadoServicio;
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 class AguaPotableController
 {
 
@@ -204,6 +207,46 @@ class AguaPotableController
             }
         }
     }
+    //exportasr contribuyente
+    public static function exportarExcelContribuyentes()
+    {
+        if (!is_auth()) {
+            header('Location: /auth/login');
+            exit;
+        }
+        if (!is_admin()) {
+            header('Location: /auth/login');
+            exit;
+        }
+
+        $contribuyentes = Contribuyente::all('ASC');
+
+        $spreadsheet = new Spreadsheet();
+
+        $hojaPendientes = $spreadsheet->getActiveSheet();
+        $hojaPendientes->setTitle("Contribuyentes");
+        $hojaPendientes->fromArray(['Codigo de Contribuyente', 'Nombres', 'Apellidos', 'Tipo', 'Documento De Identidad', 'Estado Civil', 'Fecha Inscripcion'], null, 'A1');
+
+        $fila = 2;
+        foreach ($contribuyentes as $c) {
+            $hojaPendientes->setCellValue("A$fila", $c->codigo_contribuyente);
+            $hojaPendientes->setCellValue("B$fila", $c->nombres);
+            $hojaPendientes->setCellValue("C$fila", $c->apellidos);
+            $hojaPendientes->setCellValue("D$fila", $c->tipo_usuario);
+            $hojaPendientes->setCellValue("E$fila", $c->estado_civil);
+            $hojaPendientes->setCellValue("F$fila", $c->fecha_inscripcion);
+            $fila++;
+        }
+
+        $filename = 'Contribuyentes_Sanigest.xlsx';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+        header('Cache-Control: max-age=0');
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('php://output');
+        exit;
+    }
 
     //*zonas
     // Listar y buscar zonas
@@ -372,6 +415,43 @@ class AguaPotableController
             }
         }
     }
+    //exportar contribuyente
+    public static function exportarExcelZonas()
+    {
+        if (!is_auth()) {
+            header('Location: /auth/login');
+            exit;
+        }
+        if (!is_admin()) {
+            header('Location: /auth/login');
+            exit;
+        }
+
+        $zonas = Zona::all('ASC');
+
+        $spreadsheet = new Spreadsheet();
+
+        $hojaPendientes = $spreadsheet->getActiveSheet();
+        $hojaPendientes->setTitle("Zonas");
+        $hojaPendientes->fromArray(['Codigo Zona', 'Nombre Zona'], null, 'A1');
+
+        $fila = 2;
+        foreach ($zonas as $z) {
+            $hojaPendientes->setCellValue("A$fila", $z->codigo_zona);
+            $hojaPendientes->setCellValue("B$fila", $z->nombre_zona);
+            $fila++;
+        }
+
+        $filename = 'Zonas_Sanigest.xlsx';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+        header('Cache-Control: max-age=0');
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('php://output');
+        exit;
+    }
+
     //*sectores
     // Listar y buscar sectores
     public static function sectores(Router $router)
@@ -533,6 +613,44 @@ class AguaPotableController
             }
         }
     }
+
+    //exportar sectores
+    public static function exportarExcelSectores()
+    {
+        if (!is_auth()) {
+            header('Location: /auth/login');
+            exit;
+        }
+        if (!is_admin()) {
+            header('Location: /auth/login');
+            exit;
+        }
+
+        $sectores = Sector::all('ASC');
+
+        $spreadsheet = new Spreadsheet();
+
+        $hojaPendientes = $spreadsheet->getActiveSheet();
+        $hojaPendientes->setTitle("Zonas");
+        $hojaPendientes->fromArray(['Codigo Sector', 'Nombre Sector'], null, 'A1');
+
+        $fila = 2;
+        foreach ($sectores as $s) {
+            $hojaPendientes->setCellValue("A$fila", $s->codigo_sector);
+            $hojaPendientes->setCellValue("B$fila", $s->nombre_sector);
+            $fila++;
+        }
+
+        $filename = 'Sectores_Sanigest.xlsx';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+        header('Cache-Control: max-age=0');
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('php://output');
+        exit;
+    }
+
     //*predios
     // Listar y buscar predios
     public static function predios(Router $router)
@@ -751,6 +869,62 @@ class AguaPotableController
         }
     }
 
+    //exportar sectores
+    public static function exportarExcelPredios()
+    {
+        if (!is_auth()) {
+            header('Location: /auth/login');
+            exit;
+        }
+        if (!is_admin()) {
+            header('Location: /auth/login');
+            exit;
+        }
+
+        $predios = Predio::all('ASC');
+
+        foreach ($predios as $predio) {
+            $predio->contribuyente = Contribuyente::find($predio->contribuyente_id);
+            $predio->tarifa = Tarifa::find($predio->tarifa_id);
+            $predio->zona = Zona::find($predio->zona_id);
+            $predio->sector = Sector::find($predio->sector_id);
+            $predio->estado = EstadoServicio::find($predio->estado_servicio_id);
+        }
+
+        $spreadsheet = new Spreadsheet();
+
+        $hoja = $spreadsheet->getActiveSheet();
+        $hoja->setTitle("Zonas");
+        $hoja->fromArray(['Codigo Predio', 'Contribuyente', 'Tarifa', 'Zona', 'Sector', 'Manzana', 'Lote', 'Direccion', 'Secuencia', 'Fecha Registro', 'Estado Servicio'], null, 'A1');
+
+        $fila = 2;
+        foreach ($predios as $p) {
+            $hoja->setCellValue("A$fila", $p->codigo_predio);
+            $hoja->setCellValue("B$fila", trim(($p->contribuyente->nombres ?? '') . ' ' . ($p->contribuyente->apellidos ?? '')));
+            $hoja->setCellValue("C$fila", $p->tarifa->nombre ?? '');
+            $hoja->setCellValue("D$fila", $p->zona->nombre_zona ?? '');
+            $hoja->setCellValue("E$fila", $p->sector->nombre_sector ?? '');
+            $hoja->setCellValue("F$fila", $p->manzana ?? '');
+            $hoja->setCellValue("G$fila", $p->lote ?? '');
+            $hoja->setCellValue("H$fila", $p->direccion ?? '');
+            $hoja->setCellValue("I$fila", $p->secuencia ?? '');
+            $hoja->setCellValue("J$fila", $p->created_at ?? '');
+            $hoja->setCellValue("K$fila", $p->estado->nombre ?? '');
+
+
+            $fila++;
+        }
+
+        $filename = 'Predios_Sanigest.xlsx';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+        header('Cache-Control: max-age=0');
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('php://output');
+        exit;
+    }
+
     //*tarifas
     //listar
     public static function tarifas(Router $router)
@@ -899,6 +1073,66 @@ class AguaPotableController
             }
         }
     }
+    //Exportar tarifas
+    public static function exportarExcelTarifas()
+    {
+        if (!is_auth()) {
+            header('Location: /auth/login');
+            exit;
+        }
+        if (!is_admin()) {
+            header('Location: /auth/login');
+            exit;
+        }
+
+        // Obtener todas las tarifas
+        $tarifas = Tarifa::all('ASC');
+
+        $spreadsheet = new Spreadsheet();
+        $hoja = $spreadsheet->getActiveSheet();
+        $hoja->setTitle("Tarifas");
+
+        // Encabezados según la tabla que compartiste
+        $hoja->fromArray([
+            'ID',
+            'Código Tarifa',
+            'Nombre Tarifa',
+            'Clase',
+            'Categoría',
+            'Rango Mínimo',
+            'Rango Máximo',
+            'Tarifa Agua (m³)',
+            'Tarifa Desagüe (m³)',
+            'Cargo Fijo (S/.)'
+        ], null, 'A1');
+
+        // Llenar datos
+        $fila = 2;
+        foreach ($tarifas as $t) {
+            $hoja->setCellValue("A$fila", $t->id);
+            $hoja->setCellValue("B$fila", $t->codigo_tarifa ?? '');
+            $hoja->setCellValue("C$fila", $t->nombre_tarifa ?? '');
+            $hoja->setCellValue("D$fila", $t->clase ?? '');
+            $hoja->setCellValue("E$fila", $t->categoria ?? '');
+            $hoja->setCellValue("F$fila", $t->rango_min ?? '');
+            $hoja->setCellValue("G$fila", $t->rango_max ?? '');
+            $hoja->setCellValue("H$fila", $t->tarifa_agua ?? '');
+            $hoja->setCellValue("I$fila", $t->tarifa_desague ?? '');
+            $hoja->setCellValue("J$fila", $t->cargo_fijo ?? '');
+            $fila++;
+        }
+
+        // Descargar archivo
+        $filename = 'Tarifas_Sanigest.xlsx';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+        header('Cache-Control: max-age=0');
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('php://output');
+        exit;
+    }
+
     //*medidores
     // Listar
     public static function medidores(Router $router)
@@ -1068,6 +1302,71 @@ class AguaPotableController
             }
         }
     }
+    //Exportar medidores
+    public static function exportarExcelMedidores()
+    {
+        if (!is_auth()) {
+            header('Location: /auth/login');
+            exit;
+        }
+        if (!is_admin()) {
+            header('Location: /auth/login');
+            exit;
+        }
+
+        // Obtener todos los medidores
+        $medidores = Medidor::all('ASC');
+
+        // Cargar relaciones si es necesario
+        foreach ($medidores as $medidor) {
+            $medidor->contribuyente = Contribuyente::find($medidor->contribuyente_id);
+            $medidor->predio = Predio::find($medidor->predio_id);
+        }
+
+        $spreadsheet = new Spreadsheet();
+        $hoja = $spreadsheet->getActiveSheet();
+        $hoja->setTitle("Medidores");
+
+        // Encabezados
+        $hoja->fromArray([
+            'ID',
+            'Número de Medidor',
+            'N° Personas',
+            'Padres',
+            'Hijos',
+            'Familiares',
+            'Inquilinos',
+            'Observaciones',
+            'Contribuyente',
+            'Predio',
+        ], null, 'A1');
+
+        // Llenar datos
+        $fila = 2;
+        foreach ($medidores as $m) {
+            $hoja->setCellValue("B$fila", $m->numero_medidor ?? '');
+            $hoja->setCellValue("C$fila", $m->numero_personas ?? '');
+            $hoja->setCellValue("D$fila", $m->padres ?? '');
+            $hoja->setCellValue("E$fila", $m->hijos ?? '');
+            $hoja->setCellValue("F$fila", $m->familiares ?? '');
+            $hoja->setCellValue("G$fila", $m->inquilinos ?? '');
+            $hoja->setCellValue("H$fila", $m->observaciones ?? '');
+            $hoja->setCellValue("I$fila", trim(($m->contribuyente->nombres ?? '') . ' ' . ($m->contribuyente->apellidos ?? '')));
+            $hoja->setCellValue("J$fila", $m->predio->codigo_predio ?? '');
+            $fila++;
+        }
+
+        // Descargar archivo
+        $filename = 'Medidores_Sanigest.xlsx';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+        header('Cache-Control: max-age=0');
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('php://output');
+        exit;
+    }
+
     //conexiones
     public static function conexiones(Router $router)
     {
@@ -1231,6 +1530,73 @@ class AguaPotableController
                 exit;
             }
         }
+    }
+    //Exportar conexiones
+    public static function exportarExcelConexiones()
+    {
+        if (!is_auth()) {
+            header('Location: /auth/login');
+            exit;
+        }
+        if (!is_admin()) {
+            header('Location: /auth/login');
+            exit;
+        }
+
+        $medidores = Medidor::all('ASC');
+
+        foreach ($medidores as $medidor) {
+            $medidor->contribuyente = Contribuyente::find($medidor->contribuyente_id);
+            $medidor->predio = Predio::find($medidor->predio_id);
+        }
+
+        $spreadsheet = new Spreadsheet();
+        $hoja = $spreadsheet->getActiveSheet();
+        $hoja->setTitle("Conexiones");
+
+        // Encabezados
+        $hoja->fromArray([
+            'ID',
+            'Número de Medidor',
+            'N° Personas',
+            'Padres',
+            'Hijos',
+            'Familiares',
+            'Inquilinos',
+            'Observaciones',
+            'Contribuyente',
+            'Predio'
+        ], null, 'A1');
+
+        $fila = 2;
+        foreach ($medidores as $m) {
+            $hoja->setCellValue("A$fila", $m->id);
+            $hoja->setCellValue("B$fila", $m->numero_medidor ?? '');
+            $hoja->setCellValue("C$fila", $m->numero_personas ?? '');
+            $hoja->setCellValue("D$fila", $m->padres ?? '');
+            $hoja->setCellValue("E$fila", $m->hijos ?? '');
+            $hoja->setCellValue("F$fila", $m->familiares ?? '');
+            $hoja->setCellValue("G$fila", $m->inquilinos ?? '');
+            $hoja->setCellValue("H$fila", $m->observaciones ?? '');
+
+            // Nombre completo del contribuyente
+            $hoja->setCellValue("I$fila", trim(($m->contribuyente->nombres ?? '') . ' ' . ($m->contribuyente->apellidos ?? '')));
+
+            // Código de predio
+            $hoja->setCellValue("J$fila", $m->predio->codigo_predio ?? '');
+
+            $fila++;
+        }
+
+        // Descargar archivo
+        $filename = 'Conexiones_Sanigest.xlsx';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+        header('Cache-Control: max-age=0');
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('php://output');
+        exit;
     }
     //resumen
     public static function resumen(Router $router)

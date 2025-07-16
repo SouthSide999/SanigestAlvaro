@@ -8,6 +8,9 @@ use Model\Tarifa;
 use Model\Consumo;
 use Classes\Paginacion;
 use Model\EstadoConsumo;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 
 class FacturacionLecturadorController
 {
@@ -60,7 +63,7 @@ class FacturacionLecturadorController
         }
 
         $router->render('lecturador/lecturas/index', [
-            'titulo' => 'Lista de Consumos',
+            'titulo' => 'Lista de Lecturar tomadas',
             'consumos' => $consumos,
             'paginacion' => $paginacion ? $paginacion->paginacion() : ''
         ]);
@@ -282,7 +285,6 @@ class FacturacionLecturadorController
             }
             if ($hayDuplicados) {
                 Consumo::setAlerta('error', 'Ya existen consumos registrados para al menos un predio en el mismo mes y año.');
-
             } else {
                 // Generar consumos
                 foreach ($predios as $predio) {
@@ -310,7 +312,75 @@ class FacturacionLecturadorController
         $router->render('/lecturador/lecturas/generar', [
             'titulo' => 'Generar Consumos',
             'meses' => $meses,
-            'alertas' => $alertas 
+            'alertas' => $alertas
         ]);
+    }
+    public static function exportarExcelLectura()
+    {
+        if (!is_auth()) {
+            header('Location: /auth/login');
+            exit;
+        }
+        if (!is_lecturador()) {
+            header('Location: /auth/login');
+            exit;
+        }
+
+        $consumos = Consumo::all('ASC');
+
+        foreach ($consumos as $c) {
+            $c->predio = Predio::find($c->predio_id);
+            $c->estado = EstadoConsumo::find($c->estado_id);
+            $c->tarifa = Tarifa::find($c->predio->tarifa_id ?? null);
+        }
+
+        $spreadsheet = new Spreadsheet();
+        $hoja = $spreadsheet->getActiveSheet();
+        $hoja->setTitle("Consumos");
+
+        // Encabezados actualizados con columna de Tarifa
+        $hoja->fromArray([
+            'ID',
+            'Código Predio',
+            'Mes',
+            'Año',
+            'Fecha Inicio',
+            'Fecha Fin',
+            'Consumo (m³)',
+            'Monto Agua (S/)',
+            'Monto Desagüe (S/)',
+            'Monto Total (S/)',
+            'Tarifa',
+            'Fecha Registro',
+            'Estado'
+        ], null, 'A1');
+
+        // Llenar datos
+        $fila = 2;
+        foreach ($consumos as $c) {
+            $hoja->setCellValue("A$fila", $c->id);
+            $hoja->setCellValue("B$fila", $c->predio->codigo_predio ?? '');
+            $hoja->setCellValue("C$fila", nombreMes($c->mes));
+            $hoja->setCellValue("D$fila", $c->anio);
+            $hoja->setCellValue("E$fila", $c->fecha_inicio);
+            $hoja->setCellValue("F$fila", $c->fecha_fin);
+            $hoja->setCellValue("G$fila", $c->consumo_m3);
+            $hoja->setCellValue("H$fila", $c->monto_agua);
+            $hoja->setCellValue("I$fila", $c->monto_desague);
+            $hoja->setCellValue("J$fila", $c->monto_total);
+            $hoja->setCellValue("K$fila", $c->tarifa->nombre_tarifa ?? '');
+            $hoja->setCellValue("L$fila", $c->created_at);
+            $hoja->setCellValue("M$fila", $c->estado->nombre ?? '');
+            $fila++;
+        }
+
+        $filename = 'Lecturas_Sanigest.xlsx';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+        header('Cache-Control: max-age=0');
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('php://output');
+        exit;
     }
 }

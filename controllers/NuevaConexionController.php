@@ -8,6 +8,8 @@ use Classes\Paginacion;
 use Model\Estados;
 use Model\NuevaConexion;
 use Model\Usuario;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class NuevaConexionController
 {
@@ -41,8 +43,6 @@ class NuevaConexionController
 
         ]);
     }
-
-
     public static function revisar(Router $router)
     {
 
@@ -101,5 +101,94 @@ class NuevaConexionController
             'tecnico' => $tecnico
 
         ]);
+    }
+    public static function exportarExcel()
+    {
+        if (!is_auth()) {
+            header('Location: /auth/login');
+            exit;
+        }
+        if (!is_admin()) {
+            header('Location: /auth/login');
+            exit;
+        }
+
+        // Obtener todas las solicitudes
+        $solicitudes = NuevaConexion::all('ASC'); // Ajusta el modelo si tiene otro nombre
+
+        // Cargar relaciones necesarias
+        foreach ($solicitudes as $s) {
+            $s->estado = Estados::find($s->estado_id);
+            $s->tecnico = Usuario::find($s->tecnico_id);
+        }
+
+        $spreadsheet = new Spreadsheet();
+        $hoja = $spreadsheet->getActiveSheet();
+        $hoja->setTitle("Solicitudes");
+
+        // Encabezados sin campos de imagen
+        $hoja->fromArray([
+            'ID',
+            'Tipo Solicitante',
+            'Tipo Persona',
+            'Tipo Doc. Natural',
+            'N° Doc. Natural',
+            'Tipo Doc. Jurídico',
+            'N° Doc. Jurídico',
+            'Razón Social',
+            'Nombre',
+            'Apellido Paterno',
+            'Apellido Materno',
+            'Email',
+            'Tipo Servicio',
+            'Servicio',
+            'Celular',
+            'Localidad',
+            'Dirección Principal',
+            'Referencia Dirección',
+            'Fecha Solicitud',
+            'Estado',
+            'Técnico Asignado',
+            'Código Seguimiento',
+            'Observación Rechazo'
+        ], null, 'A1');
+
+        $fila = 2;
+        foreach ($solicitudes as $s) {
+            $hoja->setCellValue("A$fila", $s->id);
+            $hoja->setCellValue("B$fila", $s->tipo_solicitante ?? '');
+            $hoja->setCellValue("C$fila", $s->tipo_persona ?? '');
+            $hoja->setCellValue("D$fila", $s->tipo_documento_natural ?? '');
+            $hoja->setCellValue("E$fila", $s->numero_documento_natural ?? '');
+            $hoja->setCellValue("F$fila", $s->tipo_documento_juridico ?? '');
+            $hoja->setCellValue("G$fila", $s->numero_documento_juridico ?? '');
+            $hoja->setCellValue("H$fila", $s->razon_social ?? '');
+            $hoja->setCellValue("I$fila", $s->nombre ?? '');
+            $hoja->setCellValue("J$fila", $s->apellido1 ?? '');
+            $hoja->setCellValue("K$fila", $s->apellido2 ?? '');
+            $hoja->setCellValue("L$fila", $s->email ?? '');
+            $hoja->setCellValue("M$fila", $s->tipo_servicio ?? '');
+            $hoja->setCellValue("N$fila", $s->servicio ?? '');
+            $hoja->setCellValue("O$fila", $s->celular ?? '');
+            $hoja->setCellValue("P$fila", $s->localidad ?? '');
+            $hoja->setCellValue("Q$fila", $s->direccion_principal ?? '');
+            $hoja->setCellValue("R$fila", $s->referencia_direccion ?? '');
+            $hoja->setCellValue("S$fila", $s->fecha_solicitud ?? '');
+            $hoja->setCellValue("T$fila", $s->estado->nombre ?? '');
+            $hoja->setCellValue("U$fila", trim(($s->tecnico->nombre ?? '') . ' ' . ($s->tecnico->apellido ?? '')));
+            $hoja->setCellValue("V$fila", $s->codigo_seguimiento ?? '');
+            $hoja->setCellValue("W$fila", $s->observacion_rechazo ?? '');
+            $fila++;
+        }
+
+        // Descargar archivo
+        $filename = 'Solicitudes_NuevaConexion.xlsx';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+        header('Cache-Control: max-age=0');
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('php://output');
+        exit;
     }
 }

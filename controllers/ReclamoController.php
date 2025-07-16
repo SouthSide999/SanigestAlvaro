@@ -9,7 +9,9 @@ use Model\Usuario;
 use Classes\Paginacion;
 use Model\TiposReclamos;
 use Intervention\Image\ImageManagerStatic as Image;
-
+use Model\Estados;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class ReclamoController
 {
@@ -30,7 +32,7 @@ class ReclamoController
         $tiposreclamos = TiposReclamos::all('ASC');
 
         $reclamosUsuario = Reclamo::whereArray(['cliente_id' => $_SESSION['id']]);
-        
+
         foreach ($reclamosUsuario as $reclamoUsuario) {
             $reclamoUsuario->tipo = TiposReclamos::find($reclamoUsuario->tipo_reclamo_id);
         }
@@ -374,5 +376,64 @@ class ReclamoController
                 exit;
             }
         }
+    }
+    public static function exportarExcel()
+    {
+        if (!is_auth()) {
+            header('Location: /auth/login');
+            exit;
+        }
+        if (!is_admin()) {
+            header('Location: /auth/login');
+            exit;
+        }
+
+        // Obtener todos los reclamos
+        $reclamos = Reclamo::all('ASC'); // Asegúrate de que el modelo se llame Reclamo
+
+        // Cargar relaciones
+        foreach ($reclamos as $r) {
+            $r->cliente = Cliente::find($r->cliente_id);
+            $r->tipo = TiposReclamos::find($r->tipo_reclamo_id);
+            $r->estado = Estados::find($r->estado_id);
+        }
+
+        $spreadsheet = new Spreadsheet();
+        $hoja = $spreadsheet->getActiveSheet();
+        $hoja->setTitle("Reclamos");
+
+        // Encabezados
+        $hoja->fromArray([
+            'ID',
+            'Número',
+            'Cliente',
+            'Tipo de Reclamo',
+            'Descripción',
+            'Fecha',
+            'Estado'
+        ], null, 'A1');
+
+        // Llenar datos
+        $fila = 2;
+        foreach ($reclamos as $r) {
+            $hoja->setCellValue("A$fila", $r->id);
+            $hoja->setCellValue("B$fila", $r->numero ?? '');
+            $hoja->setCellValue("C$fila", trim(($r->cliente->nombre ?? '') . ' ' . ($r->cliente->apellido ?? '')));
+            $hoja->setCellValue("D$fila", $r->tipo->nombre ?? '');
+            $hoja->setCellValue("E$fila", $r->descripcion ?? '');
+            $hoja->setCellValue("G$fila", $r->fecha ?? '');
+            $hoja->setCellValue("H$fila", $r->estado->nombre ?? '');
+            $fila++;
+        }
+
+        // Descargar archivo
+        $filename = 'Reclamos_Sanigest.xlsx';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+        header('Cache-Control: max-age=0');
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('php://output');
+        exit;
     }
 }

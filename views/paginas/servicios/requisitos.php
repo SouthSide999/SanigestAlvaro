@@ -7,7 +7,7 @@
             <li class="requisitos__item">Autorización Notarial (si el solicitante es tercera persona).</li>
             <li class="requisitos__item">Plano de ubicación del inmueble y/o croquis.</li>
             <li class="requisitos__item">Último recibo de pago de agua potable (fotocopia) (en caso de independización).</li>
-            <li class="requisitos__item">Pago presencial en oficina de SEDACUSCO - concepto colateral (para subramal o instalación de desagüe).</li>
+            <li class="requisitos__item">Pago presencial en oficina de ATM - concepto colateral (para subramal o instalación de desagüe).</li>
         </ul>
         <p class="requisitos__nota">* En concordancia con la Resolución de Consejo Directivo 058-2023-SUNASS-CD.</p>
 

@@ -37,6 +37,11 @@
     </form>
 </div>
 
+<a href="/admin/sectores/exportar" class="dashboard__boton">
+    <i class="fa-solid fa-file-excel"></i>
+    Exportar a Excel
+</a>
+
 <div class="dashboard__contenedor">
     <?php if (!empty($sectores)) { ?>
         <table class="table">

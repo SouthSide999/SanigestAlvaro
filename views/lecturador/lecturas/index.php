@@ -67,6 +67,11 @@ $anioActual = date('Y');
     </form>
 </div>
 
+<a href="/lecturador/lectura/exportar" class="dashboard__boton">
+    <i class="fa-solid fa-file-excel"></i>
+    Exportar a Excel Todas las Lecturas
+</a>
+
 <div class="dashboard__contenedor">
     <?php if (!empty($consumos)) { ?>
         <table class="table">

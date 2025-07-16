@@ -52,6 +52,11 @@
     </form>
 </div>
 
+<a href="/tesorero/contribuyentes/exportar" class="dashboard__boton">
+    <i class="fa-solid fa-file-excel"></i>
+    Exportar a Excel Contribuyentes
+</a>
+
 <div class="dashboard__contenedor">
     <?php if (!empty($contribuyentes)) { ?>
         <table class="table">

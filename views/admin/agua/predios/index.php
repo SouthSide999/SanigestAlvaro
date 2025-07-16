@@ -47,6 +47,11 @@
     </form>
 </div>
 
+<a href="/admin/predios/exportar" class="dashboard__boton">
+    <i class="fa-solid fa-file-excel"></i>
+    Exportar a Excel
+</a>
+
 <div class="dashboard__contenedor">
     <?php if (!empty($predios)) { ?>
         <table class="table">
