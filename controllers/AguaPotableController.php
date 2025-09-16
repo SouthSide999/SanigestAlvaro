@@ -225,7 +225,11 @@ class AguaPotableController
 
         $hojaPendientes = $spreadsheet->getActiveSheet();
         $hojaPendientes->setTitle("Contribuyentes");
-        $hojaPendientes->fromArray(['Codigo de Contribuyente', 'Nombres', 'Apellidos', 'Tipo', 'Documento De Identidad', 'Estado Civil', 'Fecha Inscripcion'], null, 'A1');
+        $hojaPendientes->fromArray(
+            ['Codigo de Contribuyente', 'Nombres', 'Apellidos', 'Tipo', 'Documento De Identidad', 'Estado Civil', 'Fecha Inscripcion'],
+            null,
+            'A1'
+        );
 
         $fila = 2;
         foreach ($contribuyentes as $c) {
@@ -233,12 +237,18 @@ class AguaPotableController
             $hojaPendientes->setCellValue("B$fila", $c->nombres);
             $hojaPendientes->setCellValue("C$fila", $c->apellidos);
             $hojaPendientes->setCellValue("D$fila", $c->tipo_usuario);
-            $hojaPendientes->setCellValue("E$fila", $c->estado_civil);
-            $hojaPendientes->setCellValue("F$fila", $c->fecha_inscripcion);
+            $hojaPendientes->setCellValue("E$fila", $c->documento_identidad);
+            $hojaPendientes->setCellValue("F$fila", $c->estado_civil);
+            $hojaPendientes->setCellValue("G$fila", $c->fecha_inscripcion);
             $fila++;
         }
 
         $filename = 'Contribuyentes_Sanigest.xlsx';
+
+        if (ob_get_length()) {
+            ob_end_clean(); // <<--- limpia buffer antes de mandar cabeceras
+        }
+
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header("Content-Disposition: attachment; filename=\"$filename\"");
         header('Cache-Control: max-age=0');
@@ -247,6 +257,7 @@ class AguaPotableController
         $writer->save('php://output');
         exit;
     }
+
 
     //*zonas
     // Listar y buscar zonas

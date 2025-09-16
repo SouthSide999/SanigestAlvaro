@@ -231,8 +231,9 @@ class AguaPotableTesoreroController
             $hojaPendientes->setCellValue("B$fila", $c->nombres);
             $hojaPendientes->setCellValue("C$fila", $c->apellidos);
             $hojaPendientes->setCellValue("D$fila", $c->tipo_usuario);
-            $hojaPendientes->setCellValue("E$fila", $c->estado_civil);
-            $hojaPendientes->setCellValue("F$fila", $c->fecha_inscripcion);
+            $hojaPendientes->setCellValue("E$fila", $c->documento_identidad);
+            $hojaPendientes->setCellValue("F$fila", $c->estado_civil);
+            $hojaPendientes->setCellValue("G$fila", $c->fecha_inscripcion);
             $fila++;
         }
 
