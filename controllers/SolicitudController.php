@@ -461,6 +461,11 @@ class SolicitudController
 
         // Descargar archivo
         $filename = 'Solicitudes_Sanigest.xlsx';
+
+        if (ob_get_length()) {
+            ob_end_clean(); 
+        }
+
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header("Content-Disposition: attachment; filename=\"$filename\"");
         header('Cache-Control: max-age=0');

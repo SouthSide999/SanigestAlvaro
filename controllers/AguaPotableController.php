@@ -246,7 +246,7 @@ class AguaPotableController
         $filename = 'Contribuyentes_Sanigest.xlsx';
 
         if (ob_get_length()) {
-            ob_end_clean(); // <<--- limpia buffer antes de mandar cabeceras
+            ob_end_clean();
         }
 
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -454,6 +454,11 @@ class AguaPotableController
         }
 
         $filename = 'Zonas_Sanigest.xlsx';
+
+        if (ob_get_length()) {
+            ob_end_clean();
+        }
+
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header("Content-Disposition: attachment; filename=\"$filename\"");
         header('Cache-Control: max-age=0');
@@ -653,6 +658,11 @@ class AguaPotableController
         }
 
         $filename = 'Sectores_Sanigest.xlsx';
+
+        if (ob_get_length()) {
+            ob_end_clean();
+        }
+
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header("Content-Disposition: attachment; filename=\"$filename\"");
         header('Cache-Control: max-age=0');
@@ -927,6 +937,11 @@ class AguaPotableController
         }
 
         $filename = 'Predios_Sanigest.xlsx';
+
+        if (ob_get_length()) {
+            ob_end_clean();
+        }
+
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header("Content-Disposition: attachment; filename=\"$filename\"");
         header('Cache-Control: max-age=0');
@@ -1135,6 +1150,11 @@ class AguaPotableController
 
         // Descargar archivo
         $filename = 'Tarifas_Sanigest.xlsx';
+
+        if (ob_get_length()) {
+            ob_end_clean();
+        }
+
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header("Content-Disposition: attachment; filename=\"$filename\"");
         header('Cache-Control: max-age=0');
@@ -1369,6 +1389,11 @@ class AguaPotableController
 
         // Descargar archivo
         $filename = 'Medidores_Sanigest.xlsx';
+
+        if (ob_get_length()) {
+            ob_end_clean();
+        }
+
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header("Content-Disposition: attachment; filename=\"$filename\"");
         header('Cache-Control: max-age=0');
@@ -1601,6 +1626,11 @@ class AguaPotableController
 
         // Descargar archivo
         $filename = 'Conexiones_Sanigest.xlsx';
+        
+        if (ob_get_length()) {
+            ob_end_clean();
+        }
+
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header("Content-Disposition: attachment; filename=\"$filename\"");
         header('Cache-Control: max-age=0');
