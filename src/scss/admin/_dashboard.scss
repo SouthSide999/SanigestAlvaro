@@ -62,8 +62,16 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+<<<<<<< Updated upstream
         padding: 2rem;
         transition: 300ms background-color ease-in-out, 300ms color ease, 300ms border-radius ease;
+=======
+        padding: 1rem 1rem;
+        text-decoration: none;
+        border-radius: 1rem;
+        cursor: pointer;
+        transition: all 300ms ease-in-out;
+>>>>>>> Stashed changes
 
         &:hover,
         &--actual {
@@ -74,11 +82,21 @@
     }
 
     &__icono {
+<<<<<<< Updated upstream
         font-size: 2rem;
     }
 
     &__menu-texto {
         font-size: 1.1rem;
+=======
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+    }
+
+    &__menu-texto {
+        margin-top:0.5rem;
+        font-size: 1rem;
+>>>>>>> Stashed changes
         text-transform: uppercase;
         font-weight: v.$bold;
         margin-top: .5rem;

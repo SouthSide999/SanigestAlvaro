@@ -74,6 +74,14 @@ class AuthController
             'alertas' => $alertas
         ]);
     }
+    public static function loginfacial(Router $router)
+    {
+
+        $router->render('/auth/loginfacial', [
+            'titulo' => 'Iniciar Sesión Con Reconocimiento Facial'
+        ]);
+    }
+
 
     public static function logout()
     {

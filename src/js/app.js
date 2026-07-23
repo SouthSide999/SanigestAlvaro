@@ -15,6 +15,15 @@ import './nuevaconexion.js'
 import './carrosel.js'
 import './slider2.js'
 import './consumos.js'
+<<<<<<< Updated upstream
+=======
+import './historial.js'
+import './estadisticas.js'
+import './meses.js'
+import './loginfacial.js'
+
+
+>>>>>>> Stashed changes
 
 
 

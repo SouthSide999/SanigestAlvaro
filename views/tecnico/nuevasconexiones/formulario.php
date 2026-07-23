@@ -60,7 +60,7 @@
 
         <div class="formulario__campo">
             <label for="correo" class="formulario__label">Correo Electrónico</label>
-            <input type="text" class="formulario__input" value="<?php echo $nueva->correo; ?>" readonly>
+            <input type="text" class="formulario__input" value="<?php echo $nueva->email; ?>" readonly>
         </div>
 
         <div class="formulario__campo">

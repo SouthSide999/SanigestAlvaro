@@ -21,7 +21,8 @@
 
 <body>
     <?php
-    include_once __DIR__ . '/templates/header.php';
+    // include_once __DIR__ . '/templates/header.php';
+    include_once __DIR__ . '/templates/header-prueba.php';
     echo $contenido;
     include_once __DIR__ . '/templates/footer-bubbles.php';
     ?>

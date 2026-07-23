@@ -7,6 +7,7 @@
     require_once __DIR__ . '/../templates/alertas.php';
     ?>
 
+<<<<<<< Updated upstream
     <form method="POST" action="/auth/login" class="formulario">
         <div class="formulario__campo">
             <label for="email" class="formulario__label">Email</label>
@@ -16,6 +17,26 @@
                 placeholder="Tu Email"
                 id="email"
                 name="email">
+=======
+            <div class="formulario__campo">
+                <label for="password" class="formulario__label">Password</label>
+                <input
+                    type="password"
+                    class="formulario__input"
+                    placeholder="Tu Password"
+                    id="password"
+                    name="password">
+            </div>
+
+            <input type="submit" class="formulario__submit" value="Iniciar Sesión">
+
+        </form>
+
+        <div class="acciones">
+            <a href="/auth/loginfacial" class="acciones__enlace">Iniciar Sesión Mediante Reconocimiento de Rostro</a>
+            <a href="/auth/registro" class="acciones__enlace">¿Aún no tienes una cuenta? Obtener una</a>
+            <a href="/auth/olvide" class="acciones__enlace">¿Olvidaste tu Password?</a>
+>>>>>>> Stashed changes
         </div>
 
         <div class="formulario__campo">

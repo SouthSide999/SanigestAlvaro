@@ -27,10 +27,18 @@
                 Registrados
             </span>
         </a> -->
+
         <a href="/admin/dashboard" class="dashboard__enlace <?php echo pagina_actual('/dashboard') ? 'dashboard__enlace--actual' : ''; ?> ">
             <i class="fa-solid fa-house"></i>
             <span class="dashboard__menu-texto">
                 Inicio
+            </span>
+        </a>
+
+        <a href="/admin/estadisticas" class="dashboard__enlace <?php echo pagina_actual('/estadisticas') ? 'dashboard__enlace--actual' : ''; ?> ">
+            <i class="fa-solid fa-chart-area"></i>
+            <span class="dashboard__menu-texto">
+                Estadisticas
             </span>
         </a>
 

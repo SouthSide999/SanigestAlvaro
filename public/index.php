@@ -28,6 +28,7 @@ use Controllers\DashboardTecnicoController;
 use Controllers\ServiciosEnLineaController;
 use Controllers\DashboardTesoreroController;
 use Controllers\AguaPotableTesoreroController;
+use Controllers\APIEstadisticas;
 use Controllers\DashboardLecturadorController;
 use Controllers\FacturacionLecturadorController;
 use Controllers\NuevasConexionesTecnicoController;
@@ -39,6 +40,10 @@ $router = new Router();
 $router->get('/auth/login', [AuthController::class, 'login']);
 $router->post('/auth/login', [AuthController::class, 'login']);
 $router->post('/logout', [AuthController::class, 'logout']);
+
+//loginfacial 
+$router->get('/auth/loginfacial', [AuthController::class, 'loginfacial']);
+$router->post('/auth/loginfacial', [AuthController::class, 'loginfacial']);
 
 // Crear Cuenta
 $router->get('/auth/registro', [AuthController::class, 'registro']);
@@ -59,6 +64,16 @@ $router->get('/auth/confirmar-cuenta', [AuthController::class, 'confirmar']);
 // Area de administración
 $router->get('/admin/dashboard', [DashboardController::class, 'index']);
 
+<<<<<<< Updated upstream
+=======
+$router->get('/admin/estadisticas', [DashboardController::class, 'estadisticas']);
+$router->get('/api/estadisticas', [APIEstadisticas::class, 'index']);//para grafica
+
+
+
+$router->get('/admin/ayuda', [DashboardController::class, 'ayuda']);
+
+>>>>>>> Stashed changes
 $router->get('/admin/ponentes', [PonentesController::class, 'index']);
 $router->get('/admin/ponentes/buscar', [PonentesController::class, 'buscar']);
 $router->post('/admin/ponentes/buscar', [PonentesController::class, 'buscar']);

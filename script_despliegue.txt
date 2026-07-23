@@ -1,0 +1,99 @@
+source: https://github.com/SouthSide999/SanigestAlvaro
+features:
+  - 'php 8.3'
+  - mysql
+  - ssl
+  - 'ssl always'
+root: public_html/public
+nginx:
+  fastcgi: 'on'
+  locations:
+    - match: /
+      try_files: '$uri $uri/ /index.php$is_args$args'
+    - match: '~ \.[^\/]+(?<!\.php)$'
+      try_files: '$uri =404'
+commands:
+  - 'echo "<?php phpinfo(15);" > phpinfo.php'
+  - 'echo "display_errors = On" > .user.ini'
+  - 'echo "display_startup_errors = On" >> .user.ini'
+  - 'echo "DB_HOST=localhost" > includes/.env'
+  - 'echo "DB_USER=${USERNAME}" >> includes/.env'
+  - 'echo "DB_PASS=${PASSWORD}" >> includes/.env'
+  - 'echo "DB_NAME=${DATABASE}" >> includes/.env'
+  - 'echo "" >> includes/.env'
+  - 'echo "EMAIL_HOST=sandbox.smtp.mailtrap.io" >> includes/.env'
+  - 'echo "EMAIL_USER=481034ebd92311" >> includes/.env'
+  - 'echo "EMAIL_PASSWORD=4583aab87c2acb" >> includes/.env'
+  - 'echo "EMAIL_PORT=2525" >> includes/.env'
+  - 'echo "" >> includes/.env'
+  - 'echo "HOST=https://${DOMAIN}" >> includes/.env'
+  - 'git checkout Rama-Alvaro || (git fetch origin Rama-Alvaro && git checkout Rama-Alvaro)'
+  - 'composer install'
+
+
+source: https://github.com/SouthSide999/SanigestAlvaro
+features:
+  - 'php 8.3'
+  - mysql
+  - ssl
+  - 'ssl always'
+root: public_html/public
+nginx:
+  fastcgi: 'on'
+  locations:
+    - match: /
+      try_files: '$uri $uri/ /index.php$is_args$args'
+    - match: '~ \.[^\/]+(?<!\.php)$'
+      try_files: '$uri =404'
+commands:
+  - 'echo "<?php phpinfo(15);" > phpinfo.php'
+  - 'echo "display_errors = On" > .user.ini'
+  - 'echo "display_startup_errors = On" >> .user.ini'
+  - 'echo "DB_HOST=localhost" > includes/.env'
+  - 'echo "DB_USER=${USERNAME}" >> includes/.env'
+  - 'echo "DB_PASS=${PASSWORD}" >> includes/.env'
+  - 'echo "DB_NAME=${DATABASE}" >> includes/.env'
+  - 'echo "" >> includes/.env'
+  - 'echo "EMAIL_HOST=sandbox.smtp.mailtrap.io" >> includes/.env'
+  - 'echo "EMAIL_USER=481034ebd92311" >> includes/.env'
+  - 'echo "EMAIL_PASS=4583aab87c2acb" >> includes/.env'
+  - 'echo "EMAIL_PORT=587" >> includes/.env'
+  - 'echo "" >> includes/.env'
+  - 'echo "HOST=https://${DOMAIN}" >> includes/.env'
+  - 'git checkout rama-demo || (git fetch origin Rama-Alvaro && git checkout Rama-Alvaro)'
+  - 'composer install'
+
+source: https://github.com/SouthSide999/SanigestAlvaro
+features:
+  - 'php 8.3'
+  - mysql
+  - ssl
+  - 'ssl always'
+root: public_html/public
+nginx:
+  fastcgi: 'on'
+  locations:
+    - match: /
+      try_files: '$uri $uri/ /index.php$is_args$args'
+    - match: '~ \.[^\/]+(?<!\.php)$'
+      try_files: '$uri =404'
+commands:
+  - 'echo "<?php phpinfo(15);" > phpinfo.php'
+  - 'echo "display_errors = On" > .user.ini'
+  - 'echo "display_startup_errors = On" >> .user.ini'
+  - 'echo "DB_HOST=localhost" > includes/.env'
+  - 'echo "DB_USER=${USERNAME}" >> includes/.env'
+  - 'echo "DB_PASS=${PASSWORD}" >> includes/.env'
+  - 'echo "DB_NAME=${DATABASE}" >> includes/.env'
+  - 'echo "" >> includes/.env'
+  - 'echo "EMAIL_HOST=smtp.gmail.com" >> includes/.env'
+  - 'echo "EMAIL_USER=sanigesthuaro@gmail.com" >> includes/.env'
+  - 'echo "EMAIL_PASS=iohynltyaegjwnxr" >> includes/.env'
+  - 'echo "EMAIL_PORT=465" >> includes/.env'
+  - 'echo "" >> includes/.env'
+  - 'echo "HOST=https://${DOMAIN}" >> includes/.env'
+  - 'git checkout rama-demo || (git fetch origin Rama-Alvaro && git checkout Rama-Alvaro)'
+  - 'composer install'
+
+  
+  mysqli_set_charset($db, "utf8mb4");
